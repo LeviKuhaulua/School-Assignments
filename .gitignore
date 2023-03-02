@@ -3,5 +3,6 @@
 
 // All class files 
 *.class
+
 // cmd files 
 *.cmd
