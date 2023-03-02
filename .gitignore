@@ -1,1 +1,7 @@
+// All text files
 *.txt
+
+// All class files 
+*.class
+// cmd files 
+*.cmd
