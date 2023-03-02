@@ -32,26 +32,31 @@ public class KuhauluaLevi3 {
         try {
             // Variables to read the file and add contents into array
             BufferedReader readFileContent = new BufferedReader(new FileReader(fileName)); 
-            String fileLine; 
+            String fileLine = readFileContent.readLine(); 
+            StringTokenizer lineContent = new StringTokenizer(fileLine, " "); 
             
             // Check for empty line or can't parse into a Double 
-           do {
-                fileLine = readFileContent.readLine(); 
-                StringTokenizer lineContent = new StringTokenizer(fileLine, " "); 
-                numberInFile = Double.parseDouble(lineContent.nextToken()); 
-                if (Double.isNaN(numberInFile)) {
-                    System.out.println("Invalid Argument: " + numberInFile);
+            do {
+                if (fileLine.isBlank()) { // checks for empty line
+                    System.out.println("Empty Line Encountered");
                     System.exit(-1); 
-                    break;  
-                } 
-                else if (fileLine.isBlank()) {
-                   System.out.println("Empty Line Encountered"); 
-                   System.exit(-1); 
-                   break; 
-                } else doubleArray.add(numberInFile); 
-                
-           } while (fileLine != null);
-        readFileContent.close(); // Closing file once done; 
+                } else if (lineContent.countTokens() > 1) { // checks for more than one argument 
+                    System.out.println("Invalid Line Encountered: " + lineContent.nextToken()); 
+                    System.exit(-1); 
+                } else { // checks to see if content can parse to double 
+                    try {
+                        numberInFile = Double.parseDouble(fileLine); 
+                        doubleArray.add(numberInFile); 
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid Line Encountered: " + lineContent.nextToken());
+                        System.exit(-1); 
+                    }
+                }
+                fileLine = readFileContent.readLine(); 
+            } while (fileLine != null); 
+            readFileContent.close(); // Closing file once done;
+            
+           // for (double i : doubleArray) System.out.println(i);
 
             
         } catch (FileNotFoundException e) { 
@@ -65,7 +70,7 @@ public class KuhauluaLevi3 {
         
         keyboard.close(); 
       
-       
+        
     }
 
     /**
