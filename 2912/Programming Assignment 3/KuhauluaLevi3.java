@@ -34,10 +34,13 @@ public class KuhauluaLevi3 {
             // Variables to read the file and add contents into array
             BufferedReader readFileContent = new BufferedReader(new FileReader(fileName)); 
             String fileLine = readFileContent.readLine(); 
-            
+            if (fileLine == null) {
+                System.out.println("Empty Line Encountered");
+                System.exit(-1); 
+            }
+            StringTokenizer lineContent = new StringTokenizer(fileLine, " ");
             // Validates each line of the file 
             do { 
-                StringTokenizer lineContent = new StringTokenizer(fileLine, " ");
                 if (fileLine.isBlank()) { // checks for empty line
                     System.out.println("Empty Line Encountered");
                     System.exit(-1); 
