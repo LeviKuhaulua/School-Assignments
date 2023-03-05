@@ -15,7 +15,7 @@ public class KuhauluaLevi3 {
         Scanner keyboard = new Scanner(System.in);  
         String fileName = null; 
         System.out.print("Please Input File Name to Sort >> "); 
-        fileName = keyboard.nextLine(); 
+        fileName = keyboard.nextLine().trim(); 
         
         // Variables for gathering File Data & staring MergeSort algorithm
         ArrayList<Double> doubleArray = new ArrayList<Double>(); 
@@ -26,7 +26,7 @@ public class KuhauluaLevi3 {
         while(!checkFileInput(fileName)) {
             System.out.println("Invalid command-line arguments");
             System.out.print("\n" + "Please Input File Name to Sort >> ");
-            fileName = keyboard.nextLine(); 
+            fileName = keyboard.nextLine().trim(); 
         }
 
         // Tries to read the file, catches if file isn't found or if there were any other errors
@@ -34,15 +34,10 @@ public class KuhauluaLevi3 {
             // Variables to read the file and add contents into array
             BufferedReader readFileContent = new BufferedReader(new FileReader(fileName)); 
             String fileLine = readFileContent.readLine(); 
-            // Checks to see if the first line is empty
-            if (fileLine == null) {
-                System.out.println("Empty Line Encountered");
-                System.exit(-1); 
-            }
-            StringTokenizer lineContent = new StringTokenizer(fileLine, " ");
             
             // Validates each line of the file 
             do { 
+                StringTokenizer lineContent = new StringTokenizer(fileLine, " ");
                 if (fileLine.isBlank()) { // checks for empty line
                     System.out.println("Empty Line Encountered");
                     System.exit(-1); 
