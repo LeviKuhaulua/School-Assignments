@@ -20,7 +20,6 @@ public class KuhauluaLevi3 {
         // Variables for gathering File Data & staring MergeSort algorithm
         ArrayList<Double> doubleArray = new ArrayList<Double>(); 
         double[] unsortedArray = null; 
-        double numberInFile; 
 
         // Check if input for file has multiple arguments or is blank
         while(!checkFileInput(fileName)) {
@@ -49,13 +48,13 @@ public class KuhauluaLevi3 {
                     System.exit(-1); 
                 } else { // checks to see if content can parse to double 
                     try {
-                        numberInFile = Double.parseDouble(fileLine); 
-                        doubleArray.add(numberInFile); 
+                        doubleArray.add(Double.parseDouble(fileLine)); 
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid Line Encountered: " + lineContent.nextToken());
                             System.exit(-1); 
                         }
                 }
+                fileLine = readFileContent.readLine(); 
             } while (fileLine != null); 
 
             readFileContent.close(); // Closing the file
