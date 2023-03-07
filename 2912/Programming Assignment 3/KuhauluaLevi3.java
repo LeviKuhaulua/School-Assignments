@@ -55,6 +55,7 @@ public class KuhauluaLevi3 {
                         }
                 }
                 fileLine = readFileContent.readLine(); 
+                lineContent = new StringTokenizer(fileLine, " "); 
             } while (fileLine != null); 
 
             readFileContent.close(); // Closing the file
