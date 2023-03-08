@@ -37,9 +37,10 @@ public class KuhauluaLevi3 {
                 System.out.println("Empty Line Encountered");
                 System.exit(-1); 
             }
-            StringTokenizer lineContent = new StringTokenizer(fileLine, " ");
+            StringTokenizer lineContent;
             // Validates each line of the file 
             do { 
+                lineContent = new StringTokenizer(fileLine, " "); 
                 if (fileLine.isBlank()) { // checks for empty line
                     System.out.println("Empty Line Encountered");
                     System.exit(-1); 
@@ -55,7 +56,6 @@ public class KuhauluaLevi3 {
                         }
                 }
                 fileLine = readFileContent.readLine(); 
-                lineContent = new StringTokenizer(fileLine, " "); 
             } while (fileLine != null); 
 
             readFileContent.close(); // Closing the file
