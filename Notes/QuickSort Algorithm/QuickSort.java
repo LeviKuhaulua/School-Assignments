@@ -7,7 +7,6 @@
  *  - Everything to the left is less than pivot, and everything on right is greater than pivot 
  * 3) Do the same for left and right parts of array 
  */
-import java.util.*; 
 public class QuickSort {
     public static void main(String[] args) {
         int[] integerArray = {0, 5, 1, 9, 2, 6, 3, 8, 4, 7}; 
@@ -20,34 +19,35 @@ public class QuickSort {
     }
 
     public static void quickSort(int[] array) {
-        int pivot = array.length - 1; // Sets the last element of the array as the pivot
-        int max = pivot - 1; // Ignores the pivot element
-        quickSort(array, 0, max, pivot); 
+        quickSort(array, 0, array.length - 1);
     }
 
-    private static void quickSort(int[] array, int min, int max, int pivot) {
+    private static void quickSort(int[] array, int min, int max) {
         // Base Case: 
-        if (min == max) return; 
+        if (min >= max) return; 
 
-        // Sort elements around pivot
-        int temp; // for swapping
-        while (min < max) {
-            if (array[min] < array[pivot]) min++; 
-            if (array[max] > array[pivot]) max--; 
-            temp = array[min]; 
-            array[min] = array[max]; 
-            array[max] = temp; 
+        // Before Recursive Call >> Sort elements around pivot
+        int pivot, minIndex, maxIndex, temp; 
+        pivot = array[max]; 
+        minIndex = min; 
+        maxIndex = max; 
+        // Sort elements based on pivot 
+        while(minIndex < maxIndex) {
+            while (array[minIndex] <= pivot && minIndex < maxIndex) minIndex++; 
+            while (array[maxIndex] >= pivot && minIndex < maxIndex) maxIndex--; 
+
+            temp = array[minIndex]; 
+            array[minIndex] = array[maxIndex];
+            array[maxIndex] = temp; 
         }
         
-        // Put pivot into right place
-        temp = array[pivot]; 
-        array[pivot] = array[++max]; 
+        // Put pivot in final location
+        temp = array[minIndex]; 
+        array[minIndex] = pivot; 
         array[max] = temp; 
-        
-        
-       
 
-    
-
+        // Recursive Call
+        quickSort(array, min, minIndex - 1); 
+        quickSort(array, minIndex + 1, max); 
     }
 }
