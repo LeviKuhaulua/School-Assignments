@@ -101,6 +101,7 @@ public void show() {
 `Shape aShape;` >> will not throw an error message 
 
 `Shape aShape = new Rectangle(...);` >> will also not throw an error message 
+    
     - Data Type is Shape | Instance is Rectangle
 
 **In UML Diagram** Abstract classes are marked by `<<Abstract>>`
@@ -150,7 +151,9 @@ Example: `public class Rectangle extends Shape implements Display`
 *NOTE: classes can only inherit one class but can implement multiple interfaces*
 
 **If a method is not in the interface, then you can't use method for what you are trying to do**
+
 Example: 
+```
     Display[] shapeArray = new Display[1]; 
     shapeArray[0] = new Rectangle(...); 
     shapeArray[1] = new Square(...); 
@@ -158,6 +161,7 @@ Example:
     // Display Interface has only show method and not getArea() for shapes
     shapeArray[0].show() // no error message 
     shapeArray[1].getArea() // results in error message
+```
 
 *Interfaces are good for only allowing certain methods that you want programmer or user to access.*
 *Doing something like type-casting goes against purpose of Interface*
