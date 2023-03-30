@@ -154,13 +154,13 @@ Example: `public class Rectangle extends Shape implements Display`
 
 Example: 
 ```
-    Display[] shapeArray = new Display[1]; 
-    shapeArray[0] = new Rectangle(...); 
-    shapeArray[1] = new Square(...); 
+Display[] shapeArray = new Display[1]; 
+shapeArray[0] = new Rectangle(...); 
+shapeArray[1] = new Square(...); 
     
-    // Display Interface has only show method and not getArea() for shapes
-    shapeArray[0].show() // no error message 
-    shapeArray[1].getArea() // results in error message
+// Display Interface has only show method and not getArea() for shapes
+shapeArray[0].show() // no error message 
+shapeArray[1].getArea() // results in error message
 ```
 
 *Interfaces are good for only allowing certain methods that you want programmer or user to access.*
