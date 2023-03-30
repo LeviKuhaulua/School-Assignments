@@ -10,5 +10,9 @@ public class inheritanceDemo {
         System.out.println();
         Square squareOne = new Square("Green", "Square", 6.0, 6.0, 6.0); 
         squareOne.show(); 
+
+        System.out.println();
+        Circle circleOne = new Circle("Light-Blue", "Circle", 5.0); 
+        circleOne.show(); 
     }
 }

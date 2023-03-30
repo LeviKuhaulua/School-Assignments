@@ -79,10 +79,12 @@ __In Child Class >> make sure you copy over the abstract method and include meth
 If Parent-class had `public abstract void show();`
 
 Then Child-class has 
+    ```
     @Override
     public void show() {
         System.out.println("I want to show you something"); 
     }
+    ```
 
 **Important: Cannot create an instance of an abstract class**
 `Shape aShape = new Shape(...);` >> will result in an error message 
@@ -96,8 +98,11 @@ Finally, in the inheritance chain, an Abstract Class cannot be the last/bottom m
 
 ## Type Casting
 Use this example: 
+    ```
     Shape[] shapeArray = new Shape[1]; 
     shapeArray[0] = new Rectangle(...); 
+    ```
+   
 
 Notice that the data type of `shapeArray` is Shape but the instance of shapeArray[0] is a Rectangle. 
 
@@ -107,6 +112,7 @@ If you tried to do `Rectangle aRectangle = shapeArray[0]` >> that will result in
 To avoid this use __Type-Casting__
 `Rectangle aRectangle = (Rectangle) shapeArray[0]` >> converts Shape to Rectangle instance.  
 **As long as Instance is smaller than data type >> can use instance to point to the bigger data type.**
+
 `Square aSquare = (Rectangle) shapeArray[0]` >> will throw an error message since Rectangle is bigger than Square
 
 ## Interface
@@ -136,7 +142,7 @@ Example:
     shapeArray[0].show() // no error message 
     shapeArray[1].getArea() // results in error message
 
-*Interfaces are good for only allowing certain methods that you want programmer or user to access*
+*Interfaces are good for only allowing certain methods that you want programmer or user to access.*
 *Doing something like type-casting goes against purpose of Interface*
 
 
