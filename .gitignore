@@ -1,8 +1,11 @@
-// All text files
+// text files
 *.txt
 
-// All class files 
+// class files 
 *.class
 
 // cmd files 
 *.cmd
+
+// Bat files 
+*.bat
