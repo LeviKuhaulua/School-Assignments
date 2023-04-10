@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.PrintStream; 
 public class Rectangle extends Shape {
     private double x, y, width, height; 
 
@@ -8,5 +9,9 @@ public class Rectangle extends Shape {
         this.y = y; 
         this.width = width; 
         this.height = height; 
+    }
+
+    public void renderAttributes(PrintStream out) {
+        
     }
 }
