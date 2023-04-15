@@ -20,14 +20,14 @@ public abstract class Shape {
         out.print("<");
         renderAttributes(out); 
         out.print(" "); 
-        out.print("style="); 
+        out.print("style='"); 
         // Adding each style for the shape
         for (int i = 0; i < styles.size(); i++) {
             if (i % 2 != 0) out.print(styles.get(i).concat(";")); 
             else out.print(styles.get(i).concat(":")); 
              
         }
-        out.print("/>"); 
+        out.print("'/>"); 
     }
 
     /**

@@ -1,24 +1,23 @@
 /**
- * Program that will read the drawing commands from a text file
- * and writes scalable vector graphics to Standard Output 
+ * Program that will take SVG tag information from a file 
+ * and output that into html format 
  * 
  * @author Levi Kuhaulua 
  * @date 04/04/2023
  * @assignment Programming Assignment 4
  */
-// Setting up for the next programming assignment; 
 import java.util.*; 
 import java.io.*;
 public class KuhauluaLevi4 {
     public static void main(String[] args) {
         // Getting user input on the file that will be read 
         Scanner keyboard = new Scanner(System.in); 
-        // String fileName; 
-        // System.out.print("Input File name >> ");
-        // fileName = keyboard.nextLine(); 
+        String fileName; 
+        System.out.print("Input File name >> ");
+        fileName = keyboard.nextLine(); 
         
         // Checks for invalid file name inputs 
-        // checkInvalidFileName(fileName); 
+        checkInvalidFileName(fileName); 
         keyboard.close(); 
 
         // Initializing variables for reading data in file
@@ -35,7 +34,7 @@ public class KuhauluaLevi4 {
 
         try {
             // Reading SVG header line or the first line in file 
-            readFileContent = new BufferedReader(new FileReader("input.txt")); 
+            readFileContent = new BufferedReader(new FileReader(fileName)); 
             
             fileLineTokenizer = new StringTokenizer(readFileContent.readLine(), " "); 
             token = fileLineTokenizer.nextToken(); 
@@ -62,23 +61,95 @@ public class KuhauluaLevi4 {
                 System.exit(-1); 
             }
 
-            // Adding Shape classes 
+            // Add shapes  
             while ((lineContent = readFileContent.readLine()) != null) {
-                // Continuosly skips a line if it is empty 
-                while (lineContent.equals("")) {
-                    lineContent = readFileContent.readLine(); 
+                // skips empty lines 
+                if (lineContent.equals("")) lineContent = readFileContent.readLine(); 
+                
+                // Checks if file reached the end of file 
+                try {
+                    fileLineTokenizer = new StringTokenizer(lineContent, " ");
+                } catch (NullPointerException nullValue) {
+                    break; 
                 }
-                fileLineTokenizer = new StringTokenizer(lineContent, " "); 
-                token = fileLineTokenizer.nextToken(); // gets the command line token             
+                
+
+                token = fileLineTokenizer.nextToken(); // gets the command line token   
+                   
                 if (token.equalsIgnoreCase("line")) {
                     // Creating tags for each line token encountered
-                    createTag(svgTag, "line", fileLineTokenizer); 
+                    Shape aLineTag = createTag("line", fileLineTokenizer);
+                    svgTag.addShape(aLineTag); 
+
+                    // Checks if line used to create shape tag contains style keys and attributes 
+                    while(fileLineTokenizer.hasMoreTokens()) {
+                        token = fileLineTokenizer.nextToken(); 
+                        // Checks if token is end 
+                        if (!token.equalsIgnoreCase("end")) {
+                            String attribute = fileLineTokenizer.nextToken(); // get value of style key 
+                            aLineTag.addStyle(token, attribute); // add line style 
+                        }
+                    }
+
+                    // Add style of the shape until it reaches end token 
+                    while (!token.equalsIgnoreCase("end")) {
+                        fileLineTokenizer = new StringTokenizer(readFileContent.readLine(), " "); 
+                        token = fileLineTokenizer.nextToken(); 
+                        if (!token.equalsIgnoreCase("end")) {
+                            String attribute = fileLineTokenizer.nextToken(); 
+                            aLineTag.addStyle(token, attribute);
+                        }
+                    }
                 } else if (token.equalsIgnoreCase("rect")) {
                     // Create tag for each rectangle token encountered
-                    createTag(svgTag, "rect", fileLineTokenizer); 
+                    Shape aRectangleTag = createTag("rect", fileLineTokenizer);
+                    svgTag.addShape(aRectangleTag);
+
+                    // checks if line used to create shape tag contains style keys and attributes
+                    while (fileLineTokenizer.hasMoreTokens()) {
+                        token = fileLineTokenizer.nextToken(); 
+                        // checks if token is not end token 
+                        if (!token.equalsIgnoreCase("end")) {
+                            String attribute = fileLineTokenizer.nextToken(); // get value of style key 
+                            aRectangleTag.addStyle(token, attribute); // add style of shape 
+                        }
+                    }
+
+                    // Checks the following lines for styling the shape
+                    while (!token.equalsIgnoreCase("end")) {
+                        fileLineTokenizer = new StringTokenizer(readFileContent.readLine(), " "); 
+                        token = fileLineTokenizer.nextToken(); // get style key 
+                        if (!token.equalsIgnoreCase("end")) {
+                            String attribute = fileLineTokenizer.nextToken(); // get style attribute
+                            aRectangleTag.addStyle(token, attribute);
+                        }
+                    }
                 } else if (token.equalsIgnoreCase("circle")) {
-                    // Create tag for each circle token encountered 
-                    createTag(svgTag, "circle", fileLineTokenizer); 
+                    // Create tag for each circle token encountered  
+                    Shape aCircleTag = createTag("circle", fileLineTokenizer);
+                    svgTag.addShape(aCircleTag); 
+
+                    // checks if line used to create shape tag has more style tokens 
+                    while (fileLineTokenizer.hasMoreTokens()) {
+                        token = fileLineTokenizer.nextToken(); 
+                        // checks if token does not equal end 
+                        if (!token.equalsIgnoreCase("end")) {
+                            String attribute = fileLineTokenizer.nextToken(); // get value of style key 
+                            aCircleTag.addStyle(token, attribute); // add attribute 
+                        }
+                    }
+
+                    // check the other lines for style keys and attributes if none found in previous line 
+                    while (!token.equalsIgnoreCase("end")) {
+                        fileLineTokenizer = new StringTokenizer(readFileContent.readLine(), " "); 
+                        // get style key 
+                        token = fileLineTokenizer.nextToken(); 
+                        if (!token.equalsIgnoreCase("end")) {
+                            // get style key attribute 
+                            String attribute = fileLineTokenizer.nextToken(); 
+                            aCircleTag.addStyle(token, attribute);
+                        }
+                    } 
                 } else {
                     // Catches an invalid shape token 
                     System.out.println("Invalid Token: " + encapsulateToken(token));
@@ -86,8 +157,9 @@ public class KuhauluaLevi4 {
                 }
             }
             
+            // Create svg tag with the shape tags 
             svgTag.render(System.out); 
-            
+            readFileContent.close(); 
            
             
         } catch (FileNotFoundException missingFile){
@@ -114,57 +186,75 @@ public class KuhauluaLevi4 {
         }
     }
 
-    public static void createTag(Svg svgTag, String tagHeader, StringTokenizer lineTokenizer) {
+    /**
+     * createTag will take the tag header and use that information to create a line, 
+     * rectangle or circle object. 
+     * @param tagHeader - either line, rectangle, or circle 
+     * @param lineTokenizer - the rest of the attributes for the line tag
+     * @return a line rectangle or circle object 
+     */
+    public static Shape createTag(String tagHeader, StringTokenizer lineTokenizer) {
+        // Initializing variables to gather information on the shape 
         String token = null; 
         double[] tagAttributes = null; 
+        Shape shapeTag = null; 
+        // create a line, rectangle, or circle object 
         if (tagHeader.equalsIgnoreCase("line")) {
             try {
                 int index = 0; 
-                tagAttributes = new double[4]; 
-                while (lineTokenizer.hasMoreTokens()) {
+                tagAttributes = new double[4]; // stores attributes for line tag 
+                // Store the attributes to the array 
+                while (index < 4) {
                     token = lineTokenizer.nextToken(); 
                     tagAttributes[index] = Double.parseDouble(token); 
                     index++; 
                 }
-                Line aLineTag = new Line(tagAttributes[0], tagAttributes[1], tagAttributes[2], tagAttributes[3]); 
-                svgTag.addShape(aLineTag); 
+                // Creating a shape tag and returning it 
+                shapeTag = new Line(tagAttributes[0], tagAttributes[1], tagAttributes[2], tagAttributes[3]); 
+                return shapeTag;
             } catch (NumberFormatException wrongFormat) {
+                // Catch anything that can't be parsed into a double
                 System.out.println("Invalid Token: " + encapsulateToken(token));
                 System.exit(-1); 
             }
         } else if (tagHeader.equalsIgnoreCase("circle")) {
             try {
                 int index = 0; 
-                tagAttributes = new double[3]; 
-                while (lineTokenizer.hasMoreTokens()) {
+                tagAttributes = new double[3]; // attributes for circle tag 
+                // stores the attributes into double array 
+                while (index < 3) {
                     token = lineTokenizer.nextToken();
                     tagAttributes[index] = Double.parseDouble(token); 
                     index++; 
                 }
-                Circle aCircleTag = new Circle(tagAttributes[0], tagAttributes[1], tagAttributes[2]); 
-                svgTag.addShape(aCircleTag); 
+                // return the circle tag 
+                shapeTag = new Circle(tagAttributes[0], tagAttributes[1], tagAttributes[2]);
+                return shapeTag;
             } catch (NumberFormatException wrongFormat) {
+                // catch if token can't be parsed into double 
                 System.out.println("Invalid Token: " + encapsulateToken(token));
                 System.exit(-1); 
             }
         } else if (tagHeader.equalsIgnoreCase("rect")) {
             try {
                 int index = 0; 
-                tagAttributes = new double[4];
-                while (lineTokenizer.hasMoreTokens()) {
+                tagAttributes = new double[4]; // attributes for rectangle 
+                // stores the attributes into the double array 
+                while (index < 4) {
                     token = lineTokenizer.nextToken(); 
                     tagAttributes[index] = Double.parseDouble(token); 
                     index++; 
                 }
-                Rectangle aRectangleTag = new Rectangle(tagAttributes[0], tagAttributes[1], tagAttributes[2], tagAttributes[3]); 
-                svgTag.addShape(aRectangleTag);
+                // return the rectangle tag 
+                shapeTag = new Rectangle(tagAttributes[0], tagAttributes[1], tagAttributes[2], tagAttributes[3]);
+                return shapeTag; 
             } catch (NumberFormatException wrongFormat) {
+                // catches if token cannot be parsed into a double
                 System.out.println("Invalid Token: " + encapsulateToken(token));
                 System.exit(-1); 
             }
-        } else if (tagHeader.equalsIgnoreCase("svg")) {
-            
         }
+        return shapeTag; // return an empty shape tag 
     }
 
     
