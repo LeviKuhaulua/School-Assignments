@@ -1,6 +1,6 @@
 /**
  * Program that will take SVG tag information from a file 
- * and output that into html format 
+ * and output that into the appropriate format. 
  * 
  * @author Levi Kuhaulua 
  * @date 04/04/2023
