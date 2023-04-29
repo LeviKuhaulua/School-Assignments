@@ -13,14 +13,15 @@ public class textEditor extends JFrame {
     private final String title = " - CSCI 2912 Editor"; // Title will end with " - CSCI 2912 Editor" 
 
     public textEditor() {
+        // Configuring the frame 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        this.setSize(new Dimension(500, 500)); 
-        this.setLocationRelativeTo(null);
+        this.setSize(new Dimension(500, 500)); // Initial size of GUI 
+        this.setLocationRelativeTo(null); // Make GUI centered to user's screen 
         this.setLayout(new FlowLayout()); 
-        this.setTitle("Untitled".concat(title));
-        this.setResizable(true);
+        this.setTitle("Untitled".concat(title)); // Initial title of GUI 
+        this.setResizable(true); // allow text editor to be resized 
 
-        
+        // Configure the components 
         configureScrollPane(); 
         setUpMenu(); 
 
@@ -53,6 +54,7 @@ public class textEditor extends JFrame {
             }
         }); 
 
+        // Exit Menu will terminate the application if user selects exit in file menu 
         exitMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +80,7 @@ public class textEditor extends JFrame {
      * setUpMenu is a private method that will configure the menu bar, menu, and menu items for the program 
      */
     private void setUpMenu() {
-        final int shortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(); 
+        final int shortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(); // Get the default mask key 
         // Creating Menu 
         fileToolMenu = new JMenuBar(); 
 
