@@ -23,6 +23,42 @@ public class textEditor extends JFrame {
         
         configureScrollPane(); 
         setUpMenu(); 
+
+        createTxtFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Created Text File");
+            }
+
+        });
+
+        openTxtFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Opening Text File");
+            }
+        });
+
+        saveTxtFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Saving File");
+            }
+        });
+
+        saveTxtFileAs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Saving this file as...");
+            }
+        }); 
+
+        exitMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textEditor.this.dispose(); // terminating the application
+            }
+        });
          
         this.setVisible(true); 
     }
@@ -48,15 +84,10 @@ public class textEditor extends JFrame {
 
         // Creating Menu and Menu Items 
         fileMenu = new JMenu("File"); 
-         
         createTxtFile = new JMenuItem("New"); 
-         
         openTxtFile = new JMenuItem("Open"); 
-         
         saveTxtFile = new JMenuItem("Save"); 
-         
         saveTxtFileAs = new JMenuItem("Save As..."); 
-         
         exitMenu = new JMenuItem("Exit"); 
         
         // Setting Mnemonic keys for each file menu 
@@ -68,10 +99,10 @@ public class textEditor extends JFrame {
         exitMenu.setMnemonic(KeyEvent.VK_X); // x for exit 
 
         // Setting Accelerator for each menu item 
-        createTxtFile.setAccelerator(KeyStroke.getKeyStroke('N', shortcutKeyMask));
-        openTxtFile.setAccelerator(KeyStroke.getKeyStroke('O', shortcutKeyMask));
-        saveTxtFile.setAccelerator(KeyStroke.getKeyStroke('S', shortcutKeyMask)); 
-        saveTxtFileAs.setAccelerator(KeyStroke.getKeyStroke('S', shortcutKeyMask + KeyEvent.SHIFT_DOWN_MASK)); 
+        createTxtFile.setAccelerator(KeyStroke.getKeyStroke('N', shortcutKeyMask)); // Ctrl+N for new
+        openTxtFile.setAccelerator(KeyStroke.getKeyStroke('O', shortcutKeyMask)); // Ctrl+O for open
+        saveTxtFile.setAccelerator(KeyStroke.getKeyStroke('S', shortcutKeyMask)); // Ctrl+S for save
+        saveTxtFileAs.setAccelerator(KeyStroke.getKeyStroke('S', shortcutKeyMask + KeyEvent.SHIFT_DOWN_MASK)); // Ctrl+Shift+S for save as
 
         // Adding menu items to the menu bar
         fileMenu.add(createTxtFile); 
@@ -82,6 +113,7 @@ public class textEditor extends JFrame {
         fileMenu.addSeparator(); 
         fileMenu.add(exitMenu); 
         fileToolMenu.add(fileMenu); 
+
        
         // Setting menu bar to the frame 
         this.setJMenuBar(fileToolMenu);
