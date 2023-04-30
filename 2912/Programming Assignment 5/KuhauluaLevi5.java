@@ -19,6 +19,7 @@ public class KuhauluaLevi5 extends JFrame {
     private JMenu fileMenu; 
     private JMenuItem createTxtFile, openTxtFile, saveTxtFile, saveTxtFileAs, exitMenu; 
     private JFileChooser fileChooser; // for performing actions for files. 
+    private File chosenFile; 
 
     private final String title = " - CSCI 2912 Editor"; // Title will end with " - CSCI 2912 Editor" 
 
@@ -49,14 +50,15 @@ public class KuhauluaLevi5 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser = new JFileChooser(); // Initializing the file chooser
-                File chosenFile; // For the file that user will choose
                 try {
                     if (fileChooser.showOpenDialog(openTxtFile) == JFileChooser.APPROVE_OPTION) {
                         KuhauluaLevi5.this.setTitle(fileChooser.getSelectedFile().getName().concat(title)); // Updating title for text editor
                     }
                     
+                    chosenFile = fileChooser.getSelectedFile().getAbsoluteFile();
+                    
                     // Setting the file contents to the text area 
-                    chosenFile = fileChooser.getSelectedFile().getAbsoluteFile(); 
+                     
                     FileInputStream fileInput = new FileInputStream(chosenFile); 
                     ByteArrayOutputStream fileContents = new ByteArrayOutputStream();
                     byte[] fileContentsBytes = new byte[(int) chosenFile.length()]; 
@@ -64,16 +66,46 @@ public class KuhauluaLevi5 extends JFrame {
                     fileContents.write(fileContentsBytes, 0, fileContentsBytes.length); // writing the bytes into an output stream 
                     textFileContents.setText(fileContents.toString()); // turning each byte into the string equivalent 
                     
+                    // closing the contents 
                     fileInput.close(); 
                     fileContents.close(); 
                     
-                } catch (IOException someIOException) {
-                    new JOptionPane(someIOException.getStackTrace(), JOptionPane.ERROR_MESSAGE); 
+                } catch (IOException someIOException) { // catching any errors with opening the files 
+                    JOptionPane.showMessageDialog(null, someIOException.getStackTrace(), "Error Opening File", JOptionPane.ERROR_MESSAGE, null); // error dialog for user
                 }
             }
         });
 
-        
+        saveTxtFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileChooser = new JFileChooser(); 
+                try {
+                    if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                        chosenFile = new File(fileChooser.getSelectedFile().getAbsolutePath()); 
+                    }
+
+                    
+
+                    PrintWriter savingFile = new PrintWriter(chosenFile); 
+                    savingFile.write(textFileContents.getText()); 
+                    savingFile.flush(); 
+                    savingFile.close(); 
+                } catch (IOException errorSavingFile) {
+                    JOptionPane.showMessageDialog(null, errorSavingFile.getStackTrace(), "Error Saving File",JOptionPane.ERROR_MESSAGE, null); 
+                }
+
+                KuhauluaLevi5.this.setTitle(chosenFile.getName().concat(title)); 
+            }
+        });
+
+        // Event handling for menu option 'save as...'
+        saveTxtFileAs.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveFileAs(); 
+            }
+        });
 
         // Exit Menu will terminate the application if user selects exit in file menu 
         exitMenu.addActionListener(new ActionListener() {
@@ -142,4 +174,25 @@ public class KuhauluaLevi5 extends JFrame {
         // Setting menu bar to the frame 
         this.setJMenuBar(fileToolMenu);
     }    
+
+    private void saveFileAs() {
+        fileChooser = new JFileChooser(); 
+        try {
+            // If successful in choosing a file to save then get file 
+            if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                chosenFile = new File(fileChooser.getSelectedFile().getAbsolutePath()); 
+            } 
+
+            
+            
+            // Creating a Print Writer to write to the file 
+            PrintWriter savingFile = new PrintWriter(chosenFile); 
+            savingFile.write(textFileContents.getText()); // writing the changes to the file 
+            savingFile.close(); // closing the print writer 
+        } catch (IOException errorSavingFileAs) {
+            JOptionPane.showMessageDialog(null, errorSavingFileAs.getStackTrace(), "Error Saving File", JOptionPane.ERROR_MESSAGE, null); 
+        }
+                
+        KuhauluaLevi5.this.setTitle(chosenFile.getName().concat(title)); // set the title to what the user named it. 
+    }
 }
