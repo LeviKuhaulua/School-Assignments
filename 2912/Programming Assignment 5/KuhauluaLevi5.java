@@ -1,18 +1,28 @@
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*; 
+import java.io.*; 
 
-public class textEditor extends JFrame {
+/**
+ * @Author: Levi Kuhaulua
+ * @Date: 4/29/2023
+ * @Assignment: Programming Assignment 5
+ * 
+ * GUI application that acts as a simple text editor. Allows users to create, open, edit, and save files. 
+ */
+
+public class KuhauluaLevi5 extends JFrame {
     private JScrollPane textFileScrollPane; // Scroll pane to show contents of text files
     private JTextArea textFileContents; // to put text file content or have user create text file  
     // Menu components 
     private JMenuBar fileToolMenu; 
     private JMenu fileMenu; 
     private JMenuItem createTxtFile, openTxtFile, saveTxtFile, saveTxtFileAs, exitMenu; 
+    private JFileChooser fileChooser; // for performing actions for files. 
 
     private final String title = " - CSCI 2912 Editor"; // Title will end with " - CSCI 2912 Editor" 
 
-    public textEditor() {
+    public KuhauluaLevi5() {
         // Configuring the frame 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setSize(new Dimension(500, 500)); // Initial size of GUI 
@@ -24,41 +34,52 @@ public class textEditor extends JFrame {
         // Configure the components 
         configureScrollPane(); 
         setUpMenu(); 
-
+        // Event action for when user clicks on 'new' menu item 
         createTxtFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Created Text File");
+                textFileContents.setText(null); // set the text area to empty 
+                KuhauluaLevi5.this.setTitle("Untitled".concat(title)); // set title to default: "Untitled - CSCI 2912 Editor". 
             }
 
         });
 
+        // Handling action when user clicks on 'Open' menu item
         openTxtFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Opening Text File");
+                fileChooser = new JFileChooser(); // Initializing the file chooser
+                File chosenFile; // For the file that user will choose
+                try {
+                    if (fileChooser.showOpenDialog(openTxtFile) == JFileChooser.APPROVE_OPTION) {
+                        KuhauluaLevi5.this.setTitle(fileChooser.getSelectedFile().getName().concat(title)); // Updating title for text editor
+                    }
+                    
+                    // Setting the file contents to the text area 
+                    chosenFile = fileChooser.getSelectedFile().getAbsoluteFile(); 
+                    FileInputStream fileInput = new FileInputStream(chosenFile); 
+                    ByteArrayOutputStream fileContents = new ByteArrayOutputStream();
+                    byte[] fileContentsBytes = new byte[(int) chosenFile.length()]; 
+                    fileInput.read(fileContentsBytes); // taking all the characters in the file and adding them to a byte array 
+                    fileContents.write(fileContentsBytes, 0, fileContentsBytes.length); // writing the bytes into an output stream 
+                    textFileContents.setText(fileContents.toString()); // turning each byte into the string equivalent 
+                    
+                    fileInput.close(); 
+                    fileContents.close(); 
+                    
+                } catch (IOException someIOException) {
+                    new JOptionPane(someIOException.getStackTrace(), JOptionPane.ERROR_MESSAGE); 
+                }
             }
         });
 
-        saveTxtFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Saving File");
-            }
-        });
-
-        saveTxtFileAs.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Saving this file as...");
-            }
-        }); 
+        
 
         // Exit Menu will terminate the application if user selects exit in file menu 
         exitMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textEditor.this.dispose(); // terminating the application
+                KuhauluaLevi5.this.dispose(); // terminating the application
             }
         });
          
@@ -70,6 +91,7 @@ public class textEditor extends JFrame {
      */
     private void configureScrollPane() {
         textFileContents = new JTextArea(); // Initializing text area 
+        textFileContents.setMargin(new Insets(5, 5, 5, 5)); // margins for text area
         textFileContents.setLineWrap(false); // not allowing line wrap when user adds or edits texts - helps allow scroll bars 
         textFileContents.setFont(new Font("Monospace", Font.PLAIN, 14)); 
         textFileScrollPane = new JScrollPane(textFileContents); // add text area to the scroll pane 

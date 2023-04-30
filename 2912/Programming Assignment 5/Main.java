@@ -1,5 +1,5 @@
-public class Main extends textEditor{
+public class Main extends KuhauluaLevi5{
     public static void main(String[] args) {
-        textEditor simpleTextEditor = new textEditor(); 
+        KuhauluaLevi5 simpleTextEditor = new KuhauluaLevi5(); 
     }
 }
