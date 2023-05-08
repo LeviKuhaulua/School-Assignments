@@ -76,6 +76,7 @@ public class KuhauluaLevi5 extends JFrame {
             }
         });
 
+        // Event handling for saving a text file when user selects 'save'
         saveTxtFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,13 +86,17 @@ public class KuhauluaLevi5 extends JFrame {
                         chosenFile = new File(fileChooser.getSelectedFile().getAbsolutePath()); 
                     }
 
-                    
+                    // If this is a new file then follow same event handling as 'save file as...'
+                    if (!chosenFile.exists()) saveFileAs();
+                    else {
+                        // If file does exist then save file contents 
+                        PrintWriter savingFile = new PrintWriter(chosenFile); 
+                        savingFile.write(textFileContents.getText()); 
+                        savingFile.flush(); 
+                        savingFile.close(); 
+                    }
 
-                    PrintWriter savingFile = new PrintWriter(chosenFile); 
-                    savingFile.write(textFileContents.getText()); 
-                    savingFile.flush(); 
-                    savingFile.close(); 
-                } catch (IOException errorSavingFile) {
+                } catch (IOException errorSavingFile) { // catching any IO exceptions
                     JOptionPane.showMessageDialog(null, errorSavingFile.getStackTrace(), "Error Saving File",JOptionPane.ERROR_MESSAGE, null); 
                 }
 
@@ -115,7 +120,7 @@ public class KuhauluaLevi5 extends JFrame {
             }
         });
          
-        this.setVisible(true); 
+        this.setVisible(true); // make application visible to user
     }
 
     /**
@@ -175,6 +180,9 @@ public class KuhauluaLevi5 extends JFrame {
         this.setJMenuBar(fileToolMenu);
     }    
 
+    /**
+     * saveFileAs is a private function that will allow user to save a new text file
+     */
     private void saveFileAs() {
         fileChooser = new JFileChooser(); 
         try {
