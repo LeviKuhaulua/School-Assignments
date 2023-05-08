@@ -7,3 +7,4 @@
 # Classes Taken or Currently Taking: 
 ## - Computer Science I  (CSCI 2911)
 ## - Computer Science II (CSCI 2912)
+Done with CSCI 2912, focusing on other notes/projects >> [https://github.com/LeviKuhaulua/Coding-Notes](https://github.com/LeviKuhaulua/Coding-Notes)
