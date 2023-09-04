@@ -4,7 +4,7 @@
 ***Goals***: Using `turtle` to... 
 - [x] tile the screen with squares (100 pixels)
 - [x] tile the screen with squares, no overwriting any lines
-- [] tile the screen with hexagons (100 pixels)
+- [x] tile the screen with hexagons (100 pixels)
 
 Notes: 
 Starting point should be the center of the shape. <br> 
