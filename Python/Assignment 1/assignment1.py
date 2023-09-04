@@ -1,5 +1,6 @@
 '''Assignment 1 to fill canvas with squares and hexagon'''
 from turtle import Turtle, Screen
+from math import sqrt
 
 def draw_square(side_length=100,): 
     '''Draws a square'''
@@ -31,6 +32,12 @@ def new_row_square():
         honu.fd(100)
         honu.lt(90)
 
+def draw_hexagon(): 
+    ''' Honu will draw a hexagon'''
+    for _ in range(6): 
+        honu.fd(100)
+        honu.rt(60)
+
 honu_hale = Screen() 
 honu = Turtle()
 honu.speed(15)
@@ -41,6 +48,7 @@ HALE_HEIGHT = honu_hale.yscale * honu_hale.canvheight
 
 # Set up the canvas boundaries 
 honu_hale.mode("world")
+honu_hale.setup(HALE_WIDTH, HALE_HEIGHT)
 honu_hale.setworldcoordinates(-HALE_WIDTH, -HALE_HEIGHT, HALE_WIDTH, HALE_HEIGHT)
 
 
@@ -72,7 +80,8 @@ while(flag):
 
 # PART TWO: Fill canvas with squares without overlapping
 
-honu_hale.clear() 
+honu_hale.clearscreen() 
+honu = Turtle()
 flag = True
 
 # Draw first row of canvas with squares 
@@ -116,5 +125,28 @@ while (flag):
         go_there((-HALE_WIDTH, start_y))
     
 # PART THREE: Fill Canvas with Hexagons 
+honu_hale.clearscreen()
+honu = Turtle()
+honu.seth(0) # force honu to face right 
+y_value = 50 * sqrt(3) # where honu will start to draw the hexagon
+start_x = -HALE_WIDTH + 50
+start_y = HALE_HEIGHT - 100 + y_value
+
+go_there((start_x, start_y))
+flag = True
+while (flag): 
+    getx_coord = honu.xcor()
+    gety_coord = honu.ycor() 
+    draw_hexagon()
+    # Honu will stop once he reaches the boundary 
+    if (getx_coord == HALE_WIDTH - 150 and gety_coord < 0): break 
+    # go to new starting point 
+    start_x += 200
+    # if honu reaches the other side, bring him back to the starting side 
+    if (getx_coord == HALE_WIDTH - 150): 
+        start_y -= (2 * y_value)
+        start_x = -HALE_WIDTH + 50
+        go_there((start_x, start_y))
+    go_there((start_x, start_y))
 
 honu_hale.mainloop()
