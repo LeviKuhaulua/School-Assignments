@@ -6,7 +6,7 @@ Using the turtle we will have it:
 
 Continue this process until the Turtle reaches back to it's original coordinates. 
 
-**Boss Challenge** <br> 
+**Challenge** <br> 
 Same premise but the turtle has to ***avoid*** the paths that it already took. 
 
 ***NOTES***: 
@@ -17,3 +17,4 @@ Same premise but the turtle has to ***avoid*** the paths that it already took.
     - 180 = West 
     - 270 = South 
 3. **Don't forget about turtle reaching boundaries / end of canvas**
+4. Need to store coordinates that turtle has previously been to. 
