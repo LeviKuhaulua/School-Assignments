@@ -29,10 +29,10 @@ awiwi.fd(30)
 
 paths_took = [awiwi.pos()] 
 
-print(int(awiwi.position[0]))
+
 
 # Awiwi will keep travelling until they reach back home (0, 0)
-'''while (not abs(awiwi.pos()) < 1): 
+while (not abs(awiwi.pos()) < 1): 
     # grab the coordinates of awiwi
     awiwi.seth(choice(face_direction))
     # Checks if turtle will go out of bounds and choose a different direction if it will
@@ -45,7 +45,7 @@ print(int(awiwi.position[0]))
     
     
     awiwi.fd(30) 
-    paths_took += [awiwi.pos()]''' 
+    paths_took += [awiwi.pos()]
 
 
 
