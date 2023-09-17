@@ -13,35 +13,39 @@ Turtle will also make sure to not choose a direction they've already walked in
 
 from turtle import Turtle, Screen
 from random import choice
-
-# Make awiwi travel in a random location and stop when they get back home. 
+ 
 
 # Initialize Turtle and Screen 
 awiwi = Turtle() 
 awiwi_hale = Screen()
-awiwi_hale.mode("world")
+awiwi_hale.mode("world") # make user defined coordinates 
 awiwi_hale.setworldcoordinates(-400, -300, 400, 300) 
 
-# List to store all directions: East, North, West, South (from left to right)
-face_direction = [0, 90, 180, 270]
+face_direction = [0, 90, 180, 270] 
+
+# "Do" Part of while statement, have awiwi travel once in a random direction to make while statement true
+awiwi.seth(choice(face_direction))
 awiwi.fd(30) 
 
+paths_took = [awiwi.pos()] 
 
+print(int(awiwi.position[0]))
 
-# Have awiwi travel around until they get back home 
-while (not abs(awiwi.pos()) < 1): 
+# Awiwi will keep travelling until they reach back home (0, 0)
+'''while (not abs(awiwi.pos()) < 1): 
+    # grab the coordinates of awiwi
     awiwi.seth(choice(face_direction))
-    # checks if awiwi will go out of bounds if they move forward 
-    if int(awiwi.xcor()) + 30 > 400: 
-        awiwi.seth(choice([n for n in face_direction if n != 0]))
-    if int(awiwi.xcor()) - 30 < -400: 
-        awiwi.seth(choice([n for n in face_direction if n != 180]))
-    if (int(awiwi.ycor()) + 30 > 300): 
-        awiwi.seth(choice([n for n in face_direction if n != 90]))
-    if (int(awiwi.ycor()) - 30 < 300): 
-        awiwi.seth(choice([n for n in face_direction if n != 270]))
+    # Checks if turtle will go out of bounds and choose a different direction if it will
+    if int(x_cord) + 30 > 400 and awiwi.heading() == 0: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
+    elif int(x_cord) - 30 < -400 and awiwi.heading() == 180: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
+
+    if int(y_cord) + 30 > 300 and awiwi.heading() == 90: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
+    elif int(y_cord) - 30 < -300 and awiwi.heading() == 270: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
+
+    
     
     awiwi.fd(30) 
+    paths_took += [awiwi.pos()]''' 
 
 
 
@@ -51,3 +55,4 @@ while (not abs(awiwi.pos()) < 1):
 
 # So that the turtle graphics do not disappear at the end. 
 awiwi_hale.mainloop() 
+
