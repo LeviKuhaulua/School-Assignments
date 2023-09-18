@@ -49,6 +49,7 @@ while(not abs(awiwi.pos()) < 1): # have awiwi keep going until they reach back h
     x, y = potential_move() # calculates the potential places that awiwi can go
 
     while(check_validity(x, y)): # checks if where awiwi is moving is a new location or an old one 
+        # have awiwi change direction then calculate it's next potential location again. 
         awiwi.seth(choice(face_direction))
         x, y = potential_move()
     
