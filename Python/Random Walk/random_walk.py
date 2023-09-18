@@ -1,51 +1,63 @@
 '''
-Author: Levi Kuhaulua
-Course: Python 3371
+Levi Kuhaulua
 Professor: Dr. Crawford 
-09-13-2023
-Github: https://github.com/LeviKuhaulua/School-Assignments/tree/main/Python/Random%20Walk
+Date: 09/17/2023
+Github: https://github.com/LeviKuhaulua/School-Assignments/blob/main/Python/Random%20Walk/
 
 Random Walk Assignment: 
-
-Turtle will choose a random direction to walk in and repeat that process until they reach back to their original position.
-Turtle will also make sure to not choose a direction they've already walked in
+Make turtle choose a random cardinal direction and go 30 pixels forward. 
+Challenge is to have turtle not go to coordinates it's already been to. 
 '''
 
 from turtle import Turtle, Screen
 from random import choice
- 
-
-# Initialize Turtle and Screen 
-awiwi = Turtle() 
-awiwi_hale = Screen()
-awiwi_hale.mode("world") # make user defined coordinates 
-awiwi_hale.setworldcoordinates(-400, -300, 400, 300) 
-
-face_direction = [0, 90, 180, 270] 
-
-# "Do" Part of while statement, have awiwi travel once in a random direction to make while statement true
-awiwi.seth(choice(face_direction))
-awiwi.fd(30) 
-
-paths_took = [awiwi.pos()] 
 
 
 
-# Awiwi will keep travelling until they reach back home (0, 0)
-while (not abs(awiwi.pos()) < 1): 
-    # grab the coordinates of awiwi
-    awiwi.seth(choice(face_direction))
-    # Checks if turtle will go out of bounds and choose a different direction if it will
-    if int(x_cord) + 30 > 400 and awiwi.heading() == 0: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
-    elif int(x_cord) - 30 < -400 and awiwi.heading() == 180: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
-
-    if int(y_cord) + 30 > 300 and awiwi.heading() == 90: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
-    elif int(y_cord) - 30 < -300 and awiwi.heading() == 270: awiwi.seth(choice([d for d in face_direction if d != awiwi.heading()]))
-
+def potential_move(): 
+    '''Calculates the coordinates of the possible places that awiwi can travel to'''
+    get_direction = awiwi.heading()
     
+    potential_x, potential_y = round(awiwi.xcor()), round(awiwi.ycor()) # rounds numbers to prevent decimal issues 
+    
+    # Calculate coordinates awiwi can travel to depending on his 
+    if get_direction == 0: potential_x += 30 
+    elif get_direction == 90: potential_y += 30 
+    elif get_direction == 180: potential_x -= 30 
+    elif get_direction == 270: potential_y -= 30 
+    
+    return potential_x, potential_y # returns the potential coordinates of the location awiwi wants to travel to 
+
+def check_validity(xcord, ycord): 
+    '''Checks if awiwi has already went to those coordinates'''
+    return (xcord, ycord) in paths_taken
+
+
+# Initializing Turtle and Screen
+awiwi = Turtle() 
+awiwi_hale = Screen() 
+awiwi.speed(3)
+
+face_direction = [0, 90, 180, 270] # Each value represents a cardinal direction. 0 = East, 90 = North, 180 = West, 270 = South 
+paths_taken = [] 
+
+awiwi.fd(30)
+
+
+while(not abs(awiwi.pos()) < 1): # have awiwi keep going until they reach back home 
+    awiwi.seth(choice(face_direction))
+    x, y = potential_move() # calculates the potential places that awiwi can go
+
+    while(check_validity(x, y)): # checks if where awiwi is moving is a new location or an old one 
+        awiwi.seth(choice(face_direction))
+        x, y = potential_move()
     
     awiwi.fd(30) 
-    paths_took += [awiwi.pos()]
+
+    paths_taken.append((x, y))
+    
+        
+    
 
 
 
@@ -53,6 +65,5 @@ while (not abs(awiwi.pos()) < 1):
 
 
 
-# So that the turtle graphics do not disappear at the end. 
+
 awiwi_hale.mainloop() 
-
