@@ -6,37 +6,31 @@ eng_dict = (word.strip() for word in open("WordEn.txt", "r")) # Generator Expres
 
 sample_list = ["aurae", "aurate", "advark", "cart", "crate","curl", "urea", "umbral", "rate", "race", "raters", "tare", "tear", "treat", "eatery", "enter", "eruct"]
 
-# Solution Two: Takes characters from 'accurate' and sees what words it can make
 
-'''for letter in days_word: 
-    possible_words = [list(word) for word in sample_list if word.startswith(letter)] # generate a list of possible words based on character
+# Solution 2: Takes characters from 'accurate' and sees what words it can make
+
+for letter in days_word: 
+    possible_words = [word for word in sample_list if word.startswith(letter) and len(word) >= 4]
+
     for word in possible_words: 
-        if letter '''
-    
+        build_word = ""
+        for letter in word: 
+            letter_freq = word.count(letter)
+            if days_word.count(letter) >= letter_freq: build_word += letter
+        if build_word == word and build_word != 'accurate': derived_words.add(build_word)
+
+print(derived_words) # Desired Output: aurae, aurate, cart, crate, urea, rate, race, tare, tear, eruct
+print(len(derived_words), len(sample_list))
         
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print(derived_words) # Desired output: aurae, aurate, cart, crate,  urea, rate, race, tare, tear, eruct
 
 
 
 # Solution 1: Grabs the characters from the words in WordEn.txt file and checks if it can be made from 'Accurate'
 
-for word in eng_dict: 
+'''for word in eng_dict: 
     build_word = "" # Reset and try to build a new word
     for letter in word: 
         letter_freq = word.count(letter)
@@ -48,6 +42,6 @@ for word in eng_dict:
 
 print('Words derived from Accurate')
 for word in derived_words: print(word)
-print(len(derived_words))
+print(len(derived_words))'''
 
             
