@@ -4,27 +4,24 @@ derived_words = set() # set to hold all the words that can be derived from 'Accu
 
 eng_dict = (word.strip() for word in open("WordEn.txt", "r")) # Generator Expression for WordEn.txt (HUUUUGE FILE)
 
-sample_list = ["aurae", "aurate", "advark", "cart", "crate","curl", "urea", "umbral", "rate", "race", "raters", "tare", "tear", "treat", "eatery", "enter", "eruct"]
 
 
 # Solution 2: Takes characters from 'accurate' and sees what words it can make
 
 for letter in days_word: 
-    possible_words = [word for word in sample_list if word.startswith(letter) and len(word) >= 4]
-
+    possible_words = [word.strip() for word in open("testWords.txt", "r") if word.startswith(letter) and len(word) >= 4]
+    
     for word in possible_words: 
         build_word = ""
         for letter in word: 
             letter_freq = word.count(letter)
             if days_word.count(letter) >= letter_freq: build_word += letter
-        if build_word == word and build_word != 'accurate': derived_words.add(build_word)
+        if build_word == word and build_word != days_word: derived_words.add(build_word)
 
 print(derived_words) # Desired Output: aurae, aurate, cart, crate, urea, rate, race, tare, tear, eruct
-print(len(derived_words), len(sample_list))
+print(len(derived_words))
         
     
-
-# print(derived_words) # Desired output: aurae, aurate, cart, crate,  urea, rate, race, tare, tear, eruct
 
 
 
