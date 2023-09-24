@@ -29,3 +29,10 @@ Solution One:
 4. If all characters are found then add that word to overall list
 5. repeat process for new word. 
 
+Solution Two: 
+1. Take each character of 'accurate'
+2. See which words can be made with that letter
+3. Get next letter of a derived word 
+4. Check if accurate has that next letter
+5. Repeat process until derived word is made or move on to the next word 
+
