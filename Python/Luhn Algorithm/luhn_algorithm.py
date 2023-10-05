@@ -8,6 +8,7 @@ id = '4388576053793488'
 # Intialized Dictionary containing values when doing Luhn's Algorithm. 
 luhn_v = {"0": 0, "1": 2, "2": 4, "3": 6, "4": 8, \
     "5": 1, "6": 3, "7": 5, "8": 7, "9": 9}
+# Performs calculation and validates if the number obtained from the calculations equal to the check-digit. 
 if 10 - (sum([ luhn_v.get(x) for x in id[-2::-2]] \
      + [ int(x) for x in id[-3::-2]]) % 10) \
      == int(id[-1]): print('it matches up') 
