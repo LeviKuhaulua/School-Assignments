@@ -14,4 +14,6 @@
 
 ## - [Data Structures (CSCI 2913)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Data%20Structures)
 
+## - [Computer Organizations (CSCI 3501)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Computer%20Organizations)
+
 <br>
