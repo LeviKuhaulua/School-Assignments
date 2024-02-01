@@ -17,6 +17,6 @@ Methods:
 
 <br>
 
-Tips from the book:
+Notes from the book:
 
 - store only necessary information about the sequence such as `Sequence Length`, `Sum of numbers in sequence`, `variables for last, smallest, and largest number in sequence`. `nextNumber` should update the private instance variable(s) when called.
