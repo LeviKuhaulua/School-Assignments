@@ -7,7 +7,7 @@
 
 /******************************************************************************
 * This class is a homework assignment;									       
-* A <CODE>Statistician</CODE> keeps track of statistics about a sequence of
+* A {@code Statistician} keeps track of statistics about a sequence of
 * double numbers.
 *
 * <b>Note:</b>
@@ -19,7 +19,8 @@
 *   http://www.cs.colorado.edu/~main/edu/colorado/homework/Statistician.java
 *   </A>
 *
-* @version Feb 10, 2016
+* @author Levi Kuhaulua (<A HREF=MAILTO:levi.kuhaulua@outlook.com>levi.kuhaulua@outlook.com</A>)
+* @version 21.0.1  
 ******************************************************************************/
 public class Statistician
 {   
@@ -32,63 +33,7 @@ public class Statistician
    public Statistician( )
    {
       // Student implementation.      
-   }        
-
-
-   /**
-   * Add the numbers of another Statistician to this Statistician.
-   * @param addend
-   *   a Statistician whose numbers will be added to this Statistician
-   * <b>Precondition:</b>
-   *   The parameter, <CODE>addend</CODE>, is not null. 
-   * <b>Postcondition:</b>
-   *   The numbers from <CODE>addend</CODE> have been added to this
-   *   Statistician. After the operation, this Statistician acts as if
-   *   if was given all of its numbers and also given all of the numbers
-   *   from the addend.
-   * @exception NullPointerException
-   *   Indicates that <CODE>addend</CODE> is null. 
-   **/
-   public void addAll(Statistician addend)
-   {
-      // Student implementation.
-   }   
-   
-   
-   /**
-   * Clear this Statistician. 
-   * <b>Postcondition:</b>
-   *   This Statistician is reinitialized as if it has never been given any 
-   *   numbers.
-   **/
-   public void clear( )
-   {
-      // Student implementation.
-   }
-
-
-   /**
-   * Compare this <CODE>Statistician</CODE> to another object for equality.
-   * @param obj
-   *   an object with which this <CODE>Statistician</CODE> will be compared
-   * @return
-   *   A return value of <CODE>true</CODE> indicates that 
-   *   <CODE>obj</CODE> refers to a 
-   *   <CODE>Statistican</CODE> object with the same length, sum, mean,
-   *   minimum and maximum as this 
-   *   <CODE>Statistician</CODE>. Otherwise the return value is 
-   *   <CODE>false</CODE>.
-   * <b>Note:</b>
-   *   If <CODE>obj</CODE> is null or does not refer to a 
-   *   <CODE>Statistician</CODE> object, then the answer is 
-   *   <CODE>false</CODE>.
-   **/   
-   public boolean equals(Object obj)
-   {
-      // The student's code will replace this return statement:
-      return false;
-   } 
-   
+   }           
    
    /**
    * Determine how many numbers have been given to this Statistician.
@@ -176,7 +121,7 @@ public class Statistician
    *   The specified number has been given to this Statistician and
    *   it will be included in any subsequent statistics.
    **/
-   public void next(double number)
+   public void nextNumber(double number)
    {
       // Student implementation.
    }
@@ -201,26 +146,15 @@ public class Statistician
       return 0;
    }
 
-
    /**
-   * Create a new Statistician that behaves as if it was given all the
-   * numbers from two other bags.
-   * @param s1
-   *   the first of two Statisticians
-   * @param s2
-   *   the second of two Statisticians
-   * <b>Precondition:</b>
-   *   Neither s1 nor s2 is null.
-   * @return
-   *   a new Statistician that acts as if it was given all the numbers from
-   *   s1 and s2.
-   * @exception NullPointerException
-   *   Indicates that one of the arguments is null.
-   **/   
-   public static Statistician union(Statistician s1, Statistician s2)
-   {
-      // The student's code will replace this return statement:
-      return null;
+    * Return the last number given to this {@code Statistician} 
+    * @return
+    */
+   public double lastNumber( ) {
+
+      return 0; 
+
    }
+
       
 }
