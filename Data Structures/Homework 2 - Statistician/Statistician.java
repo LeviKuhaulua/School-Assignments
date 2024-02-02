@@ -57,6 +57,9 @@ public class Statistician
    public void nextNumber(double number)
    {
       length++; 
+      lastNum = number; 
+      sum += lastNum; 
+      
    }
 
    /**
@@ -88,7 +91,7 @@ public class Statistician
    public double maximum( )
    {
       // The student's code will replace this return statement:
-      return 0;
+      return maxNum;
    }
 
 
@@ -112,8 +115,7 @@ public class Statistician
    **/ 
    public double mean( )
    {
-      // The student's code will replace this return statement:
-      return 0;
+      return mean; 
    }
 
 
@@ -130,8 +132,7 @@ public class Statistician
    **/ 
    public double minimum( )
    {
-      // The student's code will replace this return statement:
-      return 0;
+      return minNum;
    }
 
 
@@ -150,20 +151,17 @@ public class Statistician
    *   <CODE>Double.POSITIVE_INFINITY</CODE> or
    *   <CODE>Double.NEGATIVE_INFINITY</CODE>.
    **/ 
-   public double sum( )
-   {
-      // The student's code will replace this return statement:
-      return 0;
+   public double sum()
+   { 
+      return (Double.isNaN(lastNum)) ? 0 : sum; 
    }
 
    /**
-    * Return the last number given to this {@code Statistician} 
-    * @return
+    * Return the last number given to the Statistician
+    * @return last number in sequence
     */
    public double lastNumber( ) {
-
-      return 0; 
-
+      return lastNum; 
    }
 
       
