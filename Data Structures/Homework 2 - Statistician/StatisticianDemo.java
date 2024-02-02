@@ -57,5 +57,16 @@ public class StatisticianDemo {
         sumStatistician.nextNumber(-9.0); 
         System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
         /* END OF SUM TESTING */
+        /* LENGTH TESTING*/
+        
+        Statistician lenStatistician = new Statistician(); 
+
+        System.out.println(lenStatistician.length()); // Expected Output: 0 
+
+        lenStatistician.nextNumber(1.1); 
+
+        System.out.println(lenStatistician.length()); // Expected Output: Length should increment
+
+        /* END OF LENGTH TESTING */
     }
 }
