@@ -24,6 +24,10 @@
 ******************************************************************************/
 public class Statistician
 {   
+
+   private int length; 
+   private double minNum, maxNum, lastNum; 
+   private double sum, mean; 
    /**
    * Initialize a new Statistician.  
    * <b>Postcondition:</b>
@@ -32,9 +36,29 @@ public class Statistician
    **/   
    public Statistician( )
    {
-      // Student implementation.      
+      // Sum and Length of '0' is useful information to user. 
+      this.length = 0; 
+      this.sum = 0; 
+
+      this.minNum = Double.NaN; 
+      this.maxNum = Double.NaN; 
+      this.lastNum = Double.NaN; 
+      this.mean = Double.NaN;       
    }           
    
+   /**
+   * Give a new number to this Statistician. 
+   * @param number
+   *   the new number that is being given the this Statistician
+   * <b>Postcondition:</b>
+   *   The specified number has been given to this Statistician and
+   *   it will be included in any subsequent statistics.
+   **/
+   public void nextNumber(double number)
+   {
+      length++; 
+   }
+
    /**
    * Determine how many numbers have been given to this Statistician.
    * @return
@@ -45,13 +69,11 @@ public class Statistician
    *   <CODE>Integer.MAX_VALUE</CODE> numbers, will
    *   cause failure with an arithmetic overflow.
    **/ 
-   public int length( )
-   {
-      // The student's code will replace this return statement:
-      return 0;
+   public int length( ){
+      return length;
    }
-
-
+   
+   
    /**
    * Determine the largest number that has been given 
    * to this Statistician.
@@ -113,18 +135,6 @@ public class Statistician
    }
 
 
-   /**
-   * Give a new number to this Statistician. 
-   * @param number
-   *   the new number that is being given the this Statistician
-   * <b>Postcondition:</b>
-   *   The specified number has been given to this Statistician and
-   *   it will be included in any subsequent statistics.
-   **/
-   public void nextNumber(double number)
-   {
-      // Student implementation.
-   }
 
 
    /**
