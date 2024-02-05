@@ -24,18 +24,18 @@
 ******************************************************************************/
 public class Statistician
 {   
-
+   
    private int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
    /**
-   * Initialize a new Statistician.  
+    * Initialize a new Statistician.  
    * <b>Postcondition:</b>
    *   This Statistician is newly initialized and has not yet been given any 
    *   numbers.
    **/   
-   public Statistician( )
-   {
+  public Statistician( )
+  {
       // Sum and Length of '0' is useful information to user. 
       this.length = 0; 
       this.sum = 0; 
@@ -45,11 +45,18 @@ public class Statistician
       this.lastNum = Double.NaN; 
       this.mean = Double.NaN;       
    }           
+   /**
+    * Return the last number given to the Statistician
+    * @return last number in sequence
+    */
+   public double lastNumber( ) {
+      return lastNum; 
+   }
    
    /**
-   * Give a new number to this Statistician. 
-   * @param number
-   *   the new number that is being given the this Statistician
+    * Give a new number to this Statistician. 
+    * @param number
+    *   the new number that is being given the this Statistician
    * <b>Postcondition:</b>
    *   The specified number has been given to this Statistician and
    *   it will be included in any subsequent statistics.
@@ -58,7 +65,9 @@ public class Statistician
    {
       length++; 
       lastNum = number; 
-      sum += lastNum; 
+      sum += lastNum;  
+      maxNum = maximum(); 
+      minNum = minimum(); 
       
    }
 
@@ -90,8 +99,17 @@ public class Statistician
    **/ 
    public double maximum( )
    {
-      // The student's code will replace this return statement:
-      return maxNum;
+      
+      if (length == 1) {
+         maxNum = lastNum; 
+         return maxNum; 
+      } else if (length > 1) {
+         maxNum = Double.max(maxNum, lastNum); 
+         return maxNum; 
+      } else {
+         return maxNum; // Should be Double.NaN. 
+      }
+      
    }
 
 
@@ -115,7 +133,7 @@ public class Statistician
    **/ 
    public double mean( )
    {
-      return mean; 
+      return sum / length; 
    }
 
 
@@ -132,7 +150,15 @@ public class Statistician
    **/ 
    public double minimum( )
    {
-      return minNum;
+      if (length == 1) {
+         minNum = lastNum; 
+         return minNum; 
+      } else if (length > 1) {
+         minNum = Double.min(minNum, lastNum); 
+         return minNum; 
+      } else {
+         return minNum; // Should be Double.NaN. 
+      }
    }
 
 
@@ -156,13 +182,6 @@ public class Statistician
       return (Double.isNaN(lastNum)) ? 0 : sum; 
    }
 
-   /**
-    * Return the last number given to the Statistician
-    * @return last number in sequence
-    */
-   public double lastNumber( ) {
-      return lastNum; 
-   }
 
       
 }
