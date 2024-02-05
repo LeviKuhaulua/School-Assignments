@@ -13,7 +13,7 @@ Methods:
 - A method to get the mean of the numbers in the sequence
 - smallest number in the sequence
 - largest number in the sequence
-- methods should return `Double.NaN` if the sequence is empty.
+- methods should return `Double.NaN` if the sequence is empty except for `sum` and `length` which should return `0` if sequence is empty. 
 
 <br>
 
