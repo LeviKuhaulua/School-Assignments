@@ -2,6 +2,10 @@
 
 public class StatisticianDemo {
     public static void main(String[] args) {
+
+        /*
+        * COMMENT OUT OTHER SECTIONS WHEN TRYING TO DEBUG CODE. 
+        */
         
         /* LENGTH TESTING*/
         
@@ -51,6 +55,41 @@ public class StatisticianDemo {
         sumStatistician.nextNumber(-9.0); 
         System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
         /* END OF SUM TESTING */
+
+        /* MAXIMUM NUMBER TESTING */
+
+        Statistician maxStatistician = new Statistician(); 
+
+        System.out.println(maxStatistician.maximum()); // Expected Output: Double.NaN
+
+        maxStatistician.nextNumber(10.0); 
+
+        System.out.println(maxStatistician.maximum()); // Expected output: 10.0; 
+
+        maxStatistician.nextNumber(5.0); 
+        System.out.println(maxStatistician.maximum()); // Expected Output: 10.0; 
+        maxStatistician.nextNumber(100.0); 
+        System.out.println(maxStatistician.maximum()); // Expected Output: 100.0;
         
+
+        /* END OF MAX NUMBER TESTING */
+        
+        /* MIN NUMBER TESTING */
+        Statistician minStatistician = new Statistician(); 
+
+        System.out.println(minStatistician.minimum()); // Expected Output: Double.NaN
+
+        minStatistician.nextNumber(1.0); 
+        System.out.println(minStatistician.minimum()); // Expected Output: 1.0
+
+        minStatistician.nextNumber(10.0);
+        System.out.println(minStatistician.minimum()); // Expected Output: 1.0
+
+        minStatistician.nextNumber(10.0);
+        minStatistician.nextNumber(-10.0);
+        minStatistician.nextNumber(-100.1);
+
+        System.out.println(minStatistician.minimum()); // Expected Output: -100.1
+        /* END OF MIN NUMBER TESTING */
     }
 }
