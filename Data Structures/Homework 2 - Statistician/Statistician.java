@@ -68,6 +68,7 @@ public class Statistician
       sum += lastNum;  
       maxNum = maximum(); 
       minNum = minimum(); 
+      mean = mean(); 
       
    }
 
@@ -133,7 +134,15 @@ public class Statistician
    **/ 
    public double mean( )
    {
-      return sum / length; 
+      if (length == 1) {
+         mean = lastNum; 
+         return mean; 
+      } else if (length > 1) {
+         mean = sum / length; 
+         return mean; 
+      } else {
+         return mean; // Expected Output is NaN
+      }
    }
 
 
