@@ -69,6 +69,8 @@ public class StatisticianDemo {
         maxStatistician.nextNumber(5.0); 
         System.out.println(maxStatistician.maximum()); // Expected Output: 10.0; 
         maxStatistician.nextNumber(100.0); 
+        maxStatistician.nextNumber(-100.0); 
+        maxStatistician.nextNumber(-90.99); 
         System.out.println(maxStatistician.maximum()); // Expected Output: 100.0;
         
 
