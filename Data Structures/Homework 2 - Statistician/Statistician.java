@@ -93,7 +93,7 @@ public class Statistician
    * @postcondition 
    *   Return a {@code Double} number that represents the amount of the numbers in the sequence. If length is 0 then return {@code 0}.
    *   <P>
-   *     <B>NOTE:</B>If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
+   *     <B>NOTE:</B> If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
    *     it will go return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.
    *   </P> 
    **/ 
@@ -136,7 +136,7 @@ public class Statistician
    *    if the length of the sequence is 0. 
    * 
    *    <P>
-   *      <B>NOTE:</B>If the sum of the sequence is over the bounds for double numbers, then 
+   *      <B>NOTE:</B> If the sum of the sequence is over the bounds for double numbers, then 
    *      the answer will result in {@code Double.POSITIVE_INFINITY} or {@code Double.NEGATIVE_INFINITY}. 
    *      Another thing to take note is that if the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
    *      then that will return the last known valid mean of the sequence. 
