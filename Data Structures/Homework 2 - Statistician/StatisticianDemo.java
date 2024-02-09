@@ -77,10 +77,6 @@ public class StatisticianDemo {
         // maxStatistician.nextNumber(-90.99); 
         // System.out.println(maxStatistician.maximum()); // Expected Output: 100.0;
 
-        // double max = maxStatistician.maximum(); 
-        // maxStatistician.nextNumber(10.1);
-        // maxStatistician.maximum(); 
-        
 
         /* END OF MAX NUMBER TESTING */
         
