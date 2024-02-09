@@ -145,16 +145,29 @@ public class StatisticianDemo {
         // // checkBoundary.nextNumber(-Double.MAX_VALUE + -Double.MAX_VALUE); // Checking for some arbitrarily minimum number. 
         // // System.out.println(checkBoundary.lastNumber());
 
+        // checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(Double.MAX_VALUE); 
+        // checkBoundary.nextNumber(Double.MAX_VALUE);
+        // System.out.println(checkBoundary.sum());
+
+        // checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(-Double.MAX_VALUE);
+        // checkBoundary.nextNumber(-Double.MAX_VALUE);
+        // System.out.println(checkBoundary.sum());
+
+        checkBoundary.length = Integer.MAX_VALUE; 
+        checkBoundary.nextNumber(1.0); 
+        System.out.println(checkBoundary.mean());  
+
         checkBoundary = new Statistician(); 
         checkBoundary.nextNumber(Double.MAX_VALUE); 
         checkBoundary.nextNumber(Double.MAX_VALUE);
-        System.out.println(checkBoundary.sum());
+        System.out.println(checkBoundary.mean());
 
         checkBoundary = new Statistician(); 
         checkBoundary.nextNumber(-Double.MAX_VALUE);
         checkBoundary.nextNumber(-Double.MAX_VALUE);
-        System.out.println(checkBoundary.sum());
-        
+        System.out.println(checkBoundary.mean());
         
         /* END OF BOUNDARY TESTING */
     }

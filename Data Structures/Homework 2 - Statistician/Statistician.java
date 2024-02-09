@@ -25,7 +25,7 @@
 public class Statistician
 {   
    
-   private int length; 
+   public int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
    
@@ -131,20 +131,16 @@ public class Statistician
    /**
    * Determine the arithmetic average of all the numbers that have been given 
    * to this Statistician.
-   * @return
-   *   the arithmetic mean of all the number that have been given to this 
-   *   Statistician
-   *   since it was initialized or reinitialized.
-   * <b>Note:</b>
-   *   If this Statistician has been given more than
-   *   <CODE>Integer.MAX_VALUE</CODE> numbers, then this method fails
-   *   because of arithmetic overflow.
-   *   If <CODE>length()</CODE> is zero, then the answer from this method
-   *   is <CODE>Double.NaN</CODE>.
-   *   If <CODE>sum()</CODE> exceeds the bounds of double numbers, then the 
-   *   answer from this method may be 
-   *   <CODE>Double.POSITIVE_INFINITY</CODE> or
-   *   <CODE>Double.NEGATIVE_INFINITY</CODE>.
+   * @postcondition 
+   *    Return a {@code double} number representing the arithmetic mean of the sequence or {@code NaN} 
+   *    if the length of the sequence is 0. 
+   * 
+   *    <P>
+   *      <B>NOTE:</B>If the sum of the sequence is over the bounds for double numbers, then 
+   *      the answer will result in {@code Double.POSITIVE_INFINITY} or {@code Double.NEGATIVE_INFINITY}. 
+   *      Another thing to take note is that if the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
+   *      then that will also return {@code NaN}. 
+   *    </P>
    **/ 
    public double mean( )
    {
