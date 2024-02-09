@@ -168,6 +168,14 @@ public class StatisticianDemo {
         checkBoundary.nextNumber(-Double.MAX_VALUE);
         checkBoundary.nextNumber(-Double.MAX_VALUE);
         System.out.println(checkBoundary.mean());
+
+        checkBoundary = new Statistician(); 
+        checkBoundary.nextNumber(10.0); 
+        checkBoundary.nextNumber(15.0); 
+        checkBoundary.length = Integer.MAX_VALUE; 
+        checkBoundary.nextNumber(25.0); 
+        System.out.println(checkBoundary.mean());
+        
         
         /* END OF BOUNDARY TESTING */
     }

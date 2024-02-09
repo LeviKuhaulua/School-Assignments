@@ -139,7 +139,7 @@ public class Statistician
    *      <B>NOTE:</B>If the sum of the sequence is over the bounds for double numbers, then 
    *      the answer will result in {@code Double.POSITIVE_INFINITY} or {@code Double.NEGATIVE_INFINITY}. 
    *      Another thing to take note is that if the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
-   *      then that will also return {@code NaN}. 
+   *      then that will return the last known valid mean of the sequence. 
    *    </P>
    **/ 
    public double mean( )
