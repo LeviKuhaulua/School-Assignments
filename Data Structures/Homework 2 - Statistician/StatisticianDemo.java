@@ -132,18 +132,28 @@ public class StatisticianDemo {
         // Temporarily set length to public to adjust value. 
         // checkBoundary.length = Integer.MAX_VALUE; // Simulating when we have the max amount of double numbers in the sequence (Integer.MAX_VALUE)
         // System.out.println(checkBoundary.length());
-        checkBoundary.nextNumber(10.0); 
+        // checkBoundary.nextNumber(10.0); 
 
-        System.out.println(checkBoundary.length()); // Adding one more number to simulate overflow. 
-        System.out.println(checkBoundary.lastNumber());
-        checkBoundary.nextNumber(13.0); 
-        System.out.println(checkBoundary.lastNumber());
+        // // System.out.println(checkBoundary.length()); // Adding one more number to simulate overflow. 
+        // // System.out.println(checkBoundary.lastNumber());
+        // // checkBoundary.nextNumber(13.0); 
+        // // System.out.println(checkBoundary.lastNumber());
 
-        checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); // Checking for some arbitrarily large number.
-        System.out.println(checkBoundary.lastNumber());
+        // // checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); // Checking for some arbitrarily large number.
+        // // System.out.println(checkBoundary.lastNumber());
 
-        checkBoundary.nextNumber(-Double.MAX_VALUE + -Double.MAX_VALUE); // Checking for some arbitrarily minimum number. 
-        System.out.println(checkBoundary.lastNumber());
+        // // checkBoundary.nextNumber(-Double.MAX_VALUE + -Double.MAX_VALUE); // Checking for some arbitrarily minimum number. 
+        // // System.out.println(checkBoundary.lastNumber());
+
+        checkBoundary = new Statistician(); 
+        checkBoundary.nextNumber(Double.MAX_VALUE); 
+        checkBoundary.nextNumber(Double.MAX_VALUE);
+        System.out.println(checkBoundary.sum());
+
+        checkBoundary = new Statistician(); 
+        checkBoundary.nextNumber(-Double.MAX_VALUE);
+        checkBoundary.nextNumber(-Double.MAX_VALUE);
+        System.out.println(checkBoundary.sum());
         
         
         /* END OF BOUNDARY TESTING */

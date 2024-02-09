@@ -32,7 +32,7 @@ public class Statistician
    /**
    * Initialize a new Statistician Instance
    * @postcondition 
-   * An empty Statistician that can take in a sequence of numbers. 
+   *   An empty Statistician that can take in a sequence of numbers. 
    * 
    **/   
   public Statistician( )
@@ -75,14 +75,13 @@ public class Statistician
       /**
        * Return the last number given to the Statistician
        * @postcondition 
-       *   Return a {@code double} number that represents the last number of the sequence. 
+       *   Return a {@code double} number that represents the last number of the sequence or {@code NaN} if no numbers in sequence. 
        *   <P>
-       *    <B>NOTE</B>: If the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
+       *    <B>NOTE:</B> If the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
        *    it will still return the last number of the sequence. Additionally, if the last number in the sequence 
        *    is an arbitrarily large number that exceeds {@code Double.MAX_VALUE} or a number that is arbitrarily less than 
        *    {@code -Double.MAX_VALUE}, then it will return either positive or negative infinity. 
        *   </P>
-       * 
        * 
        */
    public double lastNumber(){
@@ -92,9 +91,11 @@ public class Statistician
    /**
    * Determine how many numbers have been given to this Statistician.
    * @postcondition 
-   *   Return a {@code Double} number that represents the amount of the numbers in the sequence.
-   *   <P><B>NOTE</B>: If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
-   *   it will go return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.</P> 
+   *   Return a {@code Double} number that represents the amount of the numbers in the sequence. If length is 0 then return {@code 0}.
+   *   <P>
+   *     <B>NOTE:</B>If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
+   *     it will go return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.
+   *   </P> 
    **/ 
    public int length( ){
       return length;
@@ -114,14 +115,13 @@ public class Statistician
    **/ 
    public double maximum( )
    {
-
       if (length == 1) {
          maxNum = lastNum; 
          return maxNum; 
       } else if (length > 1) {
          maxNum = Double.max(maxNum, lastNum); 
          return maxNum; 
-      } else { // when length is 0. 
+      } else { // When length is 0. 
          return maxNum; 
       }
       
@@ -190,15 +190,14 @@ public class Statistician
    /**
    * Determine the sum of all the numbers that have been given to this 
    * Statistician.
-   * @return
-   *   the sum of all the number that have been given to this 
-   *   Statistician
-   *   since it was initialized or reinitialized.
-   * <b>Note:</b>
-   *   If the sum exceeds the bounds of double numbers, then the answer
-   *   from this method may be 
-   *   <CODE>Double.POSITIVE_INFINITY</CODE> or
-   *   <CODE>Double.NEGATIVE_INFINITY</CODE>.
+   * @postcondition 
+   *   Return a {@code double} number that represents the sum of the sequence. Otherwise, if
+   *   the length of the sequence is 0, then return {@code 0}. 
+   *   
+   *   <P>
+   *     <B>NOTE:</B> If the sum goes over the bounds for double numbers, then it may return {@code Double.POSITIVE_INFINITY}
+   *     or {@code Double.NEGATIVE_INFINITY}. 
+   *   </P> 
    **/ 
    public double sum()
    { 
