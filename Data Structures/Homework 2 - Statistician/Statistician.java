@@ -160,13 +160,14 @@ public class Statistician
    /**
    * Determine the smallest number that has been given 
    * to this Statistician.
-   * @return
-   *   the smallest number that has been given to this 
-   *   Statistician
-   *   since it was initialized or reinitialized.
-   * <b>Note:</b>
-   *   If <CODE>length()</CODE> is zero, then the answer from this method
-   *   is <CODE>Double.NaN</CODE>.
+   * @postcondition 
+   *   Return a {@code double} number that represents the minimum number of the sequence or {@code NaN} 
+   *   if the length of the sequence is 0. 
+   * 
+   *   <P> 
+   *     <B>NOTE:</B> If you feed {@code -Double.MAX_VALUE} then that will remain the minimum number of the sequence UNLESS
+   *     the next number fed to the sequence is {@code Double.NEGATIVE_INFINITY}. 
+   *   </P> 
    **/ 
    public double minimum( )
    {

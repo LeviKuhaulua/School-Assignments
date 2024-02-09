@@ -176,12 +176,17 @@ public class StatisticianDemo {
         // checkBoundary.nextNumber(25.0); 
         // System.out.println(checkBoundary.mean());
 
-        checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); 
-        System.out.println(checkBoundary.lastNumber()); 
-        checkBoundary.nextNumber(1000000.0); 
-        System.out.println(checkBoundary.maximum());
+        // checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); 
+        // System.out.println(checkBoundary.lastNumber()); 
+        // checkBoundary.nextNumber(1000000.0); 
+        // System.out.println(checkBoundary.maximum());
         
-        
+        checkBoundary.nextNumber(-Double.MAX_VALUE);
+        checkBoundary.nextNumber(-1000000000.0); 
+        System.out.println(checkBoundary.minimum());
+        checkBoundary.nextNumber(Double.NEGATIVE_INFINITY);
+        System.out.println(checkBoundary.minimum());
+        checkBoundary.nextNumber(-10000000000.0);
         
         /* END OF BOUNDARY TESTING */
     }
