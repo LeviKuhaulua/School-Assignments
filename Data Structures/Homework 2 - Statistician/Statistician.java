@@ -60,9 +60,9 @@ public class Statistician
 
       if (Double.isNaN(number)) {
          throw new IllegalArgumentException(
-            "Must be a number. Not NaN"
+            "Must be a number."
          ); 
-      } else {
+      } else { // Make sure that this only runs if the number is a valid number. 
          length++; 
          lastNum = number; 
          sum += lastNum;  
@@ -74,6 +74,8 @@ public class Statistician
       
       /**
        * Return the last number given to the Statistician
+       * @precondition
+       *   Statistician must be an empty sequence OR a sequence with only valid numbers. See {@link nextNumber} method 
        * @postcondition 
        *   Return a {@code double} number that represents the last number of the sequence or {@code NaN} if no numbers in sequence. 
        *   <P>
@@ -94,7 +96,7 @@ public class Statistician
    *   Return a {@code Double} number that represents the amount of the numbers in the sequence. If length is 0 then return {@code 0}.
    *   <P>
    *     <B>NOTE:</B> If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
-   *     it will go return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.
+   *     it will return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.
    *   </P> 
    **/ 
    public int length( ){
@@ -105,6 +107,8 @@ public class Statistician
    /**
    * Determine the largest number that has been given 
    * to this Statistician.
+   * @precondition 
+   *   Statistician must be an empty sequence OR a sequence with only valid numbers. See {@link nextNumber} method
    * @postcondition 
    *   Return a {@code double} number that represents the largest number in the sequence or {@code NaN} 
    *   if length of the sequence is 0. 
@@ -122,7 +126,7 @@ public class Statistician
       } else if (length > 1) {
          maxNum = Double.max(maxNum, lastNum); 
          return maxNum; 
-      } else { // When length is 0. 
+      } else { // When length is 0 or when the length is negative (arithmetic overflow) 
          return maxNum; 
       }
       
@@ -132,6 +136,8 @@ public class Statistician
    /**
    * Determine the arithmetic average of all the numbers that have been given 
    * to this Statistician.
+   * @precondition 
+   *    Statistician must be an empty sequence OR a sequence with only valid numbers. See {@link nextNumber} method
    * @postcondition 
    *    Return a {@code double} number representing the arithmetic mean of the sequence or {@code NaN} 
    *    if the length of the sequence is 0. 
@@ -151,7 +157,7 @@ public class Statistician
       } else if (length > 1) {
          mean = sum / length; 
          return mean; 
-      } else { // When length is 0
+      } else { // When length is 0 or when the length is negative (arithmetic overflow)
          return mean; 
       }
    }
@@ -160,6 +166,8 @@ public class Statistician
    /**
    * Determine the smallest number that has been given 
    * to this Statistician.
+   * @precondition
+   *   Statistician must be an empty sequence OR a sequence with only valid numbers. See {@link nextNumber} method
    * @postcondition 
    *   Return a {@code double} number that represents the minimum number of the sequence or {@code NaN} 
    *   if the length of the sequence is 0. 
@@ -177,8 +185,8 @@ public class Statistician
       } else if (length > 1) {
          minNum = Double.min(minNum, lastNum); 
          return minNum; 
-      } else { // When length is 0. 
-         return minNum; 
+      } else { // When length is 0 or when the length is negative (arithmetic overflow) 
+         return minNum;  
       }
    }
 
