@@ -136,7 +136,16 @@ public class StatisticianDemo {
         checkBoundary.nextNumber(10.0); 
 
         System.out.println(checkBoundary.length()); // Adding one more number to simulate overflow. 
+        System.out.println(checkBoundary.lastNumber());
+        checkBoundary.nextNumber(13.0); 
+        System.out.println(checkBoundary.lastNumber());
 
+        checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); 
+        System.out.println(checkBoundary.lastNumber());
+
+        checkBoundary.nextNumber(-Double.MAX_VALUE + -Double.MAX_VALUE); 
+        System.out.println(checkBoundary.lastNumber());
+        
         
         /* END OF BOUNDARY TESTING */
     }

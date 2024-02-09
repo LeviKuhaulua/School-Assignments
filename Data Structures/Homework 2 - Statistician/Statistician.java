@@ -74,7 +74,16 @@ public class Statistician
       
       /**
        * Return the last number given to the Statistician
-       * @postcondition Return a {@code double} number. 
+       * @postcondition 
+       *   Return a {@code double} number that represents the last number of the sequence. 
+       *   <P>
+       *    <B>NOTE</B>: If the length of the sequence exceeds {@code Integer.MAX_VALUE}, 
+       *    it will still return the last number of the sequence. Additionally, if the last number in the sequence 
+       *    is an arbitrarily large number that exceeds {@code Double.MAX_VALUE} or a number that is arbitrarily less than 
+       *    {@code -Double.MAX_VALUE}, then it will return either positive or negative infinity. 
+       *   </P>
+       * 
+       * 
        */
    public double lastNumber(){
          return lastNum; 
