@@ -25,7 +25,7 @@
 public class Statistician
 {   
    
-   public int length; 
+   private int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
    
