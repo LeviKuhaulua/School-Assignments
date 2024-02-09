@@ -6,6 +6,7 @@ public class StatisticianDemo {
         /*
         * COMMENT OUT OTHER SECTIONS WHEN TRYING TO DEBUG CODE. 
         */
+
         
         /* LENGTH TESTING*/
         
@@ -41,19 +42,22 @@ public class StatisticianDemo {
         /* END OF LAST NUMBER TESTING */
 
         /* SUM TESTING */
-        // Statistician sumStatistician = new Statistician(); 
+        Statistician sumStatistician = new Statistician(); 
 
-        // System.out.println(sumStatistician.sum()); // Expected Output: 0; 
+        System.out.println(sumStatistician.sum()); // Expected Output: 0; 
 
-        // sumStatistician.nextNumber(10.0); 
-        // System.out.println(sumStatistician.sum()); // Expected Output: 10
+        sumStatistician.nextNumber(10.0); 
+        System.out.println(sumStatistician.sum()); // Expected Output: 10
         
-        // sumStatistician.nextNumber(5.0); 
-        // sumStatistician.nextNumber(2.0);
-        // System.out.println(sumStatistician.sum()); // Expected Output: 17.0
+        sumStatistician.nextNumber(5.0); 
+        sumStatistician.nextNumber(2.0);
+        System.out.println(sumStatistician.sum()); // Expected Output: 17.0
 
-        // sumStatistician.nextNumber(-9.0); 
-        // System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
+        sumStatistician.nextNumber(-9.0); 
+        System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
+
+        sumStatistician = new Statistician(); 
+        System.out.println(sumStatistician.sum());
         /* END OF SUM TESTING */
 
         /* MAXIMUM NUMBER TESTING */
@@ -72,6 +76,10 @@ public class StatisticianDemo {
         // maxStatistician.nextNumber(-100.0); 
         // maxStatistician.nextNumber(-90.99); 
         // System.out.println(maxStatistician.maximum()); // Expected Output: 100.0;
+
+        // double max = maxStatistician.maximum(); 
+        // maxStatistician.nextNumber(10.1);
+        // maxStatistician.maximum(); 
         
 
         /* END OF MAX NUMBER TESTING */
@@ -96,25 +104,32 @@ public class StatisticianDemo {
 
         /* MEAN TESTING */
 
-        Statistician meanStatistician = new Statistician(); 
+        // Statistician meanStatistician = new Statistician(); 
 
-        System.out.println(meanStatistician.mean());
+        // System.out.println(meanStatistician.mean());
 
-        meanStatistician.nextNumber(10.0); 
+        // meanStatistician.nextNumber(10.0); 
 
-        System.out.println(meanStatistician.mean()); // Expected Output: 10.0
+        // System.out.println(meanStatistician.mean()); // Expected Output: 10.0
 
-        meanStatistician.nextNumber(5.0); 
-        meanStatistician.nextNumber(5.0); 
-        meanStatistician.nextNumber(4.0); 
-        System.out.println(meanStatistician.mean()); // Expected Output: 6.0
+        // meanStatistician.nextNumber(5.0); 
+        // meanStatistician.nextNumber(5.0); 
+        // meanStatistician.nextNumber(4.0); 
+        // System.out.println(meanStatistician.mean()); // Expected Output: 6.0
 
-        meanStatistician.nextNumber(-1.0); 
-        meanStatistician.nextNumber(-46.0);
-        meanStatistician.nextNumber(-12.0);
-        System.out.println(meanStatistician.mean()); // Expected Output: -5.0
-
+        // meanStatistician.nextNumber(-1.0); 
+        // meanStatistician.nextNumber(-46.0);
+        // meanStatistician.nextNumber(-12.0);
+        // System.out.println(meanStatistician.mean()); // Expected Output: -5.0
 
         /* END OF MEAN TESTING */
+
+        /* BOUNDARY TESTING */
+        // Statistician checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(Double.NaN); 
+        // System.out.println(checkBoundary.lastNumber());
+
+        
+        /* END OF BOUNDARY TESTING */
     }
 }
