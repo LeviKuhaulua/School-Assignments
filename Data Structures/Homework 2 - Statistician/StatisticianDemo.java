@@ -42,22 +42,22 @@ public class StatisticianDemo {
         /* END OF LAST NUMBER TESTING */
 
         /* SUM TESTING */
-        Statistician sumStatistician = new Statistician(); 
+        // Statistician sumStatistician = new Statistician(); 
 
-        System.out.println(sumStatistician.sum()); // Expected Output: 0; 
+        // System.out.println(sumStatistician.sum()); // Expected Output: 0; 
 
-        sumStatistician.nextNumber(10.0); 
-        System.out.println(sumStatistician.sum()); // Expected Output: 10
+        // sumStatistician.nextNumber(10.0); 
+        // System.out.println(sumStatistician.sum()); // Expected Output: 10
         
-        sumStatistician.nextNumber(5.0); 
-        sumStatistician.nextNumber(2.0);
-        System.out.println(sumStatistician.sum()); // Expected Output: 17.0
+        // sumStatistician.nextNumber(5.0); 
+        // sumStatistician.nextNumber(2.0);
+        // System.out.println(sumStatistician.sum()); // Expected Output: 17.0
 
-        sumStatistician.nextNumber(-9.0); 
-        System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
+        // sumStatistician.nextNumber(-9.0); 
+        // System.out.println(sumStatistician.sum()); // Expected Output: 8.0 
 
-        sumStatistician = new Statistician(); 
-        System.out.println(sumStatistician.sum());
+        // sumStatistician = new Statistician(); 
+        // System.out.println(sumStatistician.sum());
         /* END OF SUM TESTING */
 
         /* MAXIMUM NUMBER TESTING */
@@ -125,9 +125,17 @@ public class StatisticianDemo {
         /* END OF MEAN TESTING */
 
         /* BOUNDARY TESTING */
-        // Statistician checkBoundary = new Statistician(); 
+        Statistician checkBoundary = new Statistician(); 
         // checkBoundary.nextNumber(Double.NaN); 
         // System.out.println(checkBoundary.lastNumber());
+
+        // Temporarily set length to public to adjust value. 
+        checkBoundary.length = Integer.MAX_VALUE; // Simulating when we have the max amount of double numbers in the sequence (Integer.MAX_VALUE)
+        System.out.println(checkBoundary.length());
+
+        checkBoundary.nextNumber(10.0); 
+
+        System.out.println(checkBoundary.length()); // Adding one more number to simulate overflow. 
 
         
         /* END OF BOUNDARY TESTING */

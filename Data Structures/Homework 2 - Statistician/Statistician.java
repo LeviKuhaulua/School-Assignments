@@ -25,7 +25,7 @@
 public class Statistician
 {   
    
-   private int length; 
+   public int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
    
@@ -82,13 +82,10 @@ public class Statistician
       
    /**
    * Determine how many numbers have been given to this Statistician.
-   * @return
-   *   the count of how many numbers have been given to this Statistician
-   *   since it was initialized or reinitialized.
-   * <b>Note:</b>
-   *   Giving a Statistician more than
-   *   <CODE>Integer.MAX_VALUE</CODE> numbers, will
-   *   cause failure with an arithmetic overflow.
+   * @postcondition 
+   *   Return a {@code Double} number that represents the amount of the numbers in the sequence.
+   *   <P><B>NOTE</B>: If you add more than {@code Integer.MAX_VALUE} numbers to the sequence, 
+   *   it will go return {@code -Integer.MAX_VALUE} plus the amount of numbers you added.</P> 
    **/ 
    public int length( ){
       return length;
