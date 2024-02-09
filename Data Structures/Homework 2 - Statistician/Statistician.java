@@ -25,7 +25,7 @@
 public class Statistician
 {   
    
-   public int length; 
+   private int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
    
@@ -105,13 +105,14 @@ public class Statistician
    /**
    * Determine the largest number that has been given 
    * to this Statistician.
-   * @return
-   *   the largest number that has been given to this 
-   *   Statistician
-   *   since it was initialized or reinitialized.
-   * <b>Note:</b>
-   *   If <CODE>length()</CODE> is zero, then the answer from this method
-   *   is <CODE>Double.NaN</CODE>.
+   * @postcondition 
+   *   Return a {@code double} number that represents the largest number in the sequence or {@code NaN} 
+   *   if length of the sequence is 0. 
+   * 
+   *   <P> 
+   *     <B>NOTE:</B> If you feed a number that is {@code Double.MAX_VALUE} then that will be the maximum of the sequence UNLESS
+   *     you feed {@code Double.POSITIVE_INFINITY} into the sequence. 
+   *   </P> 
    **/ 
    public double maximum( )
    {

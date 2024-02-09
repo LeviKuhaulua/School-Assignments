@@ -155,26 +155,32 @@ public class StatisticianDemo {
         // checkBoundary.nextNumber(-Double.MAX_VALUE);
         // System.out.println(checkBoundary.sum());
 
-        checkBoundary.length = Integer.MAX_VALUE; 
-        checkBoundary.nextNumber(1.0); 
-        System.out.println(checkBoundary.mean());  
+        // checkBoundary.length = Integer.MAX_VALUE; 
+        // checkBoundary.nextNumber(1.0); 
+        // System.out.println(checkBoundary.mean());  
 
-        checkBoundary = new Statistician(); 
-        checkBoundary.nextNumber(Double.MAX_VALUE); 
-        checkBoundary.nextNumber(Double.MAX_VALUE);
-        System.out.println(checkBoundary.mean());
+        // checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(Double.MAX_VALUE); 
+        // checkBoundary.nextNumber(Double.MAX_VALUE);
+        // System.out.println(checkBoundary.mean());
 
-        checkBoundary = new Statistician(); 
-        checkBoundary.nextNumber(-Double.MAX_VALUE);
-        checkBoundary.nextNumber(-Double.MAX_VALUE);
-        System.out.println(checkBoundary.mean());
+        // checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(-Double.MAX_VALUE);
+        // checkBoundary.nextNumber(-Double.MAX_VALUE);
+        // System.out.println(checkBoundary.mean());
 
-        checkBoundary = new Statistician(); 
-        checkBoundary.nextNumber(10.0); 
-        checkBoundary.nextNumber(15.0); 
-        checkBoundary.length = Integer.MAX_VALUE; 
-        checkBoundary.nextNumber(25.0); 
-        System.out.println(checkBoundary.mean());
+        // checkBoundary = new Statistician(); 
+        // checkBoundary.nextNumber(10.0); 
+        // checkBoundary.nextNumber(15.0); 
+        // checkBoundary.length = Integer.MAX_VALUE; 
+        // checkBoundary.nextNumber(25.0); 
+        // System.out.println(checkBoundary.mean());
+
+        checkBoundary.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); 
+        System.out.println(checkBoundary.lastNumber()); 
+        checkBoundary.nextNumber(1000000.0); 
+        System.out.println(checkBoundary.maximum());
+        
         
         
         /* END OF BOUNDARY TESTING */
