@@ -28,11 +28,12 @@ public class Statistician
    private int length; 
    private double minNum, maxNum, lastNum; 
    private double sum, mean; 
+   
    /**
-    * Initialize a new Statistician.  
-   * <b>Postcondition:</b>
-   *   This Statistician is newly initialized and has not yet been given any 
-   *   numbers.
+   * Initialize a new Statistician Instance
+   * @postcondition 
+   * An empty Statistician that can take in a sequence of numbers. 
+   * 
    **/   
   public Statistician( )
   {
@@ -45,33 +46,40 @@ public class Statistician
       this.lastNum = Double.NaN; 
       this.mean = Double.NaN;       
    }           
-   /**
-    * Return the last number given to the Statistician
-    * @return last number in sequence
-    */
-   public double lastNumber( ) {
-      return lastNum; 
-   }
    
    /**
-    * Give a new number to this Statistician. 
+    * Feed a new number to the Statistician sequence. 
     * @param number
-    *   the new number that is being given the this Statistician
-   * <b>Postcondition:</b>
-   *   The specified number has been given to this Statistician and
-   *   it will be included in any subsequent statistics.
-   **/
-   public void nextNumber(double number)
-   {
-      length++; 
-      lastNum = number; 
-      sum += lastNum;  
-      maxNum = maximum(); 
-      minNum = minimum(); 
-      mean = mean(); 
-      
-   }
+    *   the new number that is being given to this Statistician. 
+    * @precondition 
+    *   the new number being fed is a valid number that can be converted to a {@code Double} and is not {@code Double.NaN}
+    * @postcondition
+    *   The number has been included into the sequence and is also included in subsequent statistics about sequence.
+    **/
+   public void nextNumber(double number){ 
 
+      if (Double.isNaN(number)) {
+         throw new IllegalArgumentException(
+            "Must be a number. Not NaN"
+         ); 
+      } else {
+         length++; 
+         lastNum = number; 
+         sum += lastNum;  
+         maxNum = maximum(); 
+         minNum = minimum(); 
+         mean = mean();   
+      }
+   }
+      
+      /**
+       * Return the last number given to the Statistician
+       * @postcondition Return a {@code double} number. 
+       */
+   public double lastNumber(){
+         return lastNum; 
+   }
+      
    /**
    * Determine how many numbers have been given to this Statistician.
    * @return
@@ -100,15 +108,15 @@ public class Statistician
    **/ 
    public double maximum( )
    {
-      
+
       if (length == 1) {
          maxNum = lastNum; 
          return maxNum; 
       } else if (length > 1) {
          maxNum = Double.max(maxNum, lastNum); 
          return maxNum; 
-      } else {
-         return maxNum; // Should be Double.NaN. 
+      } else { // when length is 0. 
+         return maxNum; 
       }
       
    }
@@ -140,8 +148,8 @@ public class Statistician
       } else if (length > 1) {
          mean = sum / length; 
          return mean; 
-      } else {
-         return mean; // Expected Output is NaN
+      } else { // When length is 0
+         return mean; 
       }
    }
 
@@ -165,8 +173,8 @@ public class Statistician
       } else if (length > 1) {
          minNum = Double.min(minNum, lastNum); 
          return minNum; 
-      } else {
-         return minNum; // Should be Double.NaN. 
+      } else { // When length is 0. 
+         return minNum; 
       }
    }
 
@@ -188,7 +196,7 @@ public class Statistician
    **/ 
    public double sum()
    { 
-      return (Double.isNaN(lastNum)) ? 0 : sum; 
+      return (length == 0) ? 0 : sum; 
    }
 
 
