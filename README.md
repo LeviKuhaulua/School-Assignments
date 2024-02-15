@@ -18,4 +18,6 @@
 
 ## - [Computer Organizations (CSCI 3501)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Computer%20Organizations)
 
+## - [Data Communications (CSCI 3401)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Data%20Communications)
+
 <br>
