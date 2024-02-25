@@ -7,11 +7,6 @@ public class StatisticianDemo {
         a.nextNumber(-10.0); 
         a.nextNumber(5.0); 
 
-        Statistician b = new Statistician(); 
-        b.nextNumber(1.0); 
-        b.nextNumber(2.0); 
-        b.nextNumber(3.0); 
-
         Statistician c = new Statistician(); 
         c.nextNumber(-10.0); 
         c.nextNumber(-10.0); 
@@ -30,6 +25,7 @@ public class StatisticianDemo {
         System.out.println("Is Mean NaN? " + Double.isNaN(addTest.mean()));
         System.out.println("Is Maximum NaN? " + Double.isNaN(addTest.maximum()));
         System.out.println("Is Minimum NaN? " + Double.isNaN(addTest.minimum()));
+        System.out.println("Is Last Number NaN? " + Double.isNaN(addTest.lastNumber()));
         
     }
 }
