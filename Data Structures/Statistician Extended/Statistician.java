@@ -210,6 +210,19 @@ public class Statistician
       return (length == 0) ? 0 : sum; 
    }
 
+   /**
+    * Create a new {@code Statistician} instance that is the result of 
+    * adding the sequence of two {@code Statistician} instances. 
+    * @precondition 
+    *   TODO: TEST AND DEBUG ADD METHOD 
+    * @postcondition 
+    *    Creates a new Statistician instance that can be fed numbers and provide 
+    *    up-to-date statistics of the sequence. 
+    */
+   public static void add(Statistician s1, Statistician s2) {
+
+   }
+
 
       
 }
