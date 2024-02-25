@@ -224,6 +224,7 @@ public class Statistician
 
       // When s2 is empty 
       if(s1.length > 0 && s2.length == 0) {
+         sumOfSequences.lastNum = s1.lastNum; 
          sumOfSequences.length = s1.length; 
          sumOfSequences.sum = s1.sum; 
          sumOfSequences.mean = sumOfSequences.sum / sumOfSequences.length; 
@@ -231,6 +232,7 @@ public class Statistician
          sumOfSequences.minNum = s1.minNum; 
          return sumOfSequences; 
       } else if (s2.length > 0 && s1.length == 0) { // When s1 is empty
+         sumOfSequences.lastNum = s2.lastNum; 
          sumOfSequences.length = s2.length; 
          sumOfSequences.sum = s2.sum; 
          sumOfSequences.mean = sumOfSequences.sum / sumOfSequences.length; 
