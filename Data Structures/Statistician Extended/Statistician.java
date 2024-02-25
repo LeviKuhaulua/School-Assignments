@@ -216,11 +216,30 @@ public class Statistician
     * @precondition 
     *   TODO: TEST AND DEBUG ADD METHOD 
     * @postcondition 
-    *    Creates a new Statistician instance that can be fed numbers and provide 
+    *    Returns a new Statistician instance that can be fed numbers and provide 
     *    up-to-date statistics of the sequence. 
     */
-   public static void add(Statistician s1, Statistician s2) {
+   public static Statistician add(Statistician s1, Statistician s2) {
+      Statistician sumOfSequences = new Statistician(); 
 
+      // When s2 is empty 
+      if(s1.length > 0 && s2.length == 0) {
+         sumOfSequences.length = s1.length; 
+         sumOfSequences.sum = s1.sum; 
+         sumOfSequences.mean = sumOfSequences.sum / sumOfSequences.length; 
+         sumOfSequences.maxNum = s1.maxNum; 
+         sumOfSequences.minNum = s1.minNum; 
+         return sumOfSequences; 
+      } else if (s2.length > 0 && s1.length == 0) { // When s1 is empty
+         sumOfSequences.length = s2.length; 
+         sumOfSequences.sum = s2.sum; 
+         sumOfSequences.mean = sumOfSequences.sum / sumOfSequences.length; 
+         sumOfSequences.maxNum = s2.maxNum; 
+         sumOfSequences.minNum = s2.minNum; 
+         return sumOfSequences; 
+      } else { // The case where both s1 and s2 are empty
+         return sumOfSequences; 
+      }
    }
 
 
