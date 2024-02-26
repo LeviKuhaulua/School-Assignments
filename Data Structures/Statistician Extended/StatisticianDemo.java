@@ -79,5 +79,19 @@ public class StatisticianDemo {
         System.out.println("Mean: Expected = -15.0 | Actual = " + addTest.mean());
         System.out.println("Maximum: Expected = 15.0 | Actual = " + addTest.maximum());
         System.out.println("Minimum: Expected = -65.0 | Actual = " + addTest.minimum());
+
+        // Boundary Testing 
+        System.out.println("\nBoundary Testing: ");
+        Statistician nullStatistician = null; 
+        // addTest = Statistician.add(a, nullStatistician); // Will get a Null Pointer Exception  
+
+        /*
+         * In this section, I temporarily set the private variable length to public to play with value
+         */
+        Statistician maxLength = new Statistician(); 
+        maxLength.length = Integer.MAX_VALUE; 
+        addTest = Statistician.add(maxLength, a); 
+        System.out.println("Length: " + addTest.length()); // Will result in an Arithmetic Overflow
+        
     }
 } 
