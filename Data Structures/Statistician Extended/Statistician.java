@@ -214,7 +214,7 @@ public class Statistician
     * Create a new {@code Statistician} instance that is the result of 
     * adding the sequence of two {@code Statistician} instances. 
     * @precondition 
-    *   The two {@code Statistician} instances are valid which means not {@code null}. 
+    *   The two {@code Statistician} instances that will be added together to create a new Statistician are not {@code null}
     * @postcondition 
     *    Returns a new Statistician instance that can be fed numbers and provide 
     *    up-to-date statistics of the sequence. 
