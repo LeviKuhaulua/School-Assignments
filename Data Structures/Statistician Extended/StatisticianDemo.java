@@ -65,5 +65,19 @@ public class StatisticianDemo {
             + "Minimum: Expected = " + (Double.min(a.minimum(), c.minimum())) + " | Actual = " + addTest.minimum() + "\n" 
             + "Last Number: Expected = " + c.lastNumber() + " | Actual = " + addTest.lastNumber()
         );
+
+        // Test to ensure that Statistician instance still works when feeding another number and calling methods. 
+        System.out.println("\nEnsuring that nextNumber and calling methods will update statistics.");
+        addTest = Statistician.add(s1, s2); 
+        addTest.nextNumber(5.0); 
+        addTest.nextNumber(15.0); 
+        addTest.nextNumber(-65.0);
+
+        System.out.println("Length: Expected = 3 | Actual = " + addTest.length());
+        System.out.println("Last Number: Expected = -65.0 | Actual = " + addTest.lastNumber());
+        System.out.println("Sum: Expected = -45.0 | Actual = " + addTest.sum());
+        System.out.println("Mean: Expected = -15.0 | Actual = " + addTest.mean());
+        System.out.println("Maximum: Expected = 15.0 | Actual = " + addTest.maximum());
+        System.out.println("Minimum: Expected = -65.0 | Actual = " + addTest.minimum());
     }
 } 
