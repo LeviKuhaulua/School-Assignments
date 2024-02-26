@@ -239,7 +239,15 @@ public class Statistician
          sumOfSequences.maxNum = s2.maxNum; 
          sumOfSequences.minNum = s2.minNum; 
          return sumOfSequences; 
-      } else { // The case where both s1 and s2 are empty
+      } else if (s1.length > 0 && s2.length > 0) { // The case where both s1 and s2 are not empty 
+         sumOfSequences.lastNum = s2.lastNum; 
+         sumOfSequences.length = s1.length + s2.length; 
+         sumOfSequences.sum = s1.sum + s2.sum; 
+         sumOfSequences.mean = sumOfSequences.sum / sumOfSequences.length; 
+         sumOfSequences.maxNum = Double.max(s1.maxNum, s2.maxNum); 
+         sumOfSequences.minNum = Double.min(s1.minNum, s2.minNum); 
+         return sumOfSequences; 
+      } else { // Both s1 and s2 are empty
          return sumOfSequences; 
       }
    }
