@@ -86,12 +86,38 @@ public class StatisticianDemo {
         // addTest = Statistician.add(a, nullStatistician); // Will get a Null Pointer Exception  
 
         /*
-         * In this section, I temporarily set the private variable length to public to play with value
-         */
-        Statistician maxLength = new Statistician(); 
-        maxLength.length = Integer.MAX_VALUE; 
-        addTest = Statistician.add(maxLength, a); 
-        System.out.println("Length: " + addTest.length()); // Will result in an Arithmetic Overflow
+           In this section, I temporarily set the private variable length to public to play with value
+           
+           Statistician maxLength = new Statistician(); 
+           maxLength.length = Integer.MAX_VALUE; 
+           addTest = Statistician.add(maxLength, a); 
+           System.out.println("Length: " + addTest.length()); // Will result in an Arithmetic Overflow
+        */
+        
+        // Arbitrarily Large Positive Numbers
+        // a.nextNumber(Double.MAX_VALUE); 
+        // c.nextNumber(Double.MAX_VALUE); 
+
+        // addTest = Statistician.add(a, c); 
+        // System.out.println("Maximum: " + addTest.maximum()); 
+        // System.out.println("Sum: " + addTest.sum()); // Adding arbitrarily large numbers can result in positive infinity
+        // System.out.println("Mean: " + addTest.mean()); // Finding the mean based where the sum is infinity will also result in positive infinity
+
+        // Arbitrarily Large Negative Numbers
+        // a.nextNumber(-Double.MAX_VALUE); 
+        // c.nextNumber(-Double.MAX_VALUE); 
+
+        // addTest = Statistician.add(a, c); 
+        // System.out.println("Sum: " + addTest.sum()); // Adding arbitrarily large negative numbers can result in negative infinity
+        // System.out.println("Mean: " + addTest.mean()); // This means that the mean can also result in negative infinity ^. 
+
+        // Testing Maximum and Minimum
+        // a.nextNumber(Double.MAX_VALUE + Double.MAX_VALUE); // to make this result in positive infinity
+        // c.nextNumber(-Double.MAX_VALUE + -Double.MAX_VALUE); // to make this result in negative infinity
+
+        // addTest = Statistician.add(a, c); 
+        // System.out.println("Maximum: " + addTest.maximum()); // can result in positive infinity for arbitrarily large positive values
+        // System.out.println("Minimum: " + addTest.minimum()); // can result in negative infinity for arbitrarily large negative values
         
     }
 } 
