@@ -52,5 +52,18 @@ public class StatisticianDemo {
             + "Minimum: Expected = -100.0 | Actual = " + addTest.minimum() + "\n" 
             + "Last Number: Expected = -100.0 | Actual = " + addTest.lastNumber()
         );
-    } 
-}
+
+        // Testing when both Statisticians are not empty
+        addTest = Statistician.add(a, c); 
+        // Expected Output: Statistics will be a new result calculated based on statistics of both sequences. 
+        System.out.println("\nAdding two non-empty Statisticians together");
+        System.out.println(
+            "Length: Expected = 6 | Actual = " + addTest.length() + "\n"
+            + "Sum: Expected = -123.0 | Actual = " + addTest.sum() + "\n"
+            + "Mean: Expected = " + ((a.sum() + c.sum()) / 6) + " | Actual = " + addTest.mean() + "\n" 
+            + "Maximum: Expected = " + (Double.max(a.maximum(), c.maximum())) + " | Actual = " + addTest.maximum() + "\n"
+            + "Minimum: Expected = " + (Double.min(a.minimum(), c.minimum())) + " | Actual = " + addTest.minimum() + "\n" 
+            + "Last Number: Expected = " + c.lastNumber() + " | Actual = " + addTest.lastNumber()
+        );
+    }
+} 
