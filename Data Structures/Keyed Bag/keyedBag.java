@@ -7,7 +7,7 @@
  * @version 21.0.1 
 */
 
-public class KeyedBag {
+public class keyedBag {
     
     private int[] keys; 
     private String[] items; 
@@ -18,7 +18,7 @@ public class KeyedBag {
      * @postcondition 
      *  Instantiate a new <B>EMPTY</B> keyed bag that can take in key-value pairs. 
      */
-    public KeyedBag() {
+    public keyedBag() {
         final int minCapacity = 10; 
         this.keys = new int[minCapacity]; 
         this.items = new String[minCapacity];
@@ -35,7 +35,7 @@ public class KeyedBag {
      * @exception IllegalArgumentException 
      *  if {@code specCapacity} is less than or equal to 0. 
      */
-    public KeyedBag(int specCapacity) {
+    public keyedBag(int specCapacity) {
         if (specCapacity <= 0) {
             throw new IllegalArgumentException("Invalid capacity. Cannot be less than or equal to 0.");
         }
@@ -47,9 +47,13 @@ public class KeyedBag {
     // Problems: Consider where array would be out of bounds from currentItems. 
     // Problems: Consider where key matches another key? 
     public void add(int key, String value) {
+        if (key < 0) {
+            throw new IllegalArgumentException("Can't have a negative number for the key"); 
+        }
         currentItems++; 
-        keys[currentItems] = key; 
-        items[currentItems] = value; 
+        
+        keys[currentItems - 1] = key; 
+        items[currentItems - 1] = value; 
     }
 
 
