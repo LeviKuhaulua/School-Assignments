@@ -7,3 +7,7 @@
 
 // Bat files 
 *.bat
+
+// Test Case File and Expected Output taken from Open Kattis
+*.ans
+*.in
