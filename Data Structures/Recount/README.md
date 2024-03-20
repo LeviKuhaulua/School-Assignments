@@ -17,3 +17,5 @@
 
 - How to get input from file. **NOTE:** MAY CAUSE HEADACHES ACCORDING TO KATTIS DUE TO SLOWNESS ISSUES. KATTIS HAS CREATED A SIMPLE FILE FOR I/O FOR JAVA FOR USERS.
 TO USE. [CLICK ME](https://support.kattis.com/support/solutions/articles/79000122482-i-m-having-trouble-with-i-o-performance-what-can-i-do-about-it-)
+
+- Java Version: For Kattis, they use Java version `17.0.10` to run and compile files. [CLICK ME TO READ MORE](https://open.kattis.com/languages/java)
