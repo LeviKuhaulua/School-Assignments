@@ -35,13 +35,8 @@ public class recount {
                 continue; 
             }
 
-            if (!candidates.containsKey(line)) {
-                // Case: When candidate encountered in list has not been previously voted for. 
-                candidates.put(line, 1); 
-            } else {
-                // Case: When candidate has been voted for. In this case, increment vote by 1.  
-                candidates.compute(line, (key, value) -> value +=1); 
-            }
+            candidates.computeIfPresent(line, (key, value) -> value += 1); 
+            candidates.putIfAbsent(line, 1); 
 
         }
 
