@@ -1,6 +1,7 @@
 import java.util.Scanner;  
 import java.util.Collections; 
 import java.util.HashMap; 
+import java.util.regex.Pattern; 
 
 /**
  * Solving the <A HREF="https://open.kattis.com/problems/recount">Recount</A> problem found on the Kattis website. 
@@ -20,7 +21,7 @@ public class recount {
 
     public static void main(String[] args) {
         
-        // Get each candidate off the list. 
+        // Get each candidate of the list. 
         Scanner input = new Scanner(System.in); 
         String line = null; 
 
@@ -28,6 +29,11 @@ public class recount {
         HashMap<String, Integer> candidates = new HashMap<>(); 
         
         while (input.hasNext() && !(line = input.nextLine()).equals("***")) {
+
+            // Skip over any inputs that are not valid. Valid characters are letters, hyphens, and spaces. 
+            if (!Pattern.matches("[A-Za-z- ]+", line) || line.isBlank()) {
+                continue; 
+            }
 
             if (!candidates.containsKey(line)) {
                 // Case: When candidate encountered in list has not been previously voted for. 
@@ -45,6 +51,10 @@ public class recount {
         // candidates.forEach((key, value) -> 
         //     System.out.printf("%s: %d %n", key, value)
         // ); 
+
+        if (candidates.size() == 0) {
+            throw new IllegalArgumentException("Empty list detected"); 
+        }
 
         int maxVote = Collections.max(candidates.values()); 
 
