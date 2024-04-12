@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.io.BufferedReader; 
 import java.io.InputStreamReader; 
 import java.io.IOException; 
+import java.util.Arrays; 
 /**
  * Solution to the Babelfish problem found in <A HREF="https://open.kattis.com">Kattis</A>. This will take input and then output
  * a translation of foreign words to their English equivalent or <CODE>eh</CODE> if no translation is found. 
@@ -23,12 +24,19 @@ public class babelfish {
             
             input = new BufferedReader(new InputStreamReader(System.in)); 
             
+            // First Segment: Getting the Dictionary Entries. 
             while ((line = input.readLine()) != null) {
+                
+                // End of dictionary entries is marked by a blank line. 
                 if (line.isBlank()) {
                     break; 
                 }
 
                 entries = line.split(" "); 
+
+                if (entries.length > 2) {
+                    throw new IllegalArgumentException("Dictionary entry contains more than 2 values: " + Arrays.toString(entries));
+                }
 
                 // Debugging Purposes. 
                 // System.out.printf("English Word: %s | Foreign Equivalent: %s %n", entries[0], entries[1]);
@@ -42,6 +50,12 @@ public class babelfish {
 
             // Second Segment: Get sentence then translate to English equivalent or "eh" if not found. 
             while ((line = input.readLine()) != null) {
+                
+                // Skip over empty lines. 
+                if (line.isBlank()) {
+                    continue; 
+                }
+
                 if (dictionary.containsKey(line)){
                     System.out.println(dictionary.get(line));
                 } else {
@@ -52,7 +66,7 @@ public class babelfish {
             input.close(); 
 
         } catch(IOException e) {
-            System.err.println("Error reading input");
+            e.printStackTrace(); 
         }
 
         
