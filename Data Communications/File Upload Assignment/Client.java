@@ -7,51 +7,48 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.net.SocketException; 
 
+import java.io.File;
 
 public class Client {
-    public static void main(final String[] args) {
-        Socket client; 
-        String hostName = "127.0.0.1"; 
+    public static void main(final String[] args) throws IOException{
+        // Initializating variables. 
+        Socket client = null; 
+        String hostName = "127.0.0.1"; // Make default - localhost
         String line; 
-        BufferedReader stdIn; 
-        
+        BufferedReader fromServer = null; 
+        PrintWriter toServer = null; 
+
+        // Use diff. hostname if one found in arguments of Command Line. 
         if (args.length > 0) {
             hostName = args[0]; 
         }
 
         try {
             client = new Socket(hostName, 12345); 
-            BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream())); 
-            PrintWriter toServer = new PrintWriter(client.getOutputStream(), true); 
-            stdIn = new BufferedReader(new InputStreamReader(System.in)); 
-
-            while ((line = stdIn.readLine()) != null) {
-                
-                if (line.equalsIgnoreCase("Bye")) {
-                    break; 
-                }
-                
-                toServer.println(line); 
-                System.out.println(fromServer.readLine());
-            }
-            
-            fromServer.close(); 
-            toServer.close(); 
-            stdIn.close(); 
-            client.close(); 
+            System.out.println("Connection to server established.");
         } catch (UnknownHostException e) {
-            System.err.println("Unknown Host Name: " + hostName);
-            System.exit(-1); 
-        } catch (SocketException e) {
-            e.printStackTrace(); 
+            System.err.println("Unknown Host: " + hostName);
             System.exit(-1); 
         } catch (IOException e) {
-            e.printStackTrace(); 
-            System.exit(-1); 
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            System.exit(-1); 
-        } 
+            System.err.println("Socket error detected: " + e.getMessage());
+        }
+
+        fromServer = new BufferedReader(new InputStreamReader(client.getInputStream())); 
+        toServer = new PrintWriter(client.getOutputStream(), true); 
+
+        toServer.println("Aloha"); 
+        
+        while ((line = fromServer.readLine()) != null) {
+            if (line.trim().equalsIgnoreCase("Aloha mai kakou")) {
+                System.out.println("Welcome message received. Beginning file transfer.");
+                break; 
+            }
+        }
+        
+
+        toServer.close(); 
+        fromServer.close(); 
+        client.close(); 
 
         System.exit(0); 
     }
