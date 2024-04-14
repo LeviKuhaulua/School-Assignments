@@ -13,7 +13,7 @@ public class Client {
         Socket client; 
         String hostName = "127.0.0.1"; 
         String line; 
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in)); 
+        BufferedReader stdIn; 
         
         if (args.length > 0) {
             hostName = args[0]; 
@@ -23,8 +23,22 @@ public class Client {
             client = new Socket(hostName, 12345); 
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream())); 
             PrintWriter toServer = new PrintWriter(client.getOutputStream(), true); 
+            stdIn = new BufferedReader(new InputStreamReader(System.in)); 
 
-            System.out.println(fromServer.readLine());
+            while ((line = stdIn.readLine()) != null) {
+                
+                if (line.equalsIgnoreCase("Bye")) {
+                    break; 
+                }
+                
+                toServer.println(line); 
+                System.out.println(fromServer.readLine());
+            }
+            
+            fromServer.close(); 
+            toServer.close(); 
+            stdIn.close(); 
+            client.close(); 
         } catch (UnknownHostException e) {
             System.err.println("Unknown Host Name: " + hostName);
             System.exit(-1); 
@@ -34,6 +48,11 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace(); 
             System.exit(-1); 
-        }
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            System.exit(-1); 
+        } 
+
+        System.exit(0); 
     }
 }
