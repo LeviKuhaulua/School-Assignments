@@ -20,7 +20,7 @@ public class Client {
         }
 
         try {
-            client = new Socket(hostName, 12345); // Replace host name with IP Address you want to connect to. 
+            client = new Socket(hostName, 12345); 
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream())); 
             PrintWriter toServer = new PrintWriter(client.getOutputStream(), true); 
 
