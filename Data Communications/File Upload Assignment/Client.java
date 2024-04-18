@@ -9,23 +9,19 @@ import java.io.PrintWriter;
 import java.nio.file.Files; 
 import java.nio.file.Path; 
 import java.nio.file.Paths; 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern; 
 import static java.nio.file.StandardOpenOption.*; 
-import java.util.Arrays; 
 
 public class Client {
 
-    private static void print(String[] arr) {
-        for (String i : arr) {
-            System.out.println(i);
-        }
-    }
     public static void main(final String[] args) throws IOException{
         
         String hostname = "localhost";  // Default if no args specified when running file. 
         BufferedReader fromServer = null; 
-        BufferedReader stdIn = null; 
         PrintWriter toServer = null; 
         String line = null; 
+        BufferedReader stdIn = null; 
         
 
         // In case user specifies a hostname. 
@@ -40,8 +36,13 @@ public class Client {
             fromServer = new BufferedReader(new InputStreamReader(client.getInputStream())); 
             toServer = new PrintWriter(client.getOutputStream(), true); 
 
-            // Client Side: Send "Aloha" welcome message. 
-            toServer.println("Aloha"); 
+            // Get client to say hi to the server. 
+            stdIn = new BufferedReader(new InputStreamReader(System.in)); 
+            while ((line = stdIn.readLine()) == null || !line.equalsIgnoreCase("Aloha")) {
+                System.out.println("Say \"Aloha\" to the server: "); 
+            }
+
+            toServer.println(line); 
 
             while ((line = fromServer.readLine()) != null) {
                 if (line.trim().equalsIgnoreCase("Aloha Mai Kakou")) {
@@ -50,30 +51,43 @@ public class Client {
                 } 
             }
 
-
-            stdIn = new BufferedReader(new InputStreamReader(System.in)); 
-            Path dir = Paths.get(".\\"); 
-            String[] fileNames = Files.list(dir).map(f -> f.getFileName().toString()).toArray(String[]::new); 
             
-            // Print out directory for user to pick a file. 
-            System.out.println("Pick a file to upload: "); 
-            print(fileNames); 
-            
-            // Continue to get user input if file does not match any of those found in the directory. 
-            while(Arrays.binarySearch(fileNames, (line = stdIn.readLine())) == -1) {
-                System.out.println("Pick a file to upload: \n");
-                print(fileNames); 
-            }
-
-            stdIn.close();
-            
-            // File chosen by user. 
-            Path fileToUpload = Paths.get(line); 
+            // Name of file to upload. 
+            Path fileToUpload = Paths.get("hello.txt"); 
             byte[] fileContentBytes; 
 
+            // Streams to gather file data and then send that to the server. 
+            DataInputStream getFileContent = new DataInputStream(Files.newInputStream(fileToUpload, READ)); 
+            DataOutputStream sendFileContent = new DataOutputStream(client.getOutputStream()); 
             
-                       
+            int len; 
+            String expected = "Your file named \"Server[0-9]{3}.txt\" with a size of XXXX bytes has been uploaded correctly"; 
             
+            fileContentBytes = getFileContent.readAllBytes(); 
+            len = fileContentBytes.length; 
+            expected = expected.replace("XXXX", String.valueOf(len));
+            // Send the length first so that server knows when to stop.  
+            sendFileContent.writeInt(len); 
+            sendFileContent.write(fileContentBytes, 0, len); 
+            sendFileContent.flush(); 
+            
+            if (fromServer.readLine().matches(expected)) {
+                // Close connections. 
+                client.close(); 
+                getFileContent.close(); 
+                sendFileContent.close(); 
+                fromServer.close(); 
+                toServer.close(); 
+            } else {
+                System.err.println("Something went wrong with uploading file.");
+            }
+            
+            // Close connection anyways even if file wasn't able to upload properly. 
+            client.close(); 
+            getFileContent.close(); 
+            sendFileContent.close(); 
+            fromServer.close(); 
+            toServer.close(); 
             
         } catch (UnknownHostException e) {
             System.err.println("Unknown Host: " + hostname);
