@@ -46,7 +46,7 @@ public class Client {
 
             while ((line = fromServer.readLine()) != null) {
                 if (line.trim().equalsIgnoreCase("Aloha Mai Kakou")) {
-                    System.out.println("Welcome message received. Starting file transfer.");
+                    System.out.println("Server: " + line);
                     break; 
                 } 
             }
@@ -71,8 +71,9 @@ public class Client {
             sendFileContent.write(fileContentBytes, 0, len); 
             sendFileContent.flush(); 
             
-            if (fromServer.readLine().matches(expected)) {
+            if ((line = fromServer.readLine()).matches(expected)) {
                 // Close connections. 
+                System.out.println(line);
                 client.close(); 
                 getFileContent.close(); 
                 sendFileContent.close(); 
