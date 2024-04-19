@@ -19,3 +19,9 @@
 
 ## Additional Comments: 
 Need to show the file in the directories at both client and server sides. If you use single computer to run both server and client sockets, create two different folders for server and client, respectively. 
+
+## Improvements to make: 
+
+- Make a more robust file chooser such as having it so that user can choose from list of files in current directory. Maybe implement GUI as well. 
+- Improve file transfer such as having it so that it compares file size and if it is not received correctly then redo. 
+    - Timer to wait and if it exceeds timer without getting the acknowledgement then resend. 
