@@ -114,6 +114,7 @@ public class addingWords {
                     }
                 }
                 
+                // Reset the output line for new calculations. 
                 output = "";
                 
             } else {
