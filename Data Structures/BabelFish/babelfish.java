@@ -34,6 +34,7 @@ public class babelfish {
 
                 entries = line.split(" "); 
 
+                // Deals with input where they may be multiple definitions / translations for one word. 
                 if (entries.length > 2) {
                     throw new IllegalArgumentException("Dictionary entry contains more than 2 values: " + Arrays.toString(entries));
                 }
@@ -55,7 +56,7 @@ public class babelfish {
                 if (line.isBlank()) {
                     continue; 
                 }
-
+                
                 if (dictionary.containsKey(line)){
                     System.out.println(dictionary.get(line));
                 } else {
