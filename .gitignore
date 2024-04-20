@@ -11,3 +11,6 @@
 // Test Case File and Expected Output taken from Open Kattis
 *.ans
 *.in
+
+// .vscode folder for configurations. 
+.vscode/
