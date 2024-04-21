@@ -28,6 +28,7 @@ public class addingWords {
         HashMap<String, Integer> words = new HashMap<>(); 
         BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); 
         
+        // Continously get inputs and make calculations until we reach end of file. 
         while ((input = r.readLine()) != null) {
             line = input.split("[ ]+"); 
             
