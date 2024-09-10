@@ -14,3 +14,7 @@
 
 // .vscode folder for configurations. 
 .vscode/
+
+// C and C++ Project Files
+*.o 
+*.exe
