@@ -8,10 +8,14 @@
 */
 
 #include <stdio.h>
+#include "getdouble.h"
+
 
 
 int main(void) {
 
-    puts("Hello World!"); 
+    printf("Please enter a number: ");
+    double num = getdouble();
+    printf("%f\n", num);
     return 0; 
 }
