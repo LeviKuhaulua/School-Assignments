@@ -1,5 +1,5 @@
-program: age.o getdouble.o
-	gcc age.o getdouble.o -o program
+program: a05.o getdouble.o
+	gcc a05.o getdouble.o -o program
 
-age.o: age.c getdouble.c getdouble.h
-	gcc -c age.c getdouble.c
+a05.o: a05.c getdouble.c getdouble.h
+	gcc -c a05.c getdouble.c
