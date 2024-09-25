@@ -1,7 +1,7 @@
-program: a06.o 
-	gcc a06.o -o a06
-	a06.exe
+program: a07.o 
+	gcc a07.o -o a07
+	a07.exe
 
-a06.o: a06.c
-	gcc -c a06.c
+a07.o: a07.c
+	gcc -c a07.c
 
