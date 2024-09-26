@@ -8,10 +8,25 @@
 */
 
 #include <stdio.h>
+#include <math.h>
+#include <time.h> 
+#include <stdlib.h>
+#include "getdouble.h"
 
 int main(void) {
 
-    puts("Hello, World"); 
+    // Used to store the dice values for the players. 
+    int userDice1 = 0; 
+    int userDice2 = 0; 
+    int computerDice1 = 0; 
+    int computerDice2 = 0; 
+
+
+    // Setting the seed for random number generation. 
+    srand(time(NULL)); 
+
+    puts("Dice Betting Game:"); 
+   
 
     return 0; 
 }
