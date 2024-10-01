@@ -42,6 +42,7 @@ int main(void){
     int userWins = 0; 
     int computerWins = 0; 
     int gamesPlayed = 0; 
+    int ties = 0; 
 
     printf("\n"); 
 
@@ -59,6 +60,7 @@ int main(void){
             printf("Total Games Played: %i\n", gamesPlayed); 
             printf("Games Won: %i\n", userWins); 
             printf("Computer Wins: %i\n", computerWins); 
+            printf("Ties: %i\n", ties); 
             return 0; 
         }
 
@@ -80,6 +82,7 @@ int main(void){
         switch(compareChoice) { 
             case 0: 
                 gamesPlayed++; 
+                ties++; 
                 printf("%c vs %c Draw.\n", userChoice, computerChoice); 
                 break; 
             case 1: 
