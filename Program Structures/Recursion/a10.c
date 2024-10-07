@@ -16,6 +16,7 @@ void displayRange(int start, int end);
 int addNums(int start, int end);
 int multNums(int start, int end); 
 int power(int num1, int num2); 
+int GCD(int x, int y); 
 
 
 int main(void){
@@ -48,7 +49,11 @@ int main(void){
 
         // Calculate first number to the power of second number
         int powerCalc = power(num1, num2); 
-        printf("%d to the power of %d = %d", num1, num2, powerCalc); 
+        printf("%d to the power of %d = %d\n", num1, num2, powerCalc); 
+
+        // GCD of the two numbers
+        int result = GCD(num1, num2); 
+        printf("The GCD of %d and %d = %d", num1, num2, result); 
 
     }
 
@@ -123,4 +128,21 @@ int power(int num1, int num2) {
 
     return result; 
 
+}
+
+/*
+*  Recursive function for calculating the GCD between x and y. 
+*/
+int GCD(int x, int y) {
+    int result = 0; 
+
+    // Base Case
+    if (y == 0) {
+        result = x; 
+    } else {
+        // Recursive Call
+        result = GCD(y, x % y); 
+    }
+
+    return result; 
 }
