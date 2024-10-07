@@ -15,7 +15,7 @@
 void displayRange(int start, int end); 
 int addNums(int start, int end);
 int multNums(int start, int end); 
-
+int power(int num1, int num2); 
 
 
 int main(void){
@@ -40,7 +40,15 @@ int main(void){
 
         // Get Sum 
         int sum = addNums(num1, num2); 
-        printf("Sum from %d to %d = %d", num1, num2, sum); 
+        printf("Sum from %d to %d = %d\n", num1, num2, sum); 
+
+        // Get Product
+        int product = multNums(num1, num2); 
+        printf("Product from %d to %d = %d\n", num1, num2, product); 
+
+        // Calculate first number to the power of second number
+        int powerCalc = power(num1, num2); 
+        printf("%d to the power of %d = %d", num1, num2, powerCalc); 
 
     }
 
@@ -70,6 +78,7 @@ void displayRange(int start, int end) {
  */
 int addNums(int start, int end) {
     int result = 0; 
+    
     // Base Case
     if (start == end) {
         result = end; 
@@ -79,4 +88,39 @@ int addNums(int start, int end) {
     }
 
     return result; 
+}
+
+/*
+ * Recursive function to get the product of integers from start to end. 
+ */
+int multNums(int start, int end) {
+    int result = 0; 
+
+    // Base Case
+    if (start == end) {
+        result = end; 
+    } else {
+        // Recursive Call
+        result = start * multNums(start + 1, end); 
+    }
+
+    return result; 
+}
+
+/*
+ * Recursive function for calculating the first number to the power of the second number
+ */
+int power(int num1, int num2) {
+    int result = 0; 
+
+    // Base Case
+    if (num2 == 0) {
+        result = 1;  
+    } else {
+        // Recursive Call
+        result = num1 * power(num1, num2 - 1); 
+    }
+
+    return result; 
+
 }
