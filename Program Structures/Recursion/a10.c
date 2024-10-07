@@ -13,7 +13,8 @@
 // Function Prototypes
 
 void displayRange(int start, int end); 
-int addSum(int start, int end);
+int addNums(int start, int end);
+int multNums(int start, int end); 
 
 
 
@@ -38,7 +39,7 @@ int main(void){
         displayRange(num1, num2); 
 
         // Get Sum 
-        int sum = addSum(num1, num2); 
+        int sum = addNums(num1, num2); 
         printf("Sum from %d to %d = %d", num1, num2, sum); 
 
     }
@@ -67,14 +68,14 @@ void displayRange(int start, int end) {
 /*
  * Recursive function to find the sum of integers from start to end. 
  */
-int addSum(int start, int end) {
+int addNums(int start, int end) {
     int result = 0; 
     // Base Case
     if (start == end) {
         result = end; 
     } else {
         // Recursive Call
-        result = start + addSum(start + 1, end);
+        result = start + addNums(start + 1, end);
     }
 
     return result; 
