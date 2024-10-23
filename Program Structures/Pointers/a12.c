@@ -2,8 +2,9 @@
 // Date Created: 10-22-2024
 /* Program Description:
 *  Learning how to use pointers in C. The program will 
-*  output the memory address of three variables and change 
-*  the values of the variables via pointers. 
+*  output the memory address and value of the variables
+*  via pointers. This program will also update the value of 
+*  the variables using pointers. 
 */
 
 // Library and/or Macro Definitions
@@ -34,7 +35,24 @@ int main(void){
     printf("Value of int num: %i\n", *numPointer); 
     printf("Value of double aDouble: %.2f\n", *doublePointer); 
 
-    
+    // Adding 3 to the values of variables via pointers
+    letter = *charPointer + 3;
+    num = *numPointer + 3; 
+    aDouble = *doublePointer + 3; 
+
+    printf("\n"); 
+
+    // Outputting the new values of the pointer
+    printf("New value of char letter: %c\n", *charPointer); 
+    printf("New value of int num: %i\n", *numPointer); 
+    printf("New value of double aDouble: %.2f\n", *doublePointer); 
+
+    printf("\n");
+
+    // Outputting the values of the three variables
+    printf("Value of char letter: %c\n", letter); 
+    printf("Value of int num: %i\n", num); 
+    printf("Value of double aDouble: %.2f\n", aDouble); 
 
     return 0;
 }
