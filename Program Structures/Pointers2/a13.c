@@ -8,10 +8,13 @@
 */
 
 // Library and/or Macro Definitions
+#define SIZE 5
 #include <stdio.h>
 
 // Function Prototypes
-void addNum(int *number); 
+void addNum(int *number);
+void arraySubscript(int *arr); 
+void pointerOffset(int *arr);  
 
 int main(void){
     // Declaring int variable and pointer to variable. 
@@ -45,6 +48,17 @@ int main(void){
     printf("5th element in fib array using array subscript (pointer): %i\n", fibPointer[4]);
     printf("5th element in fib array using pointer offset (pointer): %i\n", *(fibPointer + 4));  
 
+    printf("\n\n"); 
+
+    // Display entire array using four different notations. See above comment. 
+    printf("Array Subscript - 1st is using array and second is using pointer\n"); 
+    arraySubscript(fib);
+    arraySubscript(fibPointer); 
+
+    printf("\nPointer Offset - 1st is using array and second is using pointer\n"); 
+    pointerOffset(fib); 
+    pointerOffset(fibPointer); 
+
     return 0;
 }
 
@@ -64,3 +78,32 @@ void addNum(int *number) {
     printf("New value of int number AFTER manipulating value: %i\n", *number); 
 
 }
+
+/* arraySubscript function:
+ * Prints out all elements within an array using the Array Subscript Notation. 
+ */
+void arraySubscript(int *arr) {
+    printf("Array contents using Array Subscript\n"); 
+
+    for (int i = 0; i < SIZE; i++) {
+        printf("%i, ", arr[i]); 
+    }
+
+    printf("\n"); 
+}
+
+
+/* pointerOffset function: 
+ * Prints all elements in an array using the Pointer Offset notation. 
+ */
+void pointerOffset(int *arr) {
+    printf("Array contents using Pointer Offset\n"); 
+
+    for (int i = 0; i < SIZE; i++) {
+        printf("%i, ", *(arr + i)); 
+    }
+
+    printf("\n"); 
+}
+
+
