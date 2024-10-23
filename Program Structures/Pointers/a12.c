@@ -36,9 +36,9 @@ int main(void){
     printf("Value of double aDouble via pointer: %.2f\n", *doublePointer); 
 
     // Adding 3 to the values of variables via pointers
-    letter = *charPointer + 3;
-    num = *numPointer + 3; 
-    aDouble = *doublePointer + 3; 
+    *charPointer += 3; 
+    *numPointer += 3; 
+    *doublePointer += 3; 
 
     printf("\n"); 
 
