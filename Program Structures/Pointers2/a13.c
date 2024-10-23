@@ -26,6 +26,25 @@ int main(void){
 
     // Displaying value of variable AFTER function call.
     printf("Value of int number AFTER function call: %i\n", *numPointer); 
+
+    // Creating integer array with five values and pointer for array. 
+    int fib[] = {1, 1, 2, 3, 5};
+    int *fibPointer = fib; 
+
+    printf("\n\n"); 
+
+    /* 
+    *  Display 5th element of array using four different notations: 
+    *  Array Subscript
+    *  Pointer Offset
+    *  Array Subscript via Pointer
+    *  Pointer Offset via Pointer
+    */
+    printf("5th element in fib array using array subscript: %i\n", fib[4]); 
+    printf("5th element in fib array using pointer offset: %i\n", *(fib + 4)); 
+    printf("5th element in fib array using array subscript (pointer): %i\n", fibPointer[4]);
+    printf("5th element in fib array using pointer offset (pointer): %i\n", *(fibPointer + 4));  
+
     return 0;
 }
 
