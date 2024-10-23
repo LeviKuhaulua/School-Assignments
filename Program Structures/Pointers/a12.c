@@ -9,9 +9,20 @@
 // Library and/or Macro Definitions
 #include <stdio.h>
 
-// Function Prototypes
 
 int main(void){
-    printf("Hello World");
+
+    // Declaring char, int, and double variable and assigning them value.
+    char letter = 'a'; 
+    int num = 25;
+    double aDouble = 1.00; 
+
+    // Declaring pointers to point to their specific variables
+    char *charPointer = &letter; 
+    int *numPointer = &num; 
+    double *doublePointer = &aDouble; 
+
+    
+
     return 0;
 }
