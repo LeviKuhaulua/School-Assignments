@@ -24,16 +24,16 @@ int main(void){
     double *doublePointer = &aDouble; 
 
     // Outputting memory address of variables via pointers
-    printf("Memory Address of char letter: 0x%p\n", charPointer); 
-    printf("Memory Address of int num: 0x%p\n", numPointer);
-    printf("Memory Address of double aDouble: 0x%p\n", doublePointer);
+    printf("Memory Address of char letter via pointer: 0x%p\n", charPointer); 
+    printf("Memory Address of int num via pointer: 0x%p\n", numPointer);
+    printf("Memory Address of double aDouble via pointer: 0x%p\n", doublePointer);
 
     printf("\n"); 
 
     // Outputting values associated with variables via pointers
-    printf("Value of char letter: %c\n", *charPointer); 
-    printf("Value of int num: %i\n", *numPointer); 
-    printf("Value of double aDouble: %.2f\n", *doublePointer); 
+    printf("Value of char letter via pointer: %c\n", *charPointer); 
+    printf("Value of int num via pointer: %i\n", *numPointer); 
+    printf("Value of double aDouble via pointer: %.2f\n", *doublePointer); 
 
     // Adding 3 to the values of variables via pointers
     letter = *charPointer + 3;
@@ -43,9 +43,9 @@ int main(void){
     printf("\n"); 
 
     // Outputting the new values of the pointer
-    printf("New value of char letter: %c\n", *charPointer); 
-    printf("New value of int num: %i\n", *numPointer); 
-    printf("New value of double aDouble: %.2f\n", *doublePointer); 
+    printf("New value of char letter via pointer: %c\n", *charPointer); 
+    printf("New value of int num via pointer: %i\n", *numPointer); 
+    printf("New value of double aDouble via pointer: %.2f\n", *doublePointer); 
 
     printf("\n");
 
