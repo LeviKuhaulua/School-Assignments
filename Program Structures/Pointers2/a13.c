@@ -14,6 +14,34 @@
 void addNum(int *number); 
 
 int main(void){
-    printf("Hello World");
+    // Declaring int variable and pointer to variable. 
+    int number = 100; 
+    int *numPointer = &number;
+
+    // Display value of variable BEFORE function call
+    printf("Value of int number: %i\n", *numPointer);  
+
+    // Calling function with pass-by-reference param
+    addNum(numPointer); 
+
+    // Displaying value of variable AFTER function call.
+    printf("Value of int number AFTER function call: %i\n", *numPointer); 
     return 0;
+}
+
+/* addNum function:
+ * Simple function that will add 10 to a number. 
+ * Parameters: 
+ * - number, an int; pass-by-reference. 
+ */
+void addNum(int *number) {
+    // Display value of variable before doing manipulation. 
+    printf("Value of int number inside function BEFORE manipulating value: %i\n", *number); 
+
+    // Doing the actual manipulation
+    *number += 10;
+
+    // Displaying the value of variable after doing manipulation
+    printf("New value of int number AFTER manipulating value: %i\n", *number); 
+
 }
