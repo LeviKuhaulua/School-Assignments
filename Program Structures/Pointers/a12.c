@@ -22,6 +22,18 @@ int main(void){
     int *numPointer = &num; 
     double *doublePointer = &aDouble; 
 
+    // Outputting memory address of variables via pointers
+    printf("Memory Address of char letter: 0x%p\n", charPointer); 
+    printf("Memory Address of int num: 0x%p\n", numPointer);
+    printf("Memory Address of double aDouble: 0x%p\n", doublePointer);
+
+    printf("\n"); 
+
+    // Outputting values associated with variables via pointers
+    printf("Value of char letter: %c\n", *charPointer); 
+    printf("Value of int num: %i\n", *numPointer); 
+    printf("Value of double aDouble: %.2f\n", *doublePointer); 
+
     
 
     return 0;
