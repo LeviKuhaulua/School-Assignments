@@ -59,6 +59,13 @@ int main(void){
     pointerOffset(fib); 
     pointerOffset(fibPointer); 
 
+    printf("\n\n"); 
+
+    // Display memory address of each element in array. 
+    for (int i = 0; i < SIZE; i++) {
+        printf("Address of Element %i in fib array: 0x%p\n", (i + 1), *(fibPointer + i)); 
+    }
+
     return 0;
 }
 
@@ -81,6 +88,8 @@ void addNum(int *number) {
 
 /* arraySubscript function:
  * Prints out all elements within an array using the Array Subscript Notation. 
+ * Params: 
+ * - arr, a pass-by-reference int param. 
  */
 void arraySubscript(int *arr) {
     printf("Array contents using Array Subscript\n"); 
@@ -95,6 +104,8 @@ void arraySubscript(int *arr) {
 
 /* pointerOffset function: 
  * Prints all elements in an array using the Pointer Offset notation. 
+ * Params: 
+ * - arr, a pass-by-reference int param. 
  */
 void pointerOffset(int *arr) {
     printf("Array contents using Pointer Offset\n"); 
