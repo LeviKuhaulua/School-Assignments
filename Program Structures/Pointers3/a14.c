@@ -17,6 +17,8 @@ int div(int, int);
 int sub(int, int); 
 
 int main(int argc, char *argv[]){
+
+    int (*functionArr[5])(int, int) = {add, NULL, sub, mult, div}; 
     
     // Error checking to see if argument count is EXACTLY equal to 4 arguments. 
     if (argc != 4) {
@@ -41,9 +43,73 @@ int main(int argc, char *argv[]){
         return -1; 
     }
 
-    
-    
-    // What should run if 4 arguments are detected. 
-    printf("Hello World");
+    // Error checking for operation argument. Valid = '+', '-', '/', '.'
+    int operation = (int) argv[2][0] - '+'; 
+
+    switch(operation) {
+        case 0: case 2: case 3: case 4: 
+            break; 
+        default: 
+            printf("Invalid operation: %c\n", (operation + '+')); 
+            printf("Valid operation: '+', '-', '/', '.'\nExiting Program...\n");
+            return -1; 
+    }
+
+    // Error checking to see if we're dividing by 0. 
+    if (operation == 4 && num2 == 0) {
+        printf("Error: Cannot divide by 0\n"); 
+        return -1; 
+    }
+
+    /*
+    * Function call will execute the appropriate function based on the operation, and it will output
+    * the first part of the expression. Function call also returns the result of the expression, which is what
+    * is being inputted into the printf statement. 
+    */
+    printf("%i\n", functionArr[operation](num1, num2)); 
     return 0;
+}
+
+/* add
+ * Output the beginning part of expression and return the sum. 
+ * Params: 
+ * - arg1, integer 
+ * - arg2, integer
+ */
+int add(int arg1, int arg2) {
+    printf("%i + %i = ", arg1, arg2); 
+    return arg1 + arg2; 
+}
+
+/* sub
+ * Output the beginning part of expression and return the difference. 
+ * Params: 
+ * - arg1, integer
+ * - arg2, integer
+ */
+int sub(int arg1, int arg2) {
+    printf("%i - %i = ", arg1, arg2); 
+    return arg1 - arg2; 
+}
+
+/* mult
+ * Output the beginning part of expression and return the product. 
+ * Params: 
+ * - arg1, integer
+ * - arg2, integer
+ */
+int mult(int arg1, int arg2) {
+    printf("%i * %i = ", arg1, arg2); 
+    return arg1 * arg2; 
+}
+
+/* div
+* Output the beginning part of expression and return the quotient.
+* Params: 
+* - arg1, integer
+* - arg2, integer
+*/
+int div(int arg1, int arg2) {
+    printf("%i / %i = ", arg1, arg2); 
+    return arg1 / arg2; 
 }
