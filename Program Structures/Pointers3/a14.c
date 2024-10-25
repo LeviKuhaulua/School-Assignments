@@ -15,7 +15,16 @@ int mult(int, int);
 int div(int, int); 
 int sub(int, int); 
 
-int main(void){
+int main(int argc, char *argv[]){
+    
+    // Error checking to see if argument count is EXACTLY equal to 4 arguments. 
+    if (argc != 4) {
+        printf("Invalid number of arguments. Please have 4 arguments that follows this format\n"); 
+        printf("./a14 num1 operation num2.\n* NOTE: num1 and num2 should be from 0-9.\n");
+        return -1;  
+    }
+    
+    // What should run if 4 arguments are detected. 
     printf("Hello World");
     return 0;
 }
