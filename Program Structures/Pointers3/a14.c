@@ -8,6 +8,7 @@
 
 // Library and/or Macro Definitions
 #include <stdio.h>
+#include <stdbool.h>
 
 // Function Prototypes
 int add(int, int); 
@@ -23,6 +24,24 @@ int main(int argc, char *argv[]){
         printf("./a14 num1 operation num2.\n* NOTE: num1 and num2 should be from 0-9.\n");
         return -1;  
     }
+
+    // Error checking for invalid number arguments. Valid = 0-9
+    int num1 = (int) argv[1][0] - '0'; 
+    int num2 = (int) argv[3][0] - '0'; 
+
+    if (num1 < 0 || num1 > 9) {
+        printf("Invalid argument: %c\n", (num1 + '0')); 
+        printf("Argument must be from 0-9.\nExiting Program..."); 
+        return -1; 
+    } 
+
+    if (num2 < 0 || num2 > 9) {
+        printf("Invalid argument: %c\n", (num2 + '0')); 
+        printf("Argument must be from 0-9.\nExiting Program..."); 
+        return -1; 
+    }
+
+    
     
     // What should run if 4 arguments are detected. 
     printf("Hello World");
