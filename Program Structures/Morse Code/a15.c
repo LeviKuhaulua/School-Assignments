@@ -57,7 +57,13 @@ const char *morse[36] = {
     "z --.. ",
 };
 
-int main(void){
-    printf("Hello World");
+int main(int argc, char *argv[]){
+    
+    // Checking if Morse Code arguments were entered. 
+    if (argc < 2) {
+        printf("No morse code detected. Exiting Program..."); 
+        return 0; 
+    }
+
     return 0;
 }
