@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
     
     // Allow user to re-shuffle deck if they press Enter
     while('\n' == newline){
-        printf("\nshuffling deck ... \n");
+        printf("\n\nshuffling deck ... \n\n");
         shuffle(deck);
         display(deck);
         printf("\nWould you like to shuffle again?\nIf so, press \"Enter\" key. If not, press any other key. ");
