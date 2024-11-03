@@ -44,7 +44,7 @@ void display(const Card[]);
 int main(int argc, char *argv[]){
 
     // Declare an array of 52 cards
-    Card deck[MAX_CARDS] = {"",""};
+    Card deck[MAX_CARDS] = {"","",""};
     initialize(deck);
 
     printf("Display an ordered deck of cards:\n");
@@ -74,6 +74,25 @@ void initialize(Card deck[]){
   for(i=0;i<MAX_CARDS;i++){
     deck[i].rank = ranks[i%MAX_RANKS];
     strncpy(deck[i].suit, suits[i/MAX_RANKS], MAX); 
+    
+    // Determine color of card based on suit. 
+    switch (i / MAX_RANKS) {
+        // Index of clubs and spades respectively
+        case 0: case 3: 
+            deck[i].color = colors[0]; 
+            break; 
+        
+        // Index of diamonds and hearts respectively
+        case 1: case 2: 
+            deck[i].color = colors[1]; 
+            break; 
+
+        // This shouldn't occur...
+        default: 
+            printf("Index out of bounds of suits array: %i\n", (i / MAX_RANKS)); 
+            break; 
+    }
+    
   }
 }
 
@@ -88,7 +107,7 @@ void shuffle(Card deck[]){
   int i = 0; 
 
   //temp holding place for swap
-  Card temp = {"", ""}; 
+  Card temp = {"", "", ""}; 
 
   //seed the random numbers with current time
   srand(time(NULL)); 
@@ -109,7 +128,7 @@ void shuffle(Card deck[]){
 void display(const Card deck[]){
   int i = 0;
   for(i=0;i<MAX_CARDS;i++){
-    printf("%5s of %-12s", deck[i].rank, deck[i].suit);
+    printf("%5s of %-12s %-12s", deck[i].rank, deck[i].suit, deck[i].color);
     //put in a newline every %x loops
     if(0==((i+1)%COLS)){
       printf("\n");
