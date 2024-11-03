@@ -20,6 +20,7 @@
 struct card{ 
   char *rank;    
   char suit[MAX];  
+  char *color; 
 };
 
 typedef struct card Card;
@@ -30,6 +31,9 @@ char *ranks[MAX_RANKS] = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven",
 
 // Two-dimensional array of strings for suits
 char suits[MAX_SUITS][MAX] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+
+// Array of pointers to strings for colors
+char *colors[2] = { "Black", "Red" }; 
 
 
 // Function Prototypes for Card Structure
@@ -69,7 +73,7 @@ void initialize(Card deck[]){
   int i = 0;
   for(i=0;i<MAX_CARDS;i++){
     deck[i].rank = ranks[i%MAX_RANKS];
-    strncpy(deck[i].suit, suits[i/MAX_RANKS], MAX);
+    strncpy(deck[i].suit, suits[i/MAX_RANKS], MAX); 
   }
 }
 
