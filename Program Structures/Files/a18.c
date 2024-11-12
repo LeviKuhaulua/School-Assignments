@@ -16,6 +16,27 @@
 // Other things to declare
 
 int main(void){
-    printf("Hello World");
+    FILE *filePointer = NULL; 
+    char *fileName = "students.data"; 
+
+    printf("Welcome! This program edits the \"%s\" file. Opening the file right now...\n", fileName); 
+
+    // Pointing to the file to edit. 
+    filePointer = fopen(fileName, "rb+"); 
+
+    // Checking to see if file exists
+    if (filePointer == NULL) {
+        printf("File \"%s\" does not exist. Did you run \"create-records.exe\"? \n", fileName); 
+        return 0; 
+    } 
+
+    printf("File opened successfully!\n"); 
+
+    // Closing file
+    if (fclose(filePointer) == 0) {
+        printf("Closed file \"%s\" successfully!\n", fileName); 
+    } else {
+        printf("Did not close \"%s\" successfully...", fileName); 
+    }
     return 0;
 }
