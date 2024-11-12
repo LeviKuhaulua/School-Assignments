@@ -1,6 +1,6 @@
 program: a18.o getdouble.o
-	gcc a18.o getdouble.o -o a18 -lm
-	./a18
+	gcc a18.o getdouble.o -o edit-records -lm
+	./edit-records
 
 getdouble.o: getdouble.c getdouble.h
 	gcc -c getdouble.c
