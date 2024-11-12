@@ -11,13 +11,15 @@
 #include "getdouble.h"
 #include "student.h"
 
-// Function Prototypes
+void printRecords(FILE *file, Student); 
 
-// Other things to declare
 
 int main(void){
     FILE *filePointer = NULL; 
     char *fileName = "students.data"; 
+
+    // To hold student records pulled from file. 
+    Student student = {-1, "", "", 0, 0.0}; 
 
     printf("Welcome! This program edits the \"%s\" file. Opening the file right now...\n", fileName); 
 
@@ -30,7 +32,9 @@ int main(void){
         return 0; 
     } 
 
-    printf("File opened successfully!\n"); 
+    // Load up file contents. 
+    printRecords(filePointer, student); 
+
 
     // Closing file
     if (fclose(filePointer) == 0) {
@@ -39,4 +43,27 @@ int main(void){
         printf("Did not close \"%s\" successfully...", fileName); 
     }
     return 0;
+}
+
+/** Prints out all valid records in the file. 
+ *  Params: 
+ *  - file, FILE struct pointer 
+ *  - student, Student struct
+ */
+void printRecords(FILE *file, Student student) {
+    // Record Headers
+    printf("\nNumber   FirstName    LastName  Age  GPA  \n"); 
+    printf("------   ---------    --------  ---  ---  \n");
+
+    // Printing out students information if it is a valid record
+    while (feof(file) == 0) {
+        if (fread(&student, sizeof(Student), 1, file) == 1 && student.number != -1) {
+            printf("%6d  %10s  %10s  %3d  %3.1f  \n", 
+                student.number,
+                student.first, 
+                student.last,
+                student.age,
+                student.gpa); 
+        }
+    }
 }
