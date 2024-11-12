@@ -1,0 +1,12 @@
+run: getdouble.o stringinput.o reading.o
+	gcc getdouble.o stringinput.o reading.o -o read-records
+	./read-records
+
+getdouble.o: getdouble.c getdouble.h 
+	gcc -c getdouble.c 
+
+stringinput.o: stringinput.c stringinput.h
+	gcc -c stringinput.c
+
+reading.o: reading.c getdouble.h student.h stringinput.h
+	gcc -c reading.c

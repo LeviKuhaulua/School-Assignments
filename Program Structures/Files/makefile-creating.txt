@@ -1,0 +1,7 @@
+# Run the program. If you re-run the make file it may overwrite existing students.data file.
+program:creating.o
+	gcc creating.o -o create-records
+	./create-records
+
+creating.o:creating.c student.h 
+	gcc -c creating.c
