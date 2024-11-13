@@ -2,7 +2,8 @@
 // Date Created: 11-12-2024
 /* Program Description:
 *  Given an existing Random-Access File, the program will allow the user to edit 
-*  the data located inside the file and update. 
+*  the data located inside the file and update student records until the user 
+*  quits the program. 
 */
 
 // Library and/or Macro Definitions
@@ -15,24 +16,29 @@
 #include "stringinput.h"
 
 void printRecords(FILE *file, Student); 
+void printStudentRecord(Student); 
+int getStudentRecord(FILE *file, int, Student *student); 
 void closeFile(FILE *file); 
 
 
 int main(void){
     FILE *filePointer = NULL; 
     char *fileName = "students.data";  
+
+    // Main logic for editing files. 
     bool doneEditing = false; 
     int rowEdit = -1; 
     char editAns = 0; 
     int fieldEdit = -1; 
 
-    char *userInput[3] = {"\0"}; 
-    int sizeName = 0; 
+    // Variables to hold information of student records or assist in editing them. 
+    Student student = {-1, "", "", 0, 0.0}; 
+    int recordPulled = 0; 
     int age = 0; 
     double gpa = 0.0; 
+    int sizeName = 0; 
+    char *userInput[3] = {"\0"}; 
     char dummyString[MAX_STRING] = {'\0'}; 
-    // To hold student records pulled from file. 
-    Student student = {-1, "", "", 0, 0.0}; 
 
     printf("Welcome! This program edits the \"%s\" file. Opening the file right now...\n", fileName); 
 
@@ -80,26 +86,20 @@ int main(void){
         rowEdit = (int) getdouble(); 
     
         // Pulls record to student variable 
-        fseek(filePointer, (rowEdit * sizeof(Student)), SEEK_SET);
-        fread(&student, sizeof(Student), 1, filePointer); 
+        recordPulled = getStudentRecord(filePointer, rowEdit, &student); 
+        
         
         // If invalid record, then prompt user to enter a valid record number to edit. 
-        while (student.number == -1) {
+        while (student.number == -1 || recordPulled != 1) {
             printf("Invalid record entered: %i\n", rowEdit); 
             printf("Please enter a valid record number: "); 
             rowEdit = getdouble(); 
             
-            fseek(filePointer, rowEdit * sizeof(Student), SEEK_SET); 
-            fread(&student, sizeof(Student), 1, filePointer); 
+            getStudentRecord(filePointer, rowEdit, &student); 
         }
 
-        // Print out specific information of that student. 
-        printf("%6d  %10s  %10s  %3d  %3.1f  \n", 
-                student.number,
-                student.first, 
-                student.last,
-                student.age,
-                student.gpa); 
+        printStudentRecord(student); 
+
 
         // Prompt user for what field to edit. 
         printf("Enter one of these numbers to edit a field: \n"); 
@@ -167,6 +167,8 @@ int main(void){
         fseek(filePointer, rowEdit * sizeof(Student), SEEK_SET); 
         fwrite(&student, sizeof(Student), 1, filePointer); 
         rewind(filePointer); 
+
+        // List out all records for user to see changes and also decide if they want to change more. 
         printRecords(filePointer, student); 
 
 
@@ -180,8 +182,8 @@ int main(void){
 
 /** Prints out all valid records in the file. 
  *  Params: 
- *  - file, FILE struct pointer 
- *  - student, Student struct
+ *  - file, pointer to file 
+ *  - student, Student struct that will be used to hold information of each record in file. 
  */
 void printRecords(FILE *file, Student student) {
     // Record Headers
@@ -191,14 +193,42 @@ void printRecords(FILE *file, Student student) {
     // Printing out students information if it is a valid record
     while (feof(file) == 0) {
         if (fread(&student, sizeof(Student), 1, file) == 1 && student.number != -1) {
-            printf("%6d  %10s  %10s  %3d  %3.1f  \n", 
+            printStudentRecord(student); 
+        }
+    }
+}
+
+/**
+ * Prints out individual student record information.  
+ */
+void printStudentRecord(Student student) {
+    // Print out specific information of that student. 
+        printf("%6d  %10s  %10s  %3d  %3.1f  \n", 
                 student.number,
                 student.first, 
                 student.last,
                 student.age,
                 student.gpa); 
-        }
-    }
+}
+
+
+/** Attemps to pull up a specific student record. Returns -1 if trouble accessing record. 
+ *  Params: 
+ *  - file, pointer to file
+ *  - index, int that represents index of student record
+ *  - student, Student struct that will hold the record of student. 
+ */
+int getStudentRecord(FILE *file, int index, Student *student) {
+    int numObjects = -1; 
+    fseek(file, index * sizeof(Student), SEEK_SET); 
+    numObjects = fread(student, sizeof(Student), 1, file);
+
+    // Checks to see if it correctly read from file. 
+    if (numObjects != 1) {
+        return -1;  
+    } 
+
+    return numObjects; 
 }
 
 
