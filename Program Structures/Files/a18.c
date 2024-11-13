@@ -97,6 +97,23 @@ int main(void){
                 student.age,
                 student.gpa); 
 
+        // Prompt user for what field to edit. 
+        printf("Enter one of these numbers to edit a field: \n"); 
+        printf("- (1) first name\n"); 
+        printf("- (2) last name\n");
+        printf("- (3) age\n"); 
+        printf("- (4) gpa\n"); 
+
+        fieldEdit = (int) getdouble() - 1; 
+
+        // Check if what user entered was invalid. 
+        while (fieldEdit < 0 || fieldEdit > 3) {
+            printf("Invalid Input: %i\n", fieldEdit + 1); 
+            printf("Enter (1) for first name, (2) for last name, (3) for age, or (4) for gpa: "); 
+            fieldEdit = (int) getdouble() - 1; 
+        }
+
+
     } while (!doneEditing);
     
     
