@@ -8,15 +8,24 @@
 // Library and/or Macro Definitions
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h> 
+#include <stdbool.h> 
 #include "getdouble.h"
 #include "student.h"
+#include "stringinput.h"
 
 void printRecords(FILE *file, Student); 
+void closeFile(FILE *file); 
 
 
 int main(void){
     FILE *filePointer = NULL; 
-    char *fileName = "students.data"; 
+    char *fileName = "students.data";  
+    bool doneEditing = false; 
+    int rowEdit = -1; 
+    char editAns = 0; 
+    int fieldEditAns = -1; 
+    char rowEditAns[MAX] = {'\0'}; 
 
     // To hold student records pulled from file. 
     Student student = {-1, "", "", 0, 0.0}; 
@@ -32,16 +41,39 @@ int main(void){
         return 0; 
     } 
 
-    // Load up file contents. 
+    // Initial Load: Show file records. 
     printRecords(filePointer, student); 
 
+    do {
 
-    // Closing file
-    if (fclose(filePointer) == 0) {
-        printf("Closed file \"%s\" successfully!\n", fileName); 
-    } else {
-        printf("Did not close \"%s\" successfully...", fileName); 
-    }
+        // Asking user if they would like to edit the file. 
+        printf("Would you like to edit? (Press 'y' or 'Y' for yes or 'n' or 'N' for no): "); 
+        editAns = tolower(getchar()); 
+
+        if (editAns == 'n') {
+            printf("Exiting program..."); 
+            doneEditing = true; 
+        }
+
+        getchar(); 
+
+        // Error checking
+        while (!(isalpha(editAns)) || (editAns != 'y' && editAns != 'n')) {
+            printf("Invalid input: %c\n", editAns); 
+
+            // Re-prompt for input
+            printf("Please enter 'y' or 'Y' for yes or 'n' or 'N' for no: "); 
+            editAns = tolower(getchar()); 
+
+            // Skip new-line character. 
+            getchar(); 
+
+        }
+    } while (!doneEditing);
+    
+    
+
+    closeFile(filePointer); 
     return 0;
 }
 
@@ -66,4 +98,11 @@ void printRecords(FILE *file, Student student) {
                 student.gpa); 
         }
     }
+}
+
+
+void closeFile(FILE *file) {
+    // If error occurs, then that means pointer is already pointing to end. 
+    fseek(file, 0, SEEK_END); 
+    fclose(file);
 }
