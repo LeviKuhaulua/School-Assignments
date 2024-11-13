@@ -24,9 +24,9 @@ int main(void){
     bool doneEditing = false; 
     int rowEdit = -1; 
     char editAns = 0; 
-    int fieldEditAns = -1; 
-    char rowEditAns[MAX] = {'\0'}; 
+    int fieldEdit = -1; 
 
+    char *userInput[3] = {"\0"}; 
     // To hold student records pulled from file. 
     Student student = {-1, "", "", 0, 0.0}; 
 
@@ -53,6 +53,7 @@ int main(void){
         if (editAns == 'n') {
             printf("Exiting program..."); 
             doneEditing = true; 
+            break; 
         }
 
         getchar(); 
@@ -69,6 +70,33 @@ int main(void){
             getchar(); 
 
         }
+
+        // Grab student record
+        printf("Enter number that you would like to edit: "); 
+        rowEdit = (int) getdouble(); 
+    
+        // Pulls record to student variable 
+        fseek(filePointer, (rowEdit * sizeof(Student)), SEEK_SET);
+        fread(&student, sizeof(Student), 1, filePointer); 
+        
+        // If invalid record, then prompt user to enter a valid record number to edit. 
+        while (student.number == -1) {
+            printf("Invalid record entered: %i\n", rowEdit); 
+            printf("Please enter a valid record number: "); 
+            rowEdit = getdouble(); 
+            
+            fseek(filePointer, rowEdit * sizeof(Student), SEEK_SET); 
+            fread(&student, sizeof(Student), 1, filePointer); 
+        }
+
+        // Print out specific information of that student. 
+        printf("%6d  %10s  %10s  %3d  %3.1f  \n", 
+                student.number,
+                student.first, 
+                student.last,
+                student.age,
+                student.gpa); 
+
     } while (!doneEditing);
     
     
