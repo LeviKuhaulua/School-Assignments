@@ -63,12 +63,14 @@ int main(void){
         if (editAns == 'n') {
             printf("Exiting program..."); 
             doneEditing = true; 
+            
+            // Prevents rest of code from being executed.
             break; 
         }
 
         getchar(); 
 
-        // Error checking
+        // Checking if input from user is valid. 
         while (!(isalpha(editAns)) || (editAns != 'y' && editAns != 'n')) {
             printf("Invalid input: %c\n", editAns); 
 
@@ -81,13 +83,12 @@ int main(void){
 
         }
 
-        // Grab student record
+        // Get record number that user wants to edit
         printf("Enter number that you would like to edit: "); 
         rowEdit = (int) getdouble(); 
     
         // Pulls record to student variable 
         recordPulled = getStudentRecord(filePointer, rowEdit, &student); 
-        
         
         // If invalid record, then prompt user to enter a valid record number to edit. 
         while (student.number == -1 || recordPulled != 1) {
