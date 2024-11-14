@@ -18,8 +18,14 @@
 void printRecords(FILE *file, Student); 
 void printStudentRecord(Student); 
 int getStudentRecord(FILE *file, int, Student *student); 
+void updateFirstName(Student *student); 
+void updateLastName(Student *student); 
+void updateAge(Student *student); 
+void updateGPA(Student *student); 
 void closeFile(FILE *file); 
 
+char dummyString[MAX_STRING] = {'\0'}; 
+int sizeOfName = 0; 
 
 int main(void){
     FILE *filePointer = NULL; 
@@ -36,9 +42,7 @@ int main(void){
     int recordPulled = 0; 
     int age = 0; 
     double gpa = 0.0; 
-    int sizeName = 0; 
     char *userInput[3] = {"\0"}; 
-    char dummyString[MAX_STRING] = {'\0'}; 
 
     printf("Welcome! This program edits the \"%s\" file. Opening the file right now...\n", fileName); 
 
@@ -83,6 +87,12 @@ int main(void){
 
         }
 
+        if (editAns == 'n') {
+            printf("Exiting program..."); 
+            doneEditing = true; 
+            break; 
+        }
+
         // Get record number that user wants to edit
         printf("Enter number that you would like to edit: "); 
         rowEdit = (int) getdouble(); 
@@ -96,7 +106,7 @@ int main(void){
             printf("Please enter a valid record number: "); 
             rowEdit = getdouble(); 
             
-            getStudentRecord(filePointer, rowEdit, &student); 
+            recordPulled = getStudentRecord(filePointer, rowEdit, &student); 
         }
 
         printStudentRecord(student); 
@@ -113,7 +123,7 @@ int main(void){
 
         // Check if what user entered was invalid. 
         while (fieldEdit < 1 || fieldEdit > 4) {
-            printf("Invalid Input: %i\n", fieldEdit + 1); 
+            printf("Invalid Input: %i\n", fieldEdit); 
             printf("Enter (1) for first name, (2) for last name, (3) for age, or (4) for gpa: "); 
             fieldEdit = (int) getdouble(); 
         }
@@ -122,40 +132,18 @@ int main(void){
         switch (fieldEdit) {
             // First two cases (1) and (2) deal with editing name fields. 
             case 1: 
-                sizeName = getstring(student.first, MAX_STRING); 
-                while (sizeName > MAX_STRING - 2) {
-                    printf("Invalid input. First name cannot be longer than %d characters\n", MAX_STRING - 2);
-                    getline2(dummyString, MAX_STRING); 
-                    sizeName = getstring(student.first, MAX_STRING); 
-                }
+                updateFirstName(&student); 
                 break; 
             case 2: 
-                sizeName = getstring(student.last, MAX_STRING); 
-                while (sizeName > MAX_STRING - 2) {
-                    printf("Invalid input. Last name cannot be longer than %d characters\n", MAX_STRING - 2); 
-                    sizeName = getstring(student.last, MAX_STRING); 
-                }
+                updateLastName(&student); 
                 break; 
             // Last two cases deal with editing number fields. 
             case 3: 
-                printf("Age: ");
-                age = (int) getdouble(); 
-                while (age <= 0) {
-                    printf("Invalid input: %i\n", age); 
-                    printf("Age: "); 
-                    age = (int) getdouble(); 
-                } 
-                student.age = age; 
+                updateAge(&student); 
                 break; 
 
             case 4: 
-                printf("GPA: "); 
-                gpa = getdouble(); 
-                while (gpa <= 0) {
-                    printf("Invalid input: %.2f\n", gpa); 
-                    gpa = getdouble(); 
-                }
-                student.gpa = gpa; 
+                updateGPA(&student); 
                 break; 
 
             // This shouldn't occur... 
@@ -230,6 +218,73 @@ int getStudentRecord(FILE *file, int index, Student *student) {
     } 
 
     return numObjects; 
+}
+ 
+/** Updates first name field of a student. The first name cannot exceed 10 characters.  
+ *  Params: 
+ *  - student, Student record that holds the information of the student. 
+ */
+void updateFirstName(Student *student) {
+    printf("New First Name: ");  
+    sizeOfName = getstring(student->first, MAX_STRING); 
+    while (sizeOfName > MAX_STRING - 2) {
+        printf("Argument cannot exceed %d characters\n", MAX_STRING - 2); 
+        getline2(dummyString, MAX_STRING); 
+        printf("First Name: "); 
+        sizeOfName = getstring(student->first, MAX_STRING); 
+    }
+    
+}
+
+/** Updates last name field of a student. The last name cannot exceed 10 characters
+ *  Params: 
+ *  - student, Student record that holds the information of the student. 
+ */
+void updateLastName(Student *student) {
+    printf("New Last Name: "); 
+    sizeOfName = getstring(student->last, MAX_STRING); 
+    while (sizeOfName > MAX_STRING - 2) {
+        printf("Argument cannot exceed %d characters\n", MAX_STRING - 2); 
+        getline2(dummyString, MAX_STRING); 
+        printf("Last Name: "); 
+        sizeOfName = getstring(student->last, MAX_STRING); 
+    }
+}
+
+/** Updates age of a Student record. 
+ *  Params: 
+ *  - student, Student records that holds information of the student. 
+ */
+void updateAge(Student *student) {
+    int age = 0; 
+    printf("New Age: "); 
+    age = (int) getdouble(); 
+
+    while (age <= 0) {
+        printf("Invalid Age: %i\n", age); 
+        printf("New Age: "); 
+        age = (int) getdouble(); 
+    }
+    
+    student->age = age; 
+}
+
+/** Update gpa of a Student record. 
+ *  Params: 
+ *  - student, Student record that holds the information of the student. 
+ */
+void updateGPA(Student *student) {
+    double gpa = 0; 
+    printf("New GPA: "); 
+    gpa = getdouble(); 
+
+    while (gpa < 0 || gpa > 4.0) {
+        printf("Invalid GPA: %.1f. Cannot be negative or exceed a 4.0\n", gpa);
+        printf("New GPA: "); 
+        gpa = (int) getdouble(); 
+    }
+
+    student->gpa = gpa; 
 }
 
 
