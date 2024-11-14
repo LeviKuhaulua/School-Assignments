@@ -40,9 +40,6 @@ int main(void){
     // Variables to hold information of student records or assist in editing them. 
     Student student = {-1, "", "", 0, 0.0}; 
     int recordPulled = 0; 
-    int age = 0; 
-    double gpa = 0.0; 
-    char *userInput[3] = {"\0"}; 
 
     printf("Welcome! This program edits the \"%s\" file. Opening the file right now...\n", fileName); 
 
