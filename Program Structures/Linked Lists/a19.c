@@ -14,6 +14,15 @@
 int setAmountIntegers(void);
 int setIntegerValue(void);
 
+// Linked List Structure
+struct node {
+	int element; 
+	struct node *next;
+};
+
+typedef struct node Node;
+typedef struct node* NodePointer;
+
 int main(void){
     // Setting seed for random number generation. 
     srand(time(NULL)); 
@@ -22,7 +31,7 @@ int main(void){
     int amountOfIntegers = 0; 
 	int integerToAdd = 0;   
 
-	amountOfIntegers = setAmountIntegers();  
+	amountOfIntegers = setAmountIntegers(); 
 	
 	return 0;
 }
