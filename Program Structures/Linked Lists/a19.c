@@ -10,8 +10,37 @@
 #include <stdlib.h>
 #include <time.h>
 
+// Function Prototypes
+int setAmountIntegers(void);
+int setIntegerValue(void);
 
 int main(void){
-	printf("Hello World");
-    return 0;
+    // Setting seed for random number generation. 
+    srand(time(NULL)); 
+
+	// Defining variables that will specify linked list capacity and number to add.
+    int amountOfIntegers = 0; 
+	int integerToAdd = 0;   
+
+	amountOfIntegers = setAmountIntegers();  
+	
+	return 0;
 }
+
+/*
+ * Generate a number from 25-75 (inclusive). This represents the amount of integers
+ * to store / add to the linked list. 
+*/
+
+int setAmountIntegers(void){
+	return 25 + rand() % 51; 
+}
+
+/* 
+ * Get a random integer value from 0-100 (inclusive). This number WILL be added to the linkedlist.
+*/
+int setIntegerValue(void){
+	return rand() % 100;
+}
+
+
