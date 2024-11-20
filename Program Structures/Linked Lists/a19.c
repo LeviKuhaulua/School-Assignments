@@ -10,15 +10,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Function Prototypes
-int setAmountIntegers(void);
-int setIntegerValue(void);
-int sum(NodePointer *);
-int count(NodePointer *);
-double average(int, int);
-void displayContents(NodePointer);
-void insertIntoLinkedList(int, NodePointer *); 
-
 // Linked List Structure
 struct node {
 	int element; 
@@ -27,6 +18,16 @@ struct node {
 
 typedef struct node Node;
 typedef struct node* NodePointer;
+
+// Function Prototypes
+int setAmountIntegers(void);
+int setIntegerValue(void);
+int sum(NodePointer *);
+int count(NodePointer *);
+double average(int, int);
+void displayContents(NodePointer);
+void insertIntoLinkedList(int, NodePointer*); 
+
 
 int main(void){
     // Setting seed for random number generation. 
@@ -42,6 +43,15 @@ int main(void){
 
     // Points to the beginning / head of the linked list. 
     NodePointer head = NULL; 
+
+	// Adds a random amount of integers from 0-100 (inclusive) into the linked list
+	for (int i = 0; i < amountOfIntegers; i++){
+		integerToAdd = setIntegerValue();
+		insertIntoLinkedList(integerToAdd, &head);
+	}
+
+	displayContents(head);
+	
 	
 	return 0;
 }
@@ -59,7 +69,53 @@ int setAmountIntegers(void){
  * Get a random integer value from 0-100 (inclusive). This number WILL be added to the linkedlist.
 */
 int setIntegerValue(void){
-	return rand() % 100;
+	return rand() % 101;
 }
 
+/*
+ * Adds an integer into the linked list.
+ * Params: 
+ * - num, int. Number to be added into Linked List. 
+ * - node, NodePointer, head or start of the linked list.
+*/
+void insertIntoLinkedList(int num, NodePointer *node){
+	// Creating pointers to assist in adding the element to the linked list. 
+	NodePointer newNode = NULL;
+	NodePointer curr = *node; 
 
+    newNode = malloc(sizeof(Node));
+
+    if (newNode == NULL) {
+        printf("Unable to allocate memory to add new node into linked list.\n"); 
+        return; 
+    } else {
+		newNode->element = num; 
+		newNode->next = curr; 
+		*node = newNode; 
+	}
+    
+}
+
+/*
+ * Displays all the integers stored inside the linked list. 
+ * Params:
+ * - head, NodePointer, pointer to the beginning of the linked list.
+*/
+void displayContents(NodePointer head){
+	
+	if (head == NULL){
+		printf("Empty linked list\n");
+	} else {
+		printf("Contents: \n");
+		
+		// Continously go through linked list until pointer points to NULL. 
+		while (head != NULL){
+			printf("%i ", head->element);
+			head = head->next;
+		}
+
+        printf("\n"); 
+
+	}
+
+}
