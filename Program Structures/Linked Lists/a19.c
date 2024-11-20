@@ -22,8 +22,8 @@ typedef struct node* NodePointer;
 // Function Prototypes
 int setAmountIntegers(void);
 int setIntegerValue(void);
-int sum(NodePointer *);
-int count(NodePointer *);
+int sum(NodePointer);
+int count(NodePointer);
 double average(int, int);
 void displayContents(NodePointer);
 void insertIntoLinkedList(int, NodePointer*); 
@@ -49,8 +49,18 @@ int main(void){
 		integerToAdd = setIntegerValue();
 		insertIntoLinkedList(integerToAdd, &head);
 	}
+	
 
 	displayContents(head);
+
+	// Display Statistics of Linked List: Sum, Count, Average (Floating Point)
+	int sumOfList, countOfList;
+	sumOfList = sum(head);
+	countOfList = count(head);
+
+	printf("Sum: %i\n", sumOfList);
+	printf("Count: %i\n", countOfList);
+	printf("Floating Point Average: %.2f\n", average(sumOfList, countOfList));
 	
 	
 	return 0;
@@ -73,6 +83,50 @@ int setIntegerValue(void){
 }
 
 /*
+ * Return the sum of the linked list. 
+ * Params: 
+ * - node, NodePointer. Head or Start of the linked list. 
+*/
+int sum(NodePointer node){
+	int sum = 0; 
+	
+	while (node != NULL){
+		sum += node->element;
+		node = node->next;
+	}
+	
+	return sum;
+}
+
+
+/*
+ * Returns the number of nodes in the linked list.
+ * Params:
+ * - node, NodePointer. Head or Start of the linked list.
+*/
+int count(NodePointer node){
+	int count = 0;
+
+	while (node != NULL){
+		// Increments count as long as there is another node in the list.
+		count++;
+		node = node->next;
+	}
+
+	return count;
+}
+
+/*
+ * Returns the floating point average of the linked list.
+ * Params: 
+ * - sum, int. Sum of the linked list.
+ * - count, int. Number of nodes inside the linked list.
+*/
+double average(int sum, int count){
+	return (double) sum / (double) count;
+}
+
+/*
  * Adds an integer into the linked list.
  * Params: 
  * - num, int. Number to be added into Linked List. 
@@ -87,12 +141,15 @@ void insertIntoLinkedList(int num, NodePointer *node){
 
     if (newNode == NULL) {
         printf("Unable to allocate memory to add new node into linked list.\n"); 
-        return; 
     } else {
+		// Inserts node at beginning of list. 
 		newNode->element = num; 
 		newNode->next = curr; 
 		*node = newNode; 
 	}
+
+	
+	
     
 }
 
