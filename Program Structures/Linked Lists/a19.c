@@ -13,6 +13,11 @@
 // Function Prototypes
 int setAmountIntegers(void);
 int setIntegerValue(void);
+int sum(NodePointer *);
+int count(NodePointer *);
+double average(int, int);
+void displayContents(NodePointer);
+void insertIntoLinkedList(int, NodePointer *); 
 
 // Linked List Structure
 struct node {
@@ -32,6 +37,11 @@ int main(void){
 	int integerToAdd = 0;   
 
 	amountOfIntegers = setAmountIntegers(); 
+
+    // Linked List Implementation
+
+    // Points to the beginning / head of the linked list. 
+    NodePointer head = NULL; 
 	
 	return 0;
 }
