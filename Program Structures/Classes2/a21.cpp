@@ -33,6 +33,24 @@ class Complex {
             imaginary = 0.0;
         }
         
+        /*
+        * Creates a copy of a complex expression. 
+        * Parameters: 
+        * - complex, Complex Data Type
+        */
+        Complex(const Complex &complex) {
+            real = complex.real;
+            imaginary = complex.imaginary;
+        }
+
+        /*
+        *  Destructor for complex expressions. Prints the expression that is being released. 
+        */
+        ~Complex() {
+            cout << "Releasing memory of: \n";
+            print();
+        }
+        
         /*  Set the real and imaginary numbers to the new arguments. 
         *   Parameters: 
         *   r - double,
@@ -69,12 +87,32 @@ class Complex {
 
     // Private Data Members
     private: 
-        
         double real; 
         double imaginary; 
 };
 
 int main(void){
-    cout << "Hello World!";
+    
+    // Testing Constructor with No Arguments
+    cout << "Instantiating Complex Constructor with No Arguments\n";
+    Complex c1 = Complex();
+    c1.print();
+    
+    cout << "\n";
+
+    // Testing Constructor with Arguments
+    cout << "Instantiating Complex Constructor with Arguments\n";
+    Complex c2 = Complex(2.75, -10.5);
+    c2.print();
+    
+    cout << "\n";
+
+    // Testing Copy Constructor
+    cout << "Instantiating Complex Copy Constructor\n";
+    Complex c3 = Complex(c2);
+    c3.print();
+
+    // This last line break is to space out the destructors
+    cout << "\n\n";
     return 0;
 }
