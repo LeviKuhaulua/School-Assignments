@@ -76,29 +76,34 @@ class Complex {
 int main(void) {
     
     // Testing with no argument constructor
+    cout << "Testing No Argument Constructor and Print Function\n";
     Complex c1 = Complex();
-    cout << "Complex Expression (c1): ";
+    cout << "Complex Expression: ";
     c1.print();
+    
+    cout << "\n\n";
 
     // Testing with arguments constructor. This will also test for negative numbers
+    cout << "Testing Argument Constructor with Accessor Methods\n"; 
     Complex c2 = Complex(1.0, -1.75);
-    cout << "Complex Expression (c2): "; 
+    cout << "Complex Expression: "; 
     c2.print(); 
     
     // Testing accessor methods
-    cout << "Testing accessor methods\n";
     cout << "Real Number: " << c2.getReal() << "\n";
     cout << "Imaginary Number: " << c2.getImaginary() << "\n";
     
-    // Testing mutator method
-    c2.setNumbers(-5.0, 1.75);
-    cout << "New Expression (c2): ";
-    c2.print();
-    cout << "New Real Number: " << c2.getReal() << "\n";
-    cout << "New Imaginary Number: " << c2.getImaginary() << "\n";
-
+    cout << "\n\n";
+    
+    // Testing mutator methods.
     Complex c3 = Complex(10.0, 0.0);
-    cout << "Complex Expression (c3): ";
+    cout << "Complex Expression: ";
     c3.print();  
+
+    cout << "Changing Numbers to 100\n"; 
+    c3.setNumbers(100, 100);
+    cout << "New Complex Expression: ";
+    c3.print(); 
+    
     return 0;
 }
