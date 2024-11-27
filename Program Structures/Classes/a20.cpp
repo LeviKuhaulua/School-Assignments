@@ -2,7 +2,8 @@
 // Date Created: 11-26-2024
 /* Program Description:
 *  Creates a class labeled Complex that allows users to 
-*  perform arithmetic operations with complex numbers. 
+*  define complex expressions, and get or set the values of the complex
+*  expression. 
 */
 
 
