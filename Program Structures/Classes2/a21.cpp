@@ -116,6 +116,8 @@ class Complex {
         Complex multiply(const Complex &c) {
             double r = real; 
             real = (real * c.real) - (imaginary * c.imaginary);
+            
+            // r = initial value of real number BEFORE we performed arithmetic operation.
             imaginary = (imaginary * c.real) + (r * c.imaginary); 
             return Complex(real, imaginary); 
         }
@@ -128,6 +130,8 @@ class Complex {
             double r = real; 
             double denominator = c.real * c.real + c.imaginary * c.imaginary;
             real = (real * c.real + imaginary * c.imaginary) / denominator;
+
+            // r = initial value of real number BEFORE we performed arithmetic operation.
             imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
             return Complex(real, imaginary); 
         }
