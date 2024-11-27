@@ -47,8 +47,12 @@ class Complex {
         *  Destructor for complex expressions. Prints the expression that is being released. 
         */
         ~Complex() {
-            cout << "Releasing memory of: \n";
-            print();
+            cout << "Destructor: ";
+            if (imaginary < 0) {
+                cout << real << " - " << abs(imaginary) << "i\n";
+            } else {
+                cout << real << " + " << imaginary << "i\n";
+            }
         }
         
         /*  Set the real and imaginary numbers to the new arguments. 
@@ -84,6 +88,45 @@ class Complex {
                 cout << real << " + " << imaginary << "i\n";
             }
         }
+        
+        /* Adds two complex expressions.
+        *  Parameters: 
+        *  - c, Complex Data Type
+        */
+        Complex add(const Complex &c) {
+            real += c.real;
+            imaginary += c.imaginary;
+        }
+
+        /* Subtracts two complex expressions. 
+        *  Parameters: 
+        *  - c, Complex Data Type
+        */
+        Complex sub(const Complex &c) {
+            real -= c.real;
+            imaginary -= c.imaginary;
+        }
+
+        /* Multiply two complex expressions. 
+        *  Parameters: 
+        *  - c, Complex Data Type
+        */
+        Complex multiply(const Complex &c) {
+            double r = real; 
+            real = (real * c.real) - (imaginary * c.imaginary);
+            imaginary = (imaginary * c.real) + (r * c.imaginary); 
+        }
+        
+        /* Divides two complex expressions.
+        *  Parameters: 
+        *  - c, Complex Data Type
+        */
+        Complex divide(const Complex &c) {
+            double r = real; 
+            double denominator = c.real * c.real + c.imaginary * c.imaginary;
+            real = (real * c.real + imaginary * c.imaginary) / denominator;
+            imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
+        }
 
     // Private Data Members
     private: 
@@ -95,15 +138,52 @@ int main(void){
     
     // Testing Constructor with Arguments
     cout << "Instantiating Complex Constructor with Arguments\n";
-    Complex c2 = Complex(2.75, -10.5);
-    c2.print();
+    Complex c1 = Complex(1.1, 2.3);
+    c1.print();
     
     cout << "\n";
 
     // Testing Copy Constructor
     cout << "Instantiating Complex Copy Constructor\n";
-    Complex c3 = Complex(c2);
-    c3.print();
+    Complex c2(c1);
+    c2.print();
+    
+    // Going to be used in the upcoming tests. 
+    Complex c3(c1); 
+    Complex c4(c1); 
+
+    cout << "\n"; 
+
+    // Testing Adding Function
+    cout << "Adding Both Expressions\n";
+    c1.add(c2);
+    cout << "New Expression: "; 
+    c1.print(); 
+
+    cout << "\n"; 
+
+    // Testing Subtracting Function
+    cout << "Subtracting Both Expressions\n";
+    c3.sub(c2); 
+    cout << "New Expression: ";
+    c3.print(); 
+
+    cout << "\n"; 
+
+    // Testing Multiply Function
+    cout << "Multiplying Both Expressions\n"; 
+    c2.multiply(Complex(1.1, 2.3));  
+    cout << "New Expression: ";
+    c2.print(); 
+    
+
+    cout << "\n"; 
+
+    // Testing Divide Function
+    cout << "Dividing both expressions\n";  
+    c4.divide(Complex(1.1, 2.3)); 
+    cout << "New Expression: "; 
+    c4.print(); 
 
     // This last line break is to space out the destructors
     cout << "\n\n";
