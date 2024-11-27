@@ -96,6 +96,7 @@ class Complex {
         Complex add(const Complex &c) {
             real += c.real;
             imaginary += c.imaginary;
+            return Complex(real, imaginary); 
         }
 
         /* Subtracts two complex expressions. 
@@ -105,6 +106,7 @@ class Complex {
         Complex sub(const Complex &c) {
             real -= c.real;
             imaginary -= c.imaginary;
+            return Complex(real, imaginary); 
         }
 
         /* Multiply two complex expressions. 
@@ -115,6 +117,7 @@ class Complex {
             double r = real; 
             real = (real * c.real) - (imaginary * c.imaginary);
             imaginary = (imaginary * c.real) + (r * c.imaginary); 
+            return Complex(real, imaginary); 
         }
         
         /* Divides two complex expressions.
@@ -126,6 +129,7 @@ class Complex {
             double denominator = c.real * c.real + c.imaginary * c.imaginary;
             real = (real * c.real + imaginary * c.imaginary) / denominator;
             imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
+            return Complex(real, imaginary); 
         }
 
     // Private Data Members
