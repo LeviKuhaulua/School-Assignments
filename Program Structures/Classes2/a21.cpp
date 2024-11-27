@@ -93,13 +93,6 @@ class Complex {
 
 int main(void){
     
-    // Testing Constructor with No Arguments
-    cout << "Instantiating Complex Constructor with No Arguments\n";
-    Complex c1 = Complex();
-    c1.print();
-    
-    cout << "\n";
-
     // Testing Constructor with Arguments
     cout << "Instantiating Complex Constructor with Arguments\n";
     Complex c2 = Complex(2.75, -10.5);
