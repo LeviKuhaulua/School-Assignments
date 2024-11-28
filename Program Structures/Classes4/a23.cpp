@@ -142,8 +142,32 @@ class Cylinder: public Circle {
 
 
 int main(void){
-    Circle a(3);
-    cout << a.calculateArea();
     
+
+    // Testing Circle
+    Circle a(3.75);
+    a.print(); 
+    cout << "Area: " << a.calculateArea() << "\n";
+    
+    // This will throw an error
+    // Circle b(-3.75);
+    
+    // Testing Cylinder
+    Cylinder b = Cylinder(3, 4);
+    b.print();
+
+    // Setting new radius and height
+    b.setHeight(5);
+    b.setRadius(2);
+    cout << "Changing height and radius...\n" << "New Expression: ";
+    b.print(); 
+    
+
+    // Copy constructor, grabbing radius and height, and calculating volume
+    cout << "Creating Copy...\n";
+    Cylinder c = Cylinder(b); 
+    cout << "Radius of Copy: " << c.getRadius() << "\n";
+    cout << "Height of Copy: " << c.getHeight() << "\n";
+    cout << "Volume of Copy: " << c.calculateVolume() << "\n";  
     return 0;
 }
