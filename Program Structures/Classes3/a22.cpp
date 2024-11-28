@@ -187,8 +187,25 @@ class Complex {
         Complex operator-(const Complex &c) {
             return Complex(real - c.real, imaginary - c.imaginary); 
         }
-
-
+        
+        /*
+        *  Overloading the '*' operator. Returns a new complex object
+        */
+        Complex operator*(const Complex &c) {
+            double newReal = real * c.real - imaginary * c.imaginary; 
+            double newImaginary = imaginary * c.real + real * c.imaginary; 
+            return Complex(newReal, newImaginary);   
+        }
+        
+        /*
+        *  Overloading the '/' operator. Returns a new complex object
+        */
+        Complex operator/(const Complex &c) {
+            double denominator = (c.real * c.real) + (c.imaginary * c.imaginary);
+            double newReal = (real * c.real + imaginary * c.imaginary) / denominator;
+            double newImaginary = (imaginary * c.real - real * c.imaginary) / denominator; 
+            return Complex(newReal, newImaginary); 
+        }
     // Private Data Members
     private: 
         double real; 
@@ -199,17 +216,40 @@ class Complex {
 int main(void){
     
     Complex c1, c2;
+    
+    // Testing '>>' operator. 
     cout << "Enter an expression in form \"a + bi\": ";
     cin >> c1;
     cout << "Enter another expression in form \"a + bi\": ";
     cin >> c2; 
     
+    // Tests both the '-' operator and the '<<' operator
     cout << "Subtracting Both Expressions: \n";
     Complex c3 = c1 - c2; 
     cout << c3; 
-
+    
+    // Tests the '+' operator
     cout << "Adding Both Expressions: \n";
     Complex c4 = c1 + c2;
     cout << c4; 
+
+    // Tests the '*' operator
+    cout << "Multiplying Both Expressions: \n";
+    Complex c5 = c1 * c2; 
+    cout << c5; 
+    
+    // Tests the '/' operator
+    cout << "Dividing Both Expressions: \n"; 
+    Complex c6 = c1 / c2; 
+    cout << c6;
+    
+
+    // Equality Tests
+    cout << "Testing for Equality (==): ";
+    cout << boolalpha << (c1 == c2) << "\n";
+
+    cout << "Testing for Inequality (!=): ";
+    cout << boolalpha << (c1 != c2) << "\n"; 
+
     return 0;
 }
