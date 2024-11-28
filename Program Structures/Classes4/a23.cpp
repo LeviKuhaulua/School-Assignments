@@ -30,7 +30,7 @@ class Circle {
         }
         
         // Copy constructor that initializes a Circle based on another Circle's radius
-        Circle(Circle &c) {
+        Circle(const Circle &c) {
             radius = c.radius; 
         }
         
@@ -72,6 +72,18 @@ class Circle {
 // Cylinder class. Derived from Circle class
 class Cylinder: public Circle {
     
+    public: 
+        
+        // Initializes a Cylinder with radius and height of 0
+        Cylinder():Circle() {
+            // Radius is set by super constructor
+            height = 0; 
+        }
+
+
+    private: 
+        // No other derived classes, so we can leave this as private.
+        double height;
 };
 
 
