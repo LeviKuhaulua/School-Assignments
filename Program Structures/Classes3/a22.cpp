@@ -124,7 +124,35 @@ class Complex {
             imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
             return Complex(real, imaginary); 
         }
+        
+        /*
+        *  Operator overloading for getting input of Complex Expression
+        */
+        friend istream &operator >> (istream &input, Complex &c) {
+            // Characters as placeholders for operation (+) and i (square root of -1).
+            char add = '+';
+            char i = 'i'; 
+            
+            // Sets the complex number and fraction. 
+            input >> c.real >> add >> c.imaginary >> i;
+            c.setNumbers(c.real, c.imaginary); 
+            return input; 
+        }
+        
+        /*
+        *  Operator overloading for output of Complex Expression
+        */
+        friend ostream &operator << (ostream &output, const Complex &c) {
+            char operation = '+'; 
+            
+            // Changes operation if imaginary number is negative. 
+            if (c.imaginary < 0) {
+                operation = '-'; 
+            } 
 
+            output << c.real << " " << operation << " " << abs(c.imaginary) << "i";
+            return output; 
+        }
     // Private Data Members
     private: 
         double real; 
@@ -133,6 +161,11 @@ class Complex {
 
 
 int main(void){
-    cout << "Hello World!";
+    
+    Complex c1; 
+    cout << "Enter an expression: ";
+    cin >> c1; 
+    cout << "Expression Entered: "; 
+    cout << c1; 
     return 0;
 }
