@@ -48,11 +48,7 @@ class Complex {
         */
         ~Complex() {
             cout << "Destructor: ";
-            if (imaginary < 0) {
-                cout << real << " - " << abs(imaginary) << "i\n";
-            } else {
-                cout << real << " + " << imaginary << "i\n";
-            }
+            print();
         }
         
         /*  Set the real and imaginary numbers to the new arguments. 
@@ -94,9 +90,7 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex add(const Complex &c) {
-            real += c.real;
-            imaginary += c.imaginary;
-            return Complex(real, imaginary); 
+            return Complex(real + c.real, imaginary + c.imaginary); 
         }
 
         /* Subtracts two complex expressions. 
@@ -104,9 +98,7 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex sub(const Complex &c) {
-            real -= c.real;
-            imaginary -= c.imaginary;
-            return Complex(real, imaginary); 
+            return Complex(real - c.real, imaginary - c.imaginary); 
         }
 
         /* Multiply two complex expressions. 
@@ -114,12 +106,9 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex multiply(const Complex &c) {
-            double r = real; 
-            real = (real * c.real) - (imaginary * c.imaginary);
-            
-            // r = initial value of real number BEFORE we performed arithmetic operation.
-            imaginary = (imaginary * c.real) + (r * c.imaginary); 
-            return Complex(real, imaginary); 
+            double newReal = (real * c.real) - (imaginary * c.imaginary);
+            double newImaginary = (imaginary * c.real) + (real * c.imaginary); 
+            return Complex(newReal, newImaginary); 
         }
         
         /* Divides two complex expressions.
@@ -127,13 +116,11 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex divide(const Complex &c) {
-            double r = real; 
+            // Variables to store new values of Complex Expressions
             double denominator = c.real * c.real + c.imaginary * c.imaginary;
-            real = (real * c.real + imaginary * c.imaginary) / denominator;
-
-            // r = initial value of real number BEFORE we performed arithmetic operation.
-            imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
-            return Complex(real, imaginary); 
+            double newReal = (real * c.real + imaginary * c.imaginary) / denominator;
+            double newImaginary = (imaginary * c.real - real * c.imaginary) / denominator; 
+            return Complex(newReal, newImaginary); 
         }
 
     // Private Data Members
@@ -156,42 +143,37 @@ int main(void){
     Complex c2(c1);
     c2.print();
     
-    // Going to be used in the upcoming tests. 
-    Complex c3(c1); 
-    Complex c4(c1); 
-
     cout << "\n"; 
 
     // Testing Adding Function
     cout << "Adding Both Expressions\n";
-    c1.add(c2);
+    Complex c3 = c1.add(c2);
     cout << "New Expression: "; 
-    c1.print(); 
+    c3.print(); 
 
     cout << "\n"; 
 
     // Testing Subtracting Function
     cout << "Subtracting Both Expressions\n";
-    c3.sub(c2); 
+    Complex c4 = c1.sub(c2); 
     cout << "New Expression: ";
-    c3.print(); 
+    c4.print(); 
 
     cout << "\n"; 
 
     // Testing Multiply Function
     cout << "Multiplying Both Expressions\n"; 
-    c2.multiply(Complex(1.1, 2.3));  
+    Complex c5 = c1.multiply(c2);  
     cout << "New Expression: ";
-    c2.print(); 
+    c5.print(); 
     
-
     cout << "\n"; 
 
     // Testing Divide Function
     cout << "Dividing both expressions\n";  
-    c4.divide(Complex(1.1, 2.3)); 
+    Complex c6 = c1.divide(c2);
     cout << "New Expression: "; 
-    c4.print(); 
+    c6.print(); 
 
     // This last line break is to space out the destructors
     cout << "\n\n";
