@@ -31,7 +31,7 @@ class Circle {
         
         // Copy constructor that initializes a Circle based on another Circle's radius
         Circle(const Circle &c) {
-            radius = c.radius; 
+            setRadius(c.radius);
         }
         
         // Sets a Circle's radius to r 
@@ -79,11 +79,65 @@ class Cylinder: public Circle {
             // Radius is set by super constructor
             height = 0; 
         }
+        
 
+        // Creates a Cylinder with radius r and height h
+        Cylinder(double r, double h):Circle(r) {
+            // Radius is set by super constructor
+            setHeight(h);
+        }
+        
+
+        // Creates a new Cylinder based on dimensions of another Cylinder
+        Cylinder(const Cylinder &cy) { 
+            Circle::setRadius(cy.radius);
+            setHeight(cy.height);
+        }
+        
+
+        // Sets the height of the cylinder
+        void setHeight(double h) {
+            if (isNegativeHeight(h)) {
+                throw invalid_argument("Height cannot be negative!");
+            }
+            height = h;
+        }
+        
+        // Returns the height of the cylinder
+        double getHeight() {
+            return height; 
+        }
+
+        /*
+        *  It's okay to not have setRadius or getRadius method for Cylinder class since 
+        *  that is essentially the same as the Base Class version
+        */
+
+       //  Function Override of Base Class. Finds the total surface area of the Cylinder
+       double calculateArea() {
+            double bases = 2 * Circle::calculateArea();
+            double lateral = 2 * PI * radius * height;
+            return bases + lateral; 
+        }
+        
+       // Calculates the volume of a cylinder. Formula: PI * r * r * h
+       double calculateVolume() {
+            return Circle::calculateArea() * height;
+       } 
+
+       // Prints Cylinder information, radius and height
+       void print() const {
+            cout << "Cylinder with radius " << radius << " and height " << height << "\n";
+       }
 
     private: 
-        // No other derived classes, so we can leave this as private.
+        // No other derived classes, so we can leave this as private
         double height;
+        
+        // Returns true if height is negative, otherwise false
+        bool isNegativeHeight(double h) {
+            return h < 0;
+        }
 };
 
 
