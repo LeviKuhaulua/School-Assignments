@@ -133,7 +133,7 @@ class Complex {
             char add = '+';
             char i = 'i'; 
             
-            // Sets the complex number and fraction. 
+            // Sets the complex number 
             input >> c.real >> add >> c.imaginary >> i;
             c.setNumbers(c.real, c.imaginary); 
             return input; 
