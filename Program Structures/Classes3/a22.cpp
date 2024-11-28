@@ -16,7 +16,7 @@ class Complex {
     // Public Methods
     public: 
         
-        /* Defines a Complex expression with parameters to specify the real number and imaginary number.
+        /* Defines a Complex expression with parameters to specify the real number and imaginary number
         *  Parameters: 
         *  r - double 
         *  i - double
@@ -27,7 +27,7 @@ class Complex {
         }
         
         /* 
-        *   Defines a Complex expression with default values of 0 for the real and imaginary number.
+        *   Defines a Complex expression with default values of 0 for the real and imaginary number
         */
         Complex() {
             real = 0.0;
@@ -35,7 +35,7 @@ class Complex {
         }
         
         /*
-        * Creates a copy of a complex expression. 
+        * Creates a copy of a complex expression 
         * Parameters: 
         * - complex, Complex Data Type
         */
@@ -44,7 +44,7 @@ class Complex {
             imaginary = complex.imaginary;
         }
         
-        /*  Set the real and imaginary numbers to the new arguments. 
+        /*  Set the real and imaginary numbers to the new arguments 
         *   Parameters: 
         *   r - double,
         *   i - double 
@@ -78,7 +78,7 @@ class Complex {
             }
         }
         
-        /* Adds two complex expressions.
+        /* Adds two complex expressions
         *  Parameters: 
         *  - c, Complex Data Type
         */
@@ -88,7 +88,7 @@ class Complex {
             return Complex(real, imaginary); 
         }
 
-        /* Subtracts two complex expressions. 
+        /* Subtracts two complex expressions 
         *  Parameters: 
         *  - c, Complex Data Type
         */
@@ -98,7 +98,7 @@ class Complex {
             return Complex(real, imaginary); 
         }
 
-        /* Multiply two complex expressions. 
+        /* Multiply two complex expressions 
         *  Parameters: 
         *  - c, Complex Data Type
         */
@@ -106,7 +106,7 @@ class Complex {
             double r = real; 
             real = (real * c.real) - (imaginary * c.imaginary);
             
-            // r = initial value of real number BEFORE we performed arithmetic operation.
+            // r = initial value of real number BEFORE we performed arithmetic operation
             imaginary = (imaginary * c.real) + (r * c.imaginary); 
             return Complex(real, imaginary); 
         }
@@ -145,12 +145,12 @@ class Complex {
         friend ostream &operator << (ostream &output, const Complex &c) {
             char operation = '+'; 
             
-            // Changes operation if imaginary number is negative. 
+            // Changes operation if imaginary number is negative 
             if (c.imaginary < 0) {
                 operation = '-'; 
             } 
 
-            output << c.real << " " << operation << " " << abs(c.imaginary) << "i";
+            output << c.real << " " << operation << " " << abs(c.imaginary) << "i" << "\n";
             return output; 
         }
         
@@ -165,7 +165,7 @@ class Complex {
         }
         
         /*
-        *  Overloading not equals operator. 
+        *  Overloading not equals operator 
         */
         bool operator!=(const Complex &c) {
             if (!(real == c.real && imaginary == c.imaginary)) {
@@ -173,6 +173,21 @@ class Complex {
             }
             return false; 
         }
+        
+        /*
+        *  Overloading the '+' operator. Returns a new complex object 
+        */
+        Complex operator+(const Complex &c) {
+            return Complex(real + c.real, imaginary + c.imaginary);
+        }
+
+        /* 
+        *  Overloading the '-' operator. Returns a new complex object
+        */
+        Complex operator-(const Complex &c) {
+            return Complex(real - c.real, imaginary - c.imaginary); 
+        }
+
 
     // Private Data Members
     private: 
@@ -188,9 +203,13 @@ int main(void){
     cin >> c1;
     cout << "Enter another expression in form \"a + bi\": ";
     cin >> c2; 
+    
+    cout << "Subtracting Both Expressions: \n";
+    Complex c3 = c1 - c2; 
+    cout << c3; 
 
-    cout << "Is c1 equal to c2? " << boolalpha << (c1 == c2);
-    cout << "\n";
-    cout << "Is c1 not equal to c2? " << boolalpha << (c1 != c2);
+    cout << "Adding Both Expressions: \n";
+    Complex c4 = c1 + c2;
+    cout << c4; 
     return 0;
 }
