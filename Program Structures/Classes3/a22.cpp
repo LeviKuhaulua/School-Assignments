@@ -83,9 +83,7 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex add(const Complex &c) {
-            real += c.real;
-            imaginary += c.imaginary;
-            return Complex(real, imaginary); 
+            return Complex(real + c.real, imaginary + c.imaginary); 
         }
 
         /* Subtracts two complex expressions 
@@ -93,9 +91,7 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex sub(const Complex &c) {
-            real -= c.real;
-            imaginary -= c.imaginary;
-            return Complex(real, imaginary); 
+            return Complex(real - c.real, imaginary - c.imaginary); 
         }
 
         /* Multiply two complex expressions 
@@ -103,11 +99,8 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex multiply(const Complex &c) {
-            double r = real; 
-            real = (real * c.real) - (imaginary * c.imaginary);
-            
-            // r = initial value of real number BEFORE we performed arithmetic operation
-            imaginary = (imaginary * c.real) + (r * c.imaginary); 
+            double newReal = (real * c.real) - (imaginary * c.imaginary);
+            double newImaginary = (imaginary * c.real) + (real * c.imaginary); 
             return Complex(real, imaginary); 
         }
         
@@ -116,13 +109,11 @@ class Complex {
         *  - c, Complex Data Type
         */
         Complex divide(const Complex &c) {
-            double r = real; 
+            // Variables to hold new values of complex expression
             double denominator = c.real * c.real + c.imaginary * c.imaginary;
-            real = (real * c.real + imaginary * c.imaginary) / denominator;
-
-            // r = initial value of real number BEFORE we performed arithmetic operation.
-            imaginary = (imaginary * c.real - r * c.imaginary) / denominator; 
-            return Complex(real, imaginary); 
+            double newReal = (real * c.real + imaginary * c.imaginary) / denominator;
+            double newImaginary = (imaginary * c.real - real * c.imaginary) / denominator; 
+            return Complex(newReal, newImaginary); 
         }
         
         /*
@@ -201,6 +192,7 @@ class Complex {
         *  Overloading the '/' operator. Returns a new complex object
         */
         Complex operator/(const Complex &c) {
+            // Variables to hold new values of complex expressions
             double denominator = (c.real * c.real) + (c.imaginary * c.imaginary);
             double newReal = (real * c.real + imaginary * c.imaginary) / denominator;
             double newImaginary = (imaginary * c.real - real * c.imaginary) / denominator; 
