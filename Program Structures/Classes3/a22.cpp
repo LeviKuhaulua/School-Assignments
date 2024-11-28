@@ -153,6 +153,27 @@ class Complex {
             output << c.real << " " << operation << " " << abs(c.imaginary) << "i";
             return output; 
         }
+        
+        /*
+        *  Overloading equality operator
+        */
+        bool operator==(const Complex &c) {
+            if (real == c.real && imaginary == c.imaginary) {
+                return true; 
+            }
+            return false; 
+        }
+        
+        /*
+        *  Overloading not equals operator. 
+        */
+        bool operator!=(const Complex &c) {
+            if (!(real == c.real && imaginary == c.imaginary)) {
+                return true; 
+            }
+            return false; 
+        }
+
     // Private Data Members
     private: 
         double real; 
@@ -162,10 +183,14 @@ class Complex {
 
 int main(void){
     
-    Complex c1; 
-    cout << "Enter an expression: ";
-    cin >> c1; 
-    cout << "Expression Entered: "; 
-    cout << c1; 
+    Complex c1, c2;
+    cout << "Enter an expression in form \"a + bi\": ";
+    cin >> c1;
+    cout << "Enter another expression in form \"a + bi\": ";
+    cin >> c2; 
+
+    cout << "Is c1 equal to c2? " << boolalpha << (c1 == c2);
+    cout << "\n";
+    cout << "Is c1 not equal to c2? " << boolalpha << (c1 != c2);
     return 0;
 }
