@@ -26,11 +26,7 @@ class Circle {
         
         // Initializes a Circle with radius 'r'
         Circle(double r) {
-            // Error checking to see if radius that is passed is negative
-            if (isNegativeRadius(r)) {
-                throw invalid_argument("Radius cannot be negative!");
-            }
-            radius = r;
+            setRadius(r);
         }
         
         // Copy constructor that initializes a Circle based on another Circle's radius
@@ -70,6 +66,12 @@ class Circle {
         bool isNegativeRadius(double r) {
             return r < 0;
         }
+};
+
+
+// Cylinder class. Derived from Circle class
+class Cylinder: public Circle {
+    
 };
 
 
