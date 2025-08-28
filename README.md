@@ -25,3 +25,5 @@
 ## UH Manoa (Fall 2024-Current)
 
 ### - [Program Structures (ICS 212)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Program%20Structures)
+
+### - [Operating Systems (ICS 332)](https://github.com/LeviKuhaulua/School-Assignments/tree/main/Operating%20Systems)
