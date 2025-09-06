@@ -11,20 +11,13 @@
 
 Part 1 
 
-
 1.1: What does the instruction encoded by 110010001 do? Show your work.
 
-110 = JE or Jump on Error 
-0 = Register A however, we're ignoring it b/c we need to check the error register
-10001 = Address [10001]
+110 = JE
+0 = Ignore because we care about operand
+10001 = Operand
 
-When checking Error Register: 
-
-Error register is 0:
-Since there is no error, we are going to increment the Program Counter by 1 and reset value of error register to 0
-
-Error register is 1: 
-Since there is an error, we are going to set the value of the PC to the operand, in this case, it's going to be 10001. 
+JE, [10001] so set PC to value in address [10001] if there is error in error register. 
 
 
 1.2: Translate “LOAD A, [10110]” to binary. Show your work.
@@ -33,7 +26,7 @@ LOAD instruction = 010
 Register A = 0
 Operand = [10110]
 
-Combining in that order gives us 010010110
+010010110
 
 
 1.3: Among the instruction encodings below, which one is invalid? Give an explanation.
@@ -55,32 +48,19 @@ The Program Counter value is set to 12d=01100b; The values of the other register
 
 2.1: What is the address and the first instruction executed by the program? Explain.
 
-We know that the PC stores the address of the NEXT instruction, which is 01100 so if 01100 is the next instruction
-then the first instruction's address must be the one before it which is 01011. 
-
-The contents of 01011 is 010000001, when translated:
-
-010 = LOAD
-0 = Register A
-00001 = Address [00001]
-
-So we set value of A with the content of Address [00001] 
-
-A's content  = 110101001b = 425d
-
-Then we set the value of the error register to 0 based on instructions for LOAD.
-
-
+The address and the first instruction executed by the program is address [01100b] because that is what the program counter is set to.
 
 2.2: Detail the program execution instruction by instruction (the program stops after executing the first STOP).
 
-LOAD A, [00001]; Set value of A to 110101001b = 425d
-LOAD A, [10110]; Set value of A to 111000001b = 449d (override previous value stored in A)
-LOAD B, [10111]; Set value of B to 010111100b = 188d
-ADD A, B; Add value from B to value from A and store result in A. Leads to overflow error, so set value of error register to 1
-JE 10001; Jump to instruction at address 10001
-STOP; terminate program
+1st step: 010010110;  LOAD A, [10110]; A = 111000001b = 449d
 
+2nd Step: 010110111;  LOAD B, [10111]; B = 010111100b = 188d
+
+3rd Step: 101100000;  ADD A, B; 449 + 188 results in overflow so we set error register to 1
+
+4th Step: 110010001; JE, [10001]; Set PC to value in [10001] since error register is 1
+
+5th Step: 111000000;   Program terminates
 
 2.3:
 
@@ -90,10 +70,9 @@ What is the content at address 10110 after the program in Question 2.2 has compl
 
 
 2.4:
-
 The last STORE instruction writes to memory the output of the program. 
 What does this program compute? Also consider other cases with different input values. Explain.
 
-I think the program computes the sum of 2 numbers that the user provides. If the user doesn't provide a
-value then it will default to the first number. If the 2nd number is big where it causes an overflow then the register will store
--1. 
+I think the program computes and returns the sum of 2 different numbers as long as they don't overflow.
+If there are smaller numbers that are added that don't add up to 512, then we can successfully return the sum.
+Otherwise we get an error.
