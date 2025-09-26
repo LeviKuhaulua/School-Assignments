@@ -31,3 +31,9 @@ completed, Main has also completed due to having it's child process be completed
 
 # 2: Explain why no zombie is left over by this program
 
+There is no zombie because of the following: the first child process is Child (from Main). 
+Because the Child then goes to exit(0) (2nd Line in # 1), Main will acknowledge that the child
+has terminated, therefore Child is not a Zombie. 
+
+Then there's Child's child, but Child has terminated from exit(0), therefore since the parent process
+died, Child's child is not a zombie. 
