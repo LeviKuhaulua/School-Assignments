@@ -18,3 +18,9 @@
 // C and C++ Project Files
 *.o 
 *.exe
+
+// configurations for devcontainers
+.cache/
+.dotnet/
+.local/
+.vscode-server/
