@@ -4,7 +4,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
+
+char *const success_msg = "** COMMAND SUCCESSFUL **";
+char *const failed_msg = "** COMMAND FAILED **";
 
 /* 
  * A function that executes a command using fork and execv.
@@ -17,7 +20,7 @@ void execute_plain(char *cmd, char *const argv[]) {
   // checks if we can fork
   if (pid == -1) {
     perror("fork()");
-    fprintf(stdout, "** COMMAND FAILED **\n");
+    fprintf(stdout, "%s\n", failed_msg);
     exit(1);
   }
 
@@ -35,10 +38,10 @@ void execute_plain(char *cmd, char *const argv[]) {
     returnStatus = WEXITSTATUS(returnStatus);
     if (!returnStatus) {
       // exit code of command is 0
-      fprintf(stdout, "** COMMAND SUCCESSFUL **\n");
+      fprintf(stdout, "%s\n",  success_msg);
     } else {
       // exit code of command not 0
-      fprintf(stdout, "** COMMAND FAILED **\n");
+      fprintf(stdout, "%s\n", failed_msg);
     }
   }
 
@@ -51,12 +54,13 @@ void execute_plain(char *cmd, char *const argv[]) {
  */
 void execute_output_to_file(char *cmd, char *const argv[], char *filename) {
 
+  // WRITE CODE HERE
   FILE *file = fopen(filename, "a+");  
  
   // check if can open file
   if (!file) {
     perror("fopen()");
-    fprintf(stdout, "** COMMAND FAILED **");
+    fprintf(stdout, "%s\n",  failed_msg);
     exit(1);
   }
  
@@ -65,7 +69,7 @@ void execute_output_to_file(char *cmd, char *const argv[], char *filename) {
   // check if can fork
   if (pid == -1) {
     perror("fork()");
-    fprintf(stdout, "** COMMAND FAILED **");
+    fprintf(stdout, "%s\n",  failed_msg);
     exit(1);
   }
 
@@ -85,7 +89,7 @@ void execute_output_to_file(char *cmd, char *const argv[], char *filename) {
     
     // stdout should work b/c we closed stdout stream in child process not parent
     if (!returnStatus) {
-      fprintf(stdout, "** COMMAND SUCCESSFUL **\n");
+      fprintf(stdout, "%s\n",  success_msg);
     } else {
       fprintf(stdout, "** COMMAND FAILED **\n");
     }
@@ -98,10 +102,25 @@ void execute_output_to_file(char *cmd, char *const argv[], char *filename) {
  *  that redirects the command's output to another command.
  */
 void execute_output_to_other(char *cmd1, char *const argv1[], char *cmd2_with_argv2) {
-  fprintf(stdout,"Error: %s() is not implemented!\n\n", __FUNCTION__);
 
   // WRITE CODE HERE
+  FILE *pipe = popen(cmd2_with_argv2, "r");
+
+  if (!pipe) {
+    perror("popen()");
+    fprintf(stdout, "%s\n",  failed_msg);
+    exit(1);
+  } else {
+    // close stdout
+    close(1);
+    // dup output
+    dup(pipe->_fileno);
+  }
+
+  if (pclose(pipe) == -1) {
+    perror("pclose()");
+    fprintf(stdout, "%s\n",  failed_msg);
+    exit(1);
+  }
 
 }
-
-
