@@ -1,6 +1,8 @@
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,10 +27,11 @@ public class Server {
         if (args[0].matches("\\D")) {
             throw new InputMismatchException("1st argument must be a int!");
         }
+        File serverStatus = new File("server_status.txt");
+        FileWriter out;
         
         int port = Integer.parseInt(args[0]);
         ServerSocket server;
-        System.out.printf("Server created at %d%n", port);
         Socket client;
         // Create i/o streams from server file to Client
         BufferedInputStream fromFile;
@@ -36,11 +39,13 @@ public class Server {
         
         // Attempts to send txt file to client socket
         try {
+            out = new FileWriter(serverStatus);
+            out.write("Server created at port " + port + "\n");
             server = new ServerSocket(port);
             client = server.accept();
             fromFile = new BufferedInputStream(new FileInputStream("server_file.txt"));
             toClient = new BufferedOutputStream(client.getOutputStream());
-            System.out.println("Sending data to client...");
+            out.write("Sending data...\n");
             
             // Holds the bytes and also the total # of bytes read from the file. 
             byte[] data = new byte[client.getReceiveBufferSize()];
@@ -55,11 +60,13 @@ public class Server {
             }
 
             toClient.flush();
-            System.out.println("Data sent!");
+            out.write("Data sent!");
+
             server.close();
             client.close();
             fromFile.close();
             toClient.close();
+            out.close();
         } catch (BindException | IllegalArgumentException e) {
             throw e;
         }
@@ -73,6 +80,7 @@ public class Server {
         }
         fromFile.close();
         toClient.close();
+        out.close();
 
     }
 }
