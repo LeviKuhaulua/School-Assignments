@@ -1,0 +1,14 @@
+Issue once we try to connect to socket at specified port. 
+
+server.c output:
+Server created at 14000
+Server listening at 14000
+
+then hangs as it's waiting for a connections
+
+Telnet side: 
+- Using netstat to get the port (I used 1400)
+- Tried combinations telnet localhost/127.0.0.1/0.0.0.0/my.own.ip.address 14000 but get error message
+    - Connection closed by foreign host
+    - If it helps, I used a docker container to containerize the code and then run telnet
+        - However, I did use telnet in both the docker container and outside depending on what options I used when starting the container
